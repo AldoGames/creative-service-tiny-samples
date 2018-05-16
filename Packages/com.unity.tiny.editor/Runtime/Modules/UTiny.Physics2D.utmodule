@@ -1,0 +1,213 @@
+﻿[{
+    "$TypeId": 2,
+    "Id": "259902b84b3ed0f7213a1b5e37040709",
+    "Name": "UTiny.Physics2D",
+    "ExportFlags": 1,
+    "Documentation": {
+        "Summary": "Physics module provides basic physics functionality using Box2D."
+    },
+    "Namespace": "ut.Physics2D",
+    "Options": 1,
+    "Dependencies": [
+        { "Id": "2af0cd3b47a732bf738688ceab312689", "Name": "UTiny.Core" },
+        { "Id": "a1b50987659c653138795a8f4079fc10", "Name": "UTiny.Math" }
+    ],
+    "Configurations": [
+        { "Id": "38283a6cef9faa790b5c9936163d59e3", "Name": "Physics2DConfig" }
+    ],
+    "Components": [
+        { "Id": "4eb2060bab60f5bab6e889be1cdad8ed", "Name": "ColliderContacts" },
+        { "Id": "15999c23d7007d7522e11a6ab8be3d27", "Name": "RectCollider" },
+        { "Id": "4877aebd4079748a17f940cbbee5d2e6", "Name": "Velocity2D" },
+        { "Id": "c72969aad3ab4db556d9c8c72f4d74b2", "Name": "Impulse2D" }
+    ],
+    "Enums": [
+        { "Id": "a4afdb83c635db286370870d059ac493", "Name": "BodyType" }
+    ],
+    "Systems": [
+        { "Id": "b7f7f4fdfc819e904ab2a0193ed1f613", "Name": "Physics2DSystem" }
+    ]
+},
+{
+    "$TypeId": 3,
+    "Id": "38283a6cef9faa790b5c9936163d59e3",
+    "Name": "Physics2DConfig",
+    "ExportFlags": 1,
+    "TypeCode": "Configuration",
+    "Fields": [{
+        "Id": "e828656d0238a457db3ae07f84fd6294",
+        "Name": "gravity",
+        "FieldType": { "Id": "3abb69286ddfc2d1c617a173c1eeb35d", "Name": "Vector2" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "38283a6cef9faa790b5c9936163d59e3", "Name": "Physics2DConfig" },
+        "Properties": {
+            "gravity": {
+                "Type": { "Id": "3abb69286ddfc2d1c617a173c1eeb35d", "Name": "Vector2" },
+                "Properties": {
+                    "x": 0,
+                    "y": -10
+                }
+            }
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "4eb2060bab60f5bab6e889be1cdad8ed",
+    "Name": "ColliderContacts",
+    "ExportFlags": 1,
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "4f543288af1e514222e7c0fe5094ee7f",
+        "Name": "newContacts",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" },
+        "Array": true
+    }, {
+        "Id": "356771e682bdfc9f74801b48d97a4888",
+        "Name": "endedContacts",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" },
+        "Array": true
+    }, {
+        "Id": "9baec20b586bcae706cf08806f4eda37",
+        "Name": "contacts",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" },
+        "Array": true
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "4eb2060bab60f5bab6e889be1cdad8ed", "Name": "ColliderContacts" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "15999c23d7007d7522e11a6ab8be3d27",
+    "Name": "RectCollider",
+    "ExportFlags": 1,
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "826e37a873e35b09082a9b0dfa0559c0",
+        "Name": "bodyType",
+        "FieldType": { "Id": "a4afdb83c635db286370870d059ac493", "Name": "BodyType" }
+    }, {
+        "Id": "8809db26a1397d3cef0667065e0d75de",
+        "Name": "fixedRotation",
+        "FieldType": { "Id": "2b477f505af74487b7092b5617d88d3f", "Name": "Boolean" }
+    }, {
+        "Id": "0bb64c71d13d271d0e1f0d90afcbd09e",
+        "Name": "friction",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "8c2e205350389dbb3e7cceedb104df78",
+        "Name": "restitution",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "50f9bdc19b4dc61a606ba9165c482b86",
+        "Name": "density",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "d3a2c5313bc444f40d3b3b2918cb9a00",
+        "Name": "width",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "24f2de9364d6db3b28602ad088c2998f",
+        "Name": "height",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "896f88af46d7b27a8b725821abccfde8",
+        "Name": "pivot",
+        "FieldType": { "Id": "3abb69286ddfc2d1c617a173c1eeb35d", "Name": "Vector2" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "15999c23d7007d7522e11a6ab8be3d27", "Name": "RectCollider" },
+        "Properties": {
+            "width": 1,
+            "height": 1,
+            "pivot": {
+                "Type": { "Id": "3abb69286ddfc2d1c617a173c1eeb35d", "Name": "Vector2" },
+                "Properties": {
+                    "x": 0.5,
+                    "y": 0.5
+                }
+            }
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "4877aebd4079748a17f940cbbee5d2e6",
+    "Name": "Velocity2D",
+    "ExportFlags": 1,
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "a993633dc2b1b3122d7345fcfc2c935e",
+        "Name": "velocity",
+        "FieldType": { "Id": "3abb69286ddfc2d1c617a173c1eeb35d", "Name": "Vector2" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "4877aebd4079748a17f940cbbee5d2e6", "Name": "Velocity2D" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "c72969aad3ab4db556d9c8c72f4d74b2",
+    "Name": "Impulse2D",
+    "ExportFlags": 1,
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "766f517cd2ce50d1cf0f425acb32fe3c",
+        "Name": "point",
+        "FieldType": { "Id": "3abb69286ddfc2d1c617a173c1eeb35d", "Name": "Vector2" }
+    }, {
+        "Id": "b5fcd3998b35348b77a1055fbf09a346",
+        "Name": "impulse",
+        "FieldType": { "Id": "3abb69286ddfc2d1c617a173c1eeb35d", "Name": "Vector2" }
+    }, {
+        "Id": "8dd2a85db9d06233ecf07ac1b624fe5d",
+        "Name": "scaleImpulse",
+        "FieldType": { "Id": "2b477f505af74487b7092b5617d88d3f", "Name": "Boolean" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "c72969aad3ab4db556d9c8c72f4d74b2", "Name": "Impulse2D" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "a4afdb83c635db286370870d059ac493",
+    "Name": "BodyType",
+    "ExportFlags": 1,
+    "TypeCode": "Enum",
+    "BaseType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
+    "Fields": [{
+        "Id": "04b7ed1ee43490d92adf35d6cc7e0a44",
+        "Name": "Static",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "9bd220821203281539749ecc043b64c8",
+        "Name": "Kinematic",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "5602293d3c8f73715a64943669328d32",
+        "Name": "Dynamic",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "b7982cbb4f5c78bfdd458bffbe9e1276",
+        "Name": "BulletDynamic",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "a4afdb83c635db286370870d059ac493", "Name": "BodyType" },
+        "Properties": {
+            "Static": 0,
+            "Kinematic": 1,
+            "Dynamic": 2,
+            "BulletDynamic": 3
+        }
+    }
+},
+{
+    "$TypeId": 7,
+    "Id": "b7f7f4fdfc819e904ab2a0193ed1f613",
+    "Name": "Physics2DSystem",
+    "ExportFlags": 1,
+    "Options": 3
+}]

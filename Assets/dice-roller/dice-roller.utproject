@@ -1,0 +1,870 @@
+﻿[{
+    "$TypeId": 1,
+    "Version": 1,
+    "Id": "b62072e75c3c4a0e8bbd01cad7ab93b4",
+    "Name": "dice-roller",
+    "Settings": {
+        "CanvasWidth": 1920,
+        "CanvasHeight": 1080,
+        "CanvasAutoResize": true,
+        "EmbedAssets": true,
+        "DefaultTextureSettings": {
+            "FormatType": 2,
+            "JpgCompressionQuality": 75,
+            "WebPCompressionQuality": 60,
+            "Embedded": true,
+            "IncludePreviewInDocumentation": true
+        },
+        "DefaultAudioClipSettings": {
+            "Embedded": true,
+            "IncludePreviewInDocumentation": true
+        },
+        "LocalHTTPServerPort": 9050,
+        "SingleFileHtml": true,
+        "MemorySize": 16,
+        "IncludeWSClient": true,
+        "RunBabel": true
+    },
+    "Module": { "Id": "fcc93570e3c94b48a8816b438f783038", "Name": "Main" },
+    "Configuration": { "$TypeId": 9, "Id": "4378c8b0408e42c7b2c248aa6466d413", "Name": "Configuration" }
+},
+{
+    "$TypeId": 2,
+    "Id": "fcc93570e3c94b48a8816b438f783038",
+    "Name": "Main",
+    "Namespace": "game",
+    "Options": 4,
+    "Dependencies": [
+        { "Id": "2af0cd3b47a732bf738688ceab312689", "Name": "UTiny.Core" },
+        { "Id": "eae58004250dcd15a6c834b07677ca28", "Name": "UTiny.HTML" },
+        { "Id": "a1b50987659c653138795a8f4079fc10", "Name": "UTiny.Math" },
+        { "Id": "30097418841f56d73400bf82ee859ac9", "Name": "UTiny.Core2D" },
+        { "Id": "259902b84b3ed0f7213a1b5e37040709", "Name": "UTiny.Physics2D" },
+        { "Id": "3aa8828c0eaa4fb0a2faaa1ee3f85c59", "Name": "UTiny.Flow" },
+        { "Id": "77db3a3f0ecf4c26a7ba12a90a61e639", "Name": "UTiny.Text" },
+        { "Id": "36f73ad23c8a63c53fa510f0621474f5", "Name": "UTiny.HitBox2D" }
+    ],
+    "Components": [
+        { "Id": "a7d698d8c8e94ebbb9fd07c55c39e088", "Name": "Die" },
+        { "Id": "0678b32d0d1442738c06c0e1783bb73e", "Name": "GameManager" },
+        { "Id": "fa02f5f0a883441ba245ca154997773a", "Name": "Rotator" }
+    ],
+    "Enums": [
+        { "Id": "8cbfaaa9f5cf4674889283935a81e7e9", "Name": "GameState" }
+    ],
+    "EntityGroups": [
+        { "Id": "52e74eb786014a08b0e8a0e2c4b7b995", "Name": "GameplayGroup" },
+        { "Id": "78502cb26a3244cfb85c204636cee59e", "Name": "DiePrefab" }
+    ],
+    "Systems": [
+        { "Id": "be3f0c4883814f85b1a0033cf76f5ad4", "Name": "DieSystem" },
+        { "Id": "e04c603fb32c42d593c3d5258d429e42", "Name": "GameManagerSystem" },
+        { "Id": "49e57d092906436cb35fd65dff545830", "Name": "RotatorSystem" }
+    ],
+    "StartupEntityGroup": { "Id": "52e74eb786014a08b0e8a0e2c4b7b995", "Name": "GameplayGroup" }
+},
+{
+    "$TypeId": 3,
+    "Id": "a7d698d8c8e94ebbb9fd07c55c39e088",
+    "Name": "Die",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "5c21af19870f45a9b62a3f5fac0cf1ec",
+        "Name": "resultFaces",
+        "FieldType": { "Id": "cf54a635a25248ab87f2563bb840ed5b", "Name": "SpriteEntity" },
+        "Array": true
+    }, {
+        "Id": "c1e23ef7143c4974a843156b126dc34c",
+        "Name": "result",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "1e7d2601d3ba4fab8df5fea600fa616f",
+        "Name": "animEntity",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "a7d698d8c8e94ebbb9fd07c55c39e088", "Name": "Die" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "0678b32d0d1442738c06c0e1783bb73e",
+    "Name": "GameManager",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "03e9f02c0a8346cdb0ef38c96d9edbeb",
+        "Name": "state",
+        "FieldType": { "Id": "8cbfaaa9f5cf4674889283935a81e7e9", "Name": "GameState" }
+    }, {
+        "Id": "ce093ea21b974eaa9acc80e0ea98a66e",
+        "Name": "diceOnTable",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" },
+        "Array": true
+    }, {
+        "Id": "df49f4bf3de24630a0b80845368292bc",
+        "Name": "rollButton",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }, {
+        "Id": "4491840efe0c48519dfbdc43b3e96728",
+        "Name": "countContainer",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }, {
+        "Id": "32523d0a76ad4e0cb7d2e0090981f26a",
+        "Name": "dieCountText",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }, {
+        "Id": "c8de39ee931c444391f5dfde72e597df",
+        "Name": "totalText",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }, {
+        "Id": "1bafe22674574443b69de477d8ee56dd",
+        "Name": "plusButton",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }, {
+        "Id": "8319009b9b00474a94e0a8b4ffff6c9f",
+        "Name": "minusButton",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }, {
+        "Id": "432504a160f34eaa9c2a40e1e3c7505c",
+        "Name": "numDiceToUse",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "0678b32d0d1442738c06c0e1783bb73e", "Name": "GameManager" },
+        "Properties": {
+            "numDiceToUse": 3
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "fa02f5f0a883441ba245ca154997773a",
+    "Name": "Rotator",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "f953a65957b047f989b303e5af193feb",
+        "Name": "targetAngle",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "fa02f5f0a883441ba245ca154997773a", "Name": "Rotator" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "8cbfaaa9f5cf4674889283935a81e7e9",
+    "Name": "GameState",
+    "TypeCode": "Enum",
+    "BaseType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
+    "Fields": [{
+        "Id": "3b85fe5e6abd4e29aedd1be79d525b65",
+        "Name": "PrepareToRoll",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "4ee0a9f8b4244463a3d71398b97a8381",
+        "Name": "CreateDice",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "5496a4fae4664fd28a9e2e4b04276fb7",
+        "Name": "Rolling",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "ac900a1a45194920b86a062f0f7fec1a",
+        "Name": "ShowTotal",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "8cbfaaa9f5cf4674889283935a81e7e9", "Name": "GameState" },
+        "Properties": {
+            "CreateDice": 1,
+            "Rolling": 2,
+            "ShowTotal": 3
+        }
+    }
+},
+{
+    "$TypeId": 4,
+    "Id": "52e74eb786014a08b0e8a0e2c4b7b995",
+    "Name": "GameplayGroup",
+    "Entities": [
+        { "$TypeId": 9, "Id": "0bc1b6063afe4b0b9850bdff1d3501ba", "Name": "Camera" },
+        { "$TypeId": 9, "Id": "a9977039eec14c458f487080fd747197", "Name": "Dice_table" },
+        { "$TypeId": 9, "Id": "f13b3e029f3c4230ac29fca0871dde34", "Name": "TopBar" },
+        { "$TypeId": 9, "Id": "355d6a3f744b4cd7937bd6557177997c", "Name": "RightBar" },
+        { "$TypeId": 9, "Id": "4fec5e401b354217908da879f6990447", "Name": "BottomBar" },
+        { "$TypeId": 9, "Id": "cc56a39ef04842599f768dc361d10992", "Name": "LeftBar" },
+        { "$TypeId": 9, "Id": "2010d716389741c48bb24c02882efa16", "Name": "GameManager" },
+        { "$TypeId": 9, "Id": "3d5f53591d804754928d50188db3de80", "Name": "rollButton" },
+        { "$TypeId": 9, "Id": "a3616c8e798a4e998b170a01b24b85a8", "Name": "countContainer" },
+        { "$TypeId": 9, "Id": "0d7cf50a0fac487c9802a6a04fa5cdb9", "Name": "dieCount" },
+        { "$TypeId": 9, "Id": "862909fdf493426192c6ed5b3defd225", "Name": "plusButton" },
+        { "$TypeId": 9, "Id": "7fa27d8854714b36a41ebf29dfb6b664", "Name": "minusButton" },
+        { "$TypeId": 9, "Id": "bab753be2db1482c8039b2511e8e8fa6", "Name": "pipTotal" }
+    ]
+},
+{
+    "$TypeId": 5,
+    "Id": "0bc1b6063afe4b0b9850bdff1d3501ba",
+    "Name": "Camera",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" }
+    }, {
+        "Type": { "Id": "12692383f3fef3bb74c209888c5b0939", "Name": "Camera2D" },
+        "Properties": {
+            "backgroundColor": {
+                "Type": { "Id": "83c08479d9d6e46c88247df9dbae2e1b", "Name": "Color" },
+                "Properties": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 1
+                }
+            },
+            "clearFlags": {
+                "$TypeId": 8,
+                "Type": { "Id": "76a06ddd38e99125d930e77c6a287872", "Name": "CameraClearFlags" },
+                "Id": "9faedc246f34513076701ef66b5ad74f",
+                "Name": "SolidColor",
+                "Value": 1
+            },
+            "depth": -1
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "a9977039eec14c458f487080fd747197",
+    "Name": "Dice_table",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "y": -9
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 30,
+                    "y": 30,
+                    "z": 25
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "61a59b354714e4d9f9ea4fd1670ddc72", "FileId": 21300000, "Type": 3 }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "f13b3e029f3c4230ac29fca0871dde34",
+    "Name": "TopBar",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "y": 147
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "15999c23d7007d7522e11a6ab8be3d27", "Name": "RectCollider" },
+        "Properties": {
+            "friction": 1,
+            "restitution": 0.1,
+            "density": 0,
+            "width": 750
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "355d6a3f744b4cd7937bd6557177997c",
+    "Name": "RightBar",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 215,
+                    "y": 24
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "15999c23d7007d7522e11a6ab8be3d27", "Name": "RectCollider" },
+        "Properties": {
+            "friction": 1,
+            "restitution": 0.1,
+            "density": 0,
+            "width": 1,
+            "height": 500
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "4fec5e401b354217908da879f6990447",
+    "Name": "BottomBar",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "y": -227
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "15999c23d7007d7522e11a6ab8be3d27", "Name": "RectCollider" },
+        "Properties": {
+            "friction": 1,
+            "restitution": 0.1,
+            "density": 0,
+            "width": 750
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "cc56a39ef04842599f768dc361d10992",
+    "Name": "LeftBar",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": -315,
+                    "y": 24
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "15999c23d7007d7522e11a6ab8be3d27", "Name": "RectCollider" },
+        "Properties": {
+            "friction": 1,
+            "restitution": 0.1,
+            "density": 0,
+            "width": 1,
+            "height": 500
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "2010d716389741c48bb24c02882efa16",
+    "Name": "GameManager",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" }
+    }, {
+        "Type": { "Id": "0678b32d0d1442738c06c0e1783bb73e", "Name": "GameManager" },
+        "Properties": {
+            "rollButton": { "$TypeId": 9, "Id": "3d5f53591d804754928d50188db3de80", "Name": "rollButton" },
+            "countContainer": { "$TypeId": 9, "Id": "a3616c8e798a4e998b170a01b24b85a8", "Name": "countContainer" },
+            "dieCountText": { "$TypeId": 9, "Id": "0d7cf50a0fac487c9802a6a04fa5cdb9", "Name": "dieCount" },
+            "totalText": { "$TypeId": 9, "Id": "bab753be2db1482c8039b2511e8e8fa6", "Name": "pipTotal" },
+            "plusButton": { "$TypeId": 9, "Id": "862909fdf493426192c6ed5b3defd225", "Name": "plusButton" },
+            "minusButton": { "$TypeId": 9, "Id": "7fa27d8854714b36a41ebf29dfb6b664", "Name": "plusButton1" }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "3d5f53591d804754928d50188db3de80",
+    "Name": "rollButton",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 78,
+                    "y": -171
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 30,
+                    "y": 30,
+                    "z": 30
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "7746608462e7b4bd0969f420d6ac84be", "FileId": 21300000, "Type": 3 }
+        }
+    }, {
+        "Type": { "Id": "a015bc52c7befa4d7484891d74d2b574", "Name": "RectHitBox2D" },
+        "Properties": {
+            "box": {
+                "Type": { "Id": "f216da154c4054842adb590807e977ba", "Name": "Rect" },
+                "Properties": {
+                    "width": 70,
+                    "height": 40
+                }
+            }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "a3616c8e798a4e998b170a01b24b85a8",
+    "Name": "countContainer",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": -39,
+                    "y": -169
+                }
+            },
+            "localRotation": {
+                "Type": { "Id": "dc7e11e5d517ed01fd5d084a6c9fd64d", "Name": "Quaternion" },
+                "Properties": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0,
+                    "w": 1
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 50,
+                    "y": 50,
+                    "z": 50
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "072925086f7184321811700e5efa9035", "FileId": 21300000, "Type": 3 }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "0d7cf50a0fac487c9802a6a04fa5cdb9",
+    "Name": "dieCount",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 0,
+                    "y": 0
+                }
+            },
+            "localRotation": {
+                "Type": { "Id": "dc7e11e5d517ed01fd5d084a6c9fd64d", "Name": "Quaternion" },
+                "Properties": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0,
+                    "w": 1
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 0.04,
+                    "y": 0.04,
+                    "z": 0.04
+                }
+            },
+            "parent": { "$TypeId": 9, "Id": "a3616c8e798a4e998b170a01b24b85a8", "Name": "Dice_tally" }
+        }
+    }, {
+        "Type": { "Id": "de741c68b67240148cdb8aa42a46bfdf", "Name": "TextRenderer" },
+        "Properties": {
+            "text": "99"
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "862909fdf493426192c6ed5b3defd225",
+    "Name": "plusButton",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": -0.989,
+                    "y": 0
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                }
+            },
+            "parent": { "$TypeId": 9, "Id": "a3616c8e798a4e998b170a01b24b85a8", "Name": "countContainer" }
+        }
+    }, {
+        "Type": { "Id": "a015bc52c7befa4d7484891d74d2b574", "Name": "RectHitBox2D" },
+        "Properties": {
+            "box": {
+                "Type": { "Id": "f216da154c4054842adb590807e977ba", "Name": "Rect" },
+                "Properties": {
+                    "width": 40,
+                    "height": 40
+                }
+            }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "7fa27d8854714b36a41ebf29dfb6b664",
+    "Name": "minusButton",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 0.96,
+                    "y": 0
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                }
+            },
+            "parent": { "$TypeId": 9, "Id": "a3616c8e798a4e998b170a01b24b85a8", "Name": "countContainer" }
+        }
+    }, {
+        "Type": { "Id": "a015bc52c7befa4d7484891d74d2b574", "Name": "RectHitBox2D" },
+        "Properties": {
+            "box": {
+                "Type": { "Id": "f216da154c4054842adb590807e977ba", "Name": "Rect" },
+                "Properties": {
+                    "width": 40,
+                    "height": 40
+                }
+            }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "bab753be2db1482c8039b2511e8e8fa6",
+    "Name": "pipTotal",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 0,
+                    "y": -113
+                }
+            },
+            "localRotation": {
+                "Type": { "Id": "dc7e11e5d517ed01fd5d084a6c9fd64d", "Name": "Quaternion" },
+                "Properties": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0,
+                    "w": 1
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 2,
+                    "y": 2,
+                    "z": 2
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "de741c68b67240148cdb8aa42a46bfdf", "Name": "TextRenderer" },
+        "Properties": {
+            "color": {
+                "Type": { "Id": "83c08479d9d6e46c88247df9dbae2e1b", "Name": "Color" },
+                "Properties": {
+                    "r": 0.990566,
+                    "g": 0.8558948,
+                    "b": 0,
+                    "a": 1
+                }
+            }
+        }
+    }]
+},
+{
+    "$TypeId": 4,
+    "Id": "78502cb26a3244cfb85c204636cee59e",
+    "Name": "DiePrefab",
+    "Entities": [
+        { "$TypeId": 9, "Id": "fc6efcd05a6942cb9760f330a9f6ae90", "Name": "Die" },
+        { "$TypeId": 9, "Id": "0e6c499038cc454188b8c3dbeb4b3a20", "Name": "DieAnim" }
+    ]
+},
+{
+    "$TypeId": 5,
+    "Id": "fc6efcd05a6942cb9760f330a9f6ae90",
+    "Name": "Die",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 10,
+                    "y": -191
+                }
+            },
+            "localRotation": {
+                "Type": { "Id": "dc7e11e5d517ed01fd5d084a6c9fd64d", "Name": "Quaternion" },
+                "Properties": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0,
+                    "w": 1
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 5,
+                    "y": 5,
+                    "z": 5
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "15999c23d7007d7522e11a6ab8be3d27", "Name": "RectCollider" },
+        "Properties": {
+            "bodyType": {
+                "$TypeId": 8,
+                "Type": { "Id": "a4afdb83c635db286370870d059ac493", "Name": "BodyType" },
+                "Id": "5602293d3c8f73715a64943669328d32",
+                "Name": "Dynamic",
+                "Value": 2
+            },
+            "fixedRotation": true,
+            "friction": 1,
+            "restitution": 0.5,
+            "density": 1,
+            "width": 7,
+            "height": 7
+        }
+    }, {
+        "Type": { "Id": "4877aebd4079748a17f940cbbee5d2e6", "Name": "Velocity2D" },
+        "Properties": {
+            "velocity": {
+                "Type": { "Id": "3abb69286ddfc2d1c617a173c1eeb35d", "Name": "Vector2" },
+                "Properties": {
+                    "x": 0,
+                    "y": 0
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "a7d698d8c8e94ebbb9fd07c55c39e088", "Name": "Die" },
+        "Properties": {
+            "resultFaces": {
+                "Type": { "Id": "cf54a635a25248ab87f2563bb840ed5b", "Name": "SpriteEntity" },
+                "Items": [
+                    { "$TypeId": 10, "Guid": "6c9e3955f304e4464a65c17f6d7c9776", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "272cbad74e39a454ba6172dbfbcfdbba", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "973409892e84e4caab7ea0a92d8e8290", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "e931a5b106fb044e1a35e49cf7913d4c", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "aa040ade41fb94dc28af0ac270612598", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "4d5a5fec0b5154e4caa103a2c3e2ed65", "FileId": 21300000, "Type": 3 }
+                ]
+            },
+            "result": 0,
+            "animEntity": { "$TypeId": 9, "Id": "0e6c499038cc454188b8c3dbeb4b3a20", "Name": "DieAnim" }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "0e6c499038cc454188b8c3dbeb4b3a20",
+    "Name": "DieAnim",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 0,
+                    "y": 0
+                }
+            },
+            "localRotation": {
+                "Type": { "Id": "dc7e11e5d517ed01fd5d084a6c9fd64d", "Name": "Quaternion" },
+                "Properties": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0,
+                    "w": 1
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 4,
+                    "y": 4,
+                    "z": 4
+                }
+            },
+            "parent": { "$TypeId": 9, "Id": "fc6efcd05a6942cb9760f330a9f6ae90", "Name": "Die" }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "0179f05040e684146972a800160accd7", "FileId": 21300000, "Type": 3 }
+        }
+    }, {
+        "Type": { "Id": "f2f3ae228bd6cea4900f91e826243720", "Name": "Sprite2DSequence" },
+        "Properties": {
+            "sprites": {
+                "Type": { "Id": "cf54a635a25248ab87f2563bb840ed5b", "Name": "SpriteEntity" },
+                "Items": [
+                    { "$TypeId": 10, "Guid": "09f4724d48e884ecfbf3b51ab87217de", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "4ce2f48358b6f406cbed0a4b7d2e32ff", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "95253a29c5a3b47b7bc9646cc0df7ac7", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "dd451bff758b34a72b1eee12b48f56b5", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "926bd62efc1704d159b1c00af045d3ca", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "d2ab3574a52fc41cc97d7446dee38017", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "928de155ec4124b65b6953f559bf6d41", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "1703375600a24435aaa27788bebfd4e4", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "0179f05040e684146972a800160accd7", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "039dc5f6690a44b249b15c7203c87060", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "b15dda4ca0ab546149c147c078eac252", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "39555ec3fab3a4e719002250e8fe2c29", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "e729779da88e44a0b87baa3bf93136f7", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "4f12eb0ed0cf14301a9129bbb1a97453", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "3ca07fd97d59247c0ac0ecf222a0127d", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "a3aa9971854164452bd410d50ac50966", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "b5a09ab3888d6462188c65c0102c80b3", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "8edc7fda14e254e41b2ccb18e5ee2afc", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "12479dd4f713d455785cc0831b9a3e22", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "b791ed3cd74424aa7be443d28b8799df", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "1d20d779626e6414898e940c9584dff2", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "b862fb53d9bf644878fd7b8cc5403767", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "258df8b785a8b4aec972fc5b41f2f9ea", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "438ae2929dff14f6699c2b82191846d7", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "5d769a48ae11c44b7880d2c4fe6c7eb5", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "bd8f9aab04d604cd9b67a6483537fb09", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "686e8c024aecc46aa8a68b98a0250439", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "19da459b5cb3b4ebcb5b9532aa552bb0", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "6853c5d48f08f40c5ba3f266c6b19ebd", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "269ddecda30a94e86b2251cf4383abce", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "a37f97caeb2374055bf1e198944346e5", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "a4a75bf382d9e41008ee72f91fca3071", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "a7b754f30b0a1419595f8cd4889ad724", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "4aaeebf7890b441be9edc71ab186da33", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "a9f9eb3f2482740829ffb41a4f76c9c4", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "2ef8d89959b544a66822c8e5bc0a94a3", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "f0b6d6f0abdc546189beb90008b44377", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "ade532c06dffe4b6f8562130b1ba74df", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "57ff4023a835c462b9e989596a8f4462", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "5183b6c03b75b4a378ec12aa1d30041a", "FileId": 21300000, "Type": 3 }
+                ]
+            },
+            "frameRate": 60
+        }
+    }, {
+        "Type": { "Id": "324355c3d3ae75925565b701d9ad2256", "Name": "Sprite2DSequencePlayer" },
+        "Properties": {
+            "sequence": { "$TypeId": 9, "Id": "0e6c499038cc454188b8c3dbeb4b3a20", "Name": "Die" },
+            "speed": 2
+        }
+    }]
+},
+{
+    "$TypeId": 7,
+    "Id": "be3f0c4883814f85b1a0033cf76f5ad4",
+    "Name": "DieSystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "005efb628f9a6428d902b8a3b8ceaec8", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "a7d698d8c8e94ebbb9fd07c55c39e088", "Name": "Die" },
+        { "Id": "4877aebd4079748a17f940cbbee5d2e6", "Name": "Velocity2D" },
+        { "Id": "15999c23d7007d7522e11a6ab8be3d27", "Name": "RectCollider" },
+        { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "e04c603fb32c42d593c3d5258d429e42",
+    "Name": "GameManagerSystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "c91efc8bbce6c4c4cb10abc24c38bf09", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "0678b32d0d1442738c06c0e1783bb73e", "Name": "GameManager" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "49e57d092906436cb35fd65dff545830",
+    "Name": "RotatorSystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "618cf9a96e5344e6d9939bb7c65591dc", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "fa02f5f0a883441ba245ca154997773a", "Name": "Rotator" },
+        { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" }
+    ]
+},
+{
+    "$TypeId": 5,
+    "Id": "4378c8b0408e42c7b2c248aa6466d413",
+    "Name": "Configuration",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "575fe161bc06950c954480d04c70c9ab", "Name": "DisplayInfo" },
+        "Properties": {
+            "width": 1920,
+            "height": 1080,
+            "autoSizeToFrame": true
+        }
+    }, {
+        "Type": { "Id": "38283a6cef9faa790b5c9936163d59e3", "Name": "Physics2DConfig" }
+    }]
+}]

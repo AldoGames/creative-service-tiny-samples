@@ -1,0 +1,83 @@
+var gems = match.gems();
+
+for (var i=0; i<gems.length; i++) {
+
+    var gem = gems[i];
+    gem.getComponent(game.Gem).setAnimating(true);
+
+    var gemTransform = gem.getComponent(ut.Core2D.Transform);
+
+    gemTransform.tween("localScale", gemTransform.localScale(), new Vector3(0, 0, 0))
+                .setDuration(0.35)
+                .setEase(ut.tween.EaseType.EaseOutQuad)
+                .onComplete(function(e) {
+                    var cell = e.getComponent(game.CellGraphNode).cell();
+                    Graph.removeNode(cell);
+                    e.destroy();
+                }, gem);
+
+    // trigger particle effect
+    var particleGroup = ut.Flow.Service.instantiate("game.ParticlePrefab");
+    var particleEmitterEntity = particleGroup.root;
+    var particleTransform = particleEmitterEntity.getComponent(ut.Core2D.Transform);
+    var particleEmitter = particleEmitterEntity.getComponent(ut.Particles.ParticleEmitter);
+    particleTransform.setLocalPosition(gemTransform.localPosition());
+
+    var particleSprite = particleEmitter.particle().getComponent(ut.Core2D.Sprite2DRenderer);
+    var color = null;
+
+    switch (gem.getComponent(game.Gem).type()) {
+        case game.GemType.Swirl:
+            color = new ut.Core2D.Color(1, 0, 0, 1);
+            break;
+        case game.GemType.Circle:
+            color = new ut.Core2D.Color(0, 1, 0, 1);
+            break;
+        case game.GemType.D20:
+            color = new ut.Core2D.Color(0, 0, 1, 1);
+            break;
+        case game.GemType.Star:
+            color = new ut.Core2D.Color(.4, .6, .7, 1);
+            break;
+    }
+    particleSprite.setColor(color);
+
+    var targetPos = Dragon.getDragonTransform().localPosition();
+
+    particleTransform.tween("localPosition", particleTransform.localPosition(), targetPos)
+                 .setDuration(1)
+                 .setEase(ut.tween.EaseType.EaseInOutQuad)
+                 .onComplete(function(e) {
+                    Dragon.applyDamage(1);
+                    spawnSlashEffect(targetPos);
+                    e.setEmitRate(0);
+                }, particleEmitter);
+
+}
+
+entity.destroy();
+
+
+function spawnSlashEffect(targetPos)
+{
+    var slashGroup = ut.Flow.Service.instantiate("game.SlashPrefab");
+    var slashTransform = slashGroup.root.getComponent(ut.Core2D.Transform);
+
+    var angle = getRandomInt(0,360);
+    var radAngle = Math.PI*angle/180;
+
+    var newRotation = new Quaternion().setFromEuler(new ut.Math.Euler(0,0,radAngle));
+    slashTransform.setLocalRotation(newRotation);
+
+    var newPosition = targetPos;
+    newPosition.x += getRandomInt(-80,80);
+    newPosition.y += getRandomInt(-80,80);
+    slashTransform.setLocalPosition(newPosition);
+}
+
+/**
+ * @todo move to random class
+ */
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}

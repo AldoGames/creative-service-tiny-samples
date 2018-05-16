@@ -1,0 +1,1165 @@
+﻿[{
+    "$TypeId": 1,
+    "Version": 1,
+    "Id": "1a78e595f6c74da4a45be3f230748191",
+    "Name": "slot-machine",
+    "Settings": {
+        "CanvasWidth": 1024,
+        "CanvasHeight": 600,
+        "CanvasAutoResize": true,
+        "BuildConfiguration": 2,
+        "EmbedAssets": true,
+        "DefaultTextureSettings": {
+            "FormatType": 1,
+            "JpgCompressionQuality": 75,
+            "WebPCompressionQuality": 60,
+            "Embedded": true,
+            "IncludePreviewInDocumentation": true
+        },
+        "DefaultAudioClipSettings": {
+            "Embedded": true,
+            "IncludePreviewInDocumentation": true
+        },
+        "Preview": true,
+        "LocalHTTPServerPort": 9050,
+        "SingleFileHtml": true,
+        "MemorySize": 16,
+        "IncludeWSClient": true,
+        "RunBabel": true
+    },
+    "Module": { "Id": "685f5f5d64494ffd8feea45de7d45695", "Name": "Main" }
+},
+{
+    "$TypeId": 2,
+    "Id": "685f5f5d64494ffd8feea45de7d45695",
+    "Name": "Main",
+    "Namespace": "game",
+    "Options": 4,
+    "Dependencies": [
+        { "Id": "2af0cd3b47a732bf738688ceab312689", "Name": "UTiny.Core" },
+        { "Id": "eae58004250dcd15a6c834b07677ca28", "Name": "UTiny.HTML" },
+        { "Id": "a1b50987659c653138795a8f4079fc10", "Name": "UTiny.Math" },
+        { "Id": "30097418841f56d73400bf82ee859ac9", "Name": "UTiny.Core2D" },
+        { "Id": "3aa8828c0eaa4fb0a2faaa1ee3f85c59", "Name": "UTiny.Flow" },
+        { "Id": "251df5ef6819533f94e1cbf3181f722e", "Name": "UTiny.Audio" },
+        { "Id": "0bc66cc14cafcceaaebf78d21c72cede", "Name": "UTiny.Particles" },
+        { "Id": "caa624a7fb461368575347703e7a89e7", "Name": "UTiny.AdSupport" },
+        { "Id": "7a630ae9230a41848287fbe2dc371ade", "Name": "UTiny.Tween" }
+    ],
+    "Components": [
+        { "Id": "c1b85b54b0804513b8752a006932200e", "Name": "SymbolColumn" },
+        { "Id": "da967c6d3a7644319231cd8830f35264", "Name": "ScrollingSymbol" },
+        { "Id": "bb9ac9b94d514ed5a1e0207227972a4e", "Name": "SlotMachine" },
+        { "Id": "057ab87043b848019dfa63204f075e1d", "Name": "Explosion" }
+    ],
+    "Enums": [
+        { "Id": "082ddab69ebe4b139e91ca3c448f0416", "Name": "SlotMachineState" },
+        { "Id": "b75b9ac5412e42de8987248dab320ed5", "Name": "SymbolColumnState" }
+    ],
+    "EntityGroups": [
+        { "Id": "98b076fc5ebc47ac9486a21a95d4baed", "Name": "GameplayGroup" },
+        { "Id": "5ce3e88f0fc848b082dd33127466b5f2", "Name": "GameOverGroup" },
+        { "Id": "4eb39f7481cf48aeb491113ac89106e5", "Name": "ScrollingSymbolPrefab" },
+        { "Id": "0a65fa4386994f3f894b02b04b279253", "Name": "WinEffectsGroup" }
+    ],
+    "Systems": [
+        { "Id": "8b2a22d2e5394075be55e6a4cf1d95af", "Name": "ScrollingSymbolSystem" },
+        { "Id": "11925dffde424d7d921dcb36ff842974", "Name": "SymbolColumnSystem" },
+        { "Id": "2fc9bd1faa1f4710a7f7d2d09feef59d", "Name": "SlotMachineSystem" },
+        { "Id": "782e1a226ec54326a5556bead9053f8d", "Name": "ExplosionSystem" }
+    ],
+    "Assets": [{
+        "Object": { "$TypeId": 10, "Guid": "da3e87ea4bf814708800db26cd48c8dc", "FileId": 2800000, "Type": 3 }
+    }, {
+        "Object": { "$TypeId": 10, "Guid": "93645e4d9afec4c94a1c461f3794a74f", "FileId": 2800000, "Type": 3 }
+    }],
+    "StartupEntityGroup": { "Id": "98b076fc5ebc47ac9486a21a95d4baed", "Name": "GameplayGroup" }
+},
+{
+    "$TypeId": 3,
+    "Id": "c1b85b54b0804513b8752a006932200e",
+    "Name": "SymbolColumn",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "470c4f5dc308469289f025a640c8e589",
+        "Name": "scrollingSymbols",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" },
+        "Array": true
+    }, {
+        "Id": "befb34090e894356b7e68e32e1c48620",
+        "Name": "currentState",
+        "FieldType": { "Id": "b75b9ac5412e42de8987248dab320ed5", "Name": "SymbolColumnState" }
+    }, {
+        "Id": "2aff1693757245a7aad6523cd5c383b3",
+        "Name": "isSpinning",
+        "FieldType": { "Id": "2b477f505af74487b7092b5617d88d3f", "Name": "Boolean" }
+    }, {
+        "Id": "19b29af787c9430ab19b1ae85ea99843",
+        "Name": "currentSpinSpeed",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "aa276d23ba4c4316abe187ecb2329702",
+        "Name": "slowingScalar",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "08dbf7fd8d574f5f941db3b6ddfc29d8",
+        "Name": "symbolSprites",
+        "FieldType": { "Id": "cf54a635a25248ab87f2563bb840ed5b", "Name": "SpriteEntity" },
+        "Array": true
+    }, {
+        "Id": "7d3295ba1acb4e7cac9d5a304f92d4c6",
+        "Name": "currentShownEntity",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "c1b85b54b0804513b8752a006932200e", "Name": "SymbolColumn" },
+        "Properties": {
+            "slowingScalar": 10
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "da967c6d3a7644319231cd8830f35264",
+    "Name": "ScrollingSymbol",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "e3403efec7c24fbeba08f15bfee06af5",
+        "Name": "currentScrollSpeed",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "0724e9af84f34021b86df2dfc97fac54",
+        "Name": "isAtStoppingPoint",
+        "FieldType": { "Id": "2b477f505af74487b7092b5617d88d3f", "Name": "Boolean" }
+    }, {
+        "Id": "4591cdf1225f4de38f8d9b80a691f7d9",
+        "Name": "positionResetAmount",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "39bba1bd64334c8499667994082e1aa0",
+        "Name": "offscreenValueY",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "da967c6d3a7644319231cd8830f35264", "Name": "ScrollingSymbol" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "bb9ac9b94d514ed5a1e0207227972a4e",
+    "Name": "SlotMachine",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "4173603e21e64974af92560b7c6a2e99",
+        "Name": "symbolColumns",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" },
+        "Array": true
+    }, {
+        "Id": "23a1c4f6995f4c54a89e3ef4bef3164e",
+        "Name": "currentState",
+        "FieldType": { "Id": "082ddab69ebe4b139e91ca3c448f0416", "Name": "SlotMachineState" }
+    }, {
+        "Id": "34a69e63551b4bdbb33e420660ca0d76",
+        "Name": "spinButton",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }, {
+        "Id": "a892ca12070d4a7da89c435c2ca5b792",
+        "Name": "stopButton",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }, {
+        "Id": "f5b963b968cb491fa2681473b2987d30",
+        "Name": "winSound",
+        "FieldType": { "Id": "1ae8c073dc444f4fb2d3120e5e618326", "Name": "AudioClipEntity" }
+    }, {
+        "Id": "bbd5ae0b6f924539b236a7e7c1149158",
+        "Name": "spinSound",
+        "FieldType": { "Id": "1ae8c073dc444f4fb2d3120e5e618326", "Name": "AudioClipEntity" }
+    }, {
+        "Id": "911d1b445f8340fa835933a488dd8027",
+        "Name": "spinAgainText",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }, {
+        "Id": "c872eac569884174ac931ff9e53b0935",
+        "Name": "winnerText",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }, {
+        "Id": "9696508fbc004fd6a80ecb473ccc17e1",
+        "Name": "jackpotText",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }, {
+        "Id": "28c0c2acd04d4dc09a25b22fbcb7b62d",
+        "Name": "slotsText",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "bb9ac9b94d514ed5a1e0207227972a4e", "Name": "SlotMachine" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "057ab87043b848019dfa63204f075e1d",
+    "Name": "Explosion",
+    "TypeCode": "Component",
+    "DefaultValue": {
+        "Type": { "Id": "057ab87043b848019dfa63204f075e1d", "Name": "Explosion" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "082ddab69ebe4b139e91ca3c448f0416",
+    "Name": "SlotMachineState",
+    "TypeCode": "Enum",
+    "BaseType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
+    "Fields": [{
+        "Id": "c412d6072faf474c9e5a5d6d362082cf",
+        "Name": "Uninitialized",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "c6e131110e124622a0c8124ee4e1d796",
+        "Name": "AtRest",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "92f3671b252c4a0493ce6444b07f5881",
+        "Name": "Spinning",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "738c08aa0a774edca22aecb7fce83088",
+        "Name": "StoppingColumn1",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "31eab01aa7304748a4415caf8bab2217",
+        "Name": "StoppingColumn2",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "c64f27960a97467cbab6411649b51f50",
+        "Name": "StoppingColumn3",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "01846c5c0f044ab19b902d0d11a0ec5e",
+        "Name": "GameOver",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "082ddab69ebe4b139e91ca3c448f0416", "Name": "SlotMachineState" },
+        "Properties": {
+            "Uninitialized": 6,
+            "Spinning": 1,
+            "StoppingColumn1": 2,
+            "StoppingColumn2": 3,
+            "StoppingColumn3": 4,
+            "GameOver": 5
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "b75b9ac5412e42de8987248dab320ed5",
+    "Name": "SymbolColumnState",
+    "TypeCode": "Enum",
+    "BaseType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
+    "Fields": [{
+        "Id": "087dd3b78f9e43d1b591c5cf234f56ff",
+        "Name": "Uninitialized",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "f237834152494725995a642a107ed599",
+        "Name": "AtRest",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "af391064f31c40f9a35ca8a6f16cb4cf",
+        "Name": "Spinning",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "cb82ebebcc7a4e96acf3e9fa97d988be",
+        "Name": "ComeToStop",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "b75b9ac5412e42de8987248dab320ed5", "Name": "SymbolColumnState" },
+        "Properties": {
+            "Uninitialized": 0,
+            "AtRest": 1,
+            "Spinning": 2,
+            "ComeToStop": 3
+        }
+    }
+},
+{
+    "$TypeId": 4,
+    "Id": "98b076fc5ebc47ac9486a21a95d4baed",
+    "Name": "GameplayGroup",
+    "Entities": [
+        { "$TypeId": 9, "Id": "9029b9b4d9c34ffcbdf258f75339b1a2", "Name": "Camera" },
+        { "$TypeId": 9, "Id": "e919a28ed6e04f04b96e3f1ac021b321", "Name": "WorldScale" },
+        { "$TypeId": 9, "Id": "9a4ea4da366941559771153583054544", "Name": "SlotMachine" },
+        { "$TypeId": 9, "Id": "c52d6158f87c4303bab8db4b3d3c9ea5", "Name": "Column1" },
+        { "$TypeId": 9, "Id": "a18d84055e1747a2b7b0d7e49b66b147", "Name": "Column2" },
+        { "$TypeId": 9, "Id": "0dcdd8e5afb8438ea25453baa592c7e5", "Name": "Column3" },
+        { "$TypeId": 9, "Id": "7628c477c12a4f59a27cabaf7ea7ccbe", "Name": "yellow line" },
+        { "$TypeId": 9, "Id": "a84ab63e731c4d4f9772d6f9a0299029", "Name": "Slot Screen" },
+        { "$TypeId": 9, "Id": "a9937679a1624733b98e6a18c601803f", "Name": "Slots_SpinAgian" },
+        { "$TypeId": 9, "Id": "2dda79933dd7445084e7d50df337be26", "Name": "Slots_Jackpot" },
+        { "$TypeId": 9, "Id": "a5e8f110dd094041ba272e5db3b6fe04", "Name": "Slots_Winner" },
+        { "$TypeId": 9, "Id": "935e9fba10644a5887d3e8d071414efb", "Name": "Slots_SlotsText" },
+        { "$TypeId": 9, "Id": "840b14caa0f64152954856fb480e6dbe", "Name": "StopButton" },
+        { "$TypeId": 9, "Id": "e24b82f8d4494b14a622641da225e470", "Name": "SpinButton" }
+    ]
+},
+{
+    "$TypeId": 5,
+    "Id": "9029b9b4d9c34ffcbdf258f75339b1a2",
+    "Name": "Camera",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" }
+    }, {
+        "Type": { "Id": "12692383f3fef3bb74c209888c5b0939", "Name": "Camera2D" },
+        "Properties": {
+            "halfVerticalSize": 8.5,
+            "backgroundColor": {
+                "Type": { "Id": "83c08479d9d6e46c88247df9dbae2e1b", "Name": "Color" },
+                "Properties": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 1
+                }
+            },
+            "clearFlags": {
+                "$TypeId": 8,
+                "Type": { "Id": "76a06ddd38e99125d930e77c6a287872", "Name": "CameraClearFlags" },
+                "Id": "9faedc246f34513076701ef66b5ad74f",
+                "Name": "SolidColor",
+                "Value": 1
+            },
+            "depth": -1
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "e919a28ed6e04f04b96e3f1ac021b321",
+    "Name": "WorldScale",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "9a4ea4da366941559771153583054544",
+    "Name": "SlotMachine",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "parent": { "$TypeId": 9, "Id": "e919a28ed6e04f04b96e3f1ac021b321", "Name": "WorldScale" }
+        }
+    }, {
+        "Type": { "Id": "bb9ac9b94d514ed5a1e0207227972a4e", "Name": "SlotMachine" },
+        "Properties": {
+            "symbolColumns": {
+                "Type": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" },
+                "Items": [
+                    { "$TypeId": 9, "Id": "c52d6158f87c4303bab8db4b3d3c9ea5", "Name": "Column1" },
+                    { "$TypeId": 9, "Id": "a18d84055e1747a2b7b0d7e49b66b147", "Name": "Column2" },
+                    { "$TypeId": 9, "Id": "0dcdd8e5afb8438ea25453baa592c7e5", "Name": "Column3" }
+                ]
+            },
+            "spinButton": { "$TypeId": 9, "Id": "e24b82f8d4494b14a622641da225e470", "Name": "Slots_Button01" },
+            "stopButton": { "$TypeId": 9, "Id": "840b14caa0f64152954856fb480e6dbe", "Name": "StopButton" },
+            "winSound": { "$TypeId": 10, "Guid": "23e713779c01540909fd742a3db19ea9", "FileId": 8300000, "Type": 3 },
+            "spinSound": { "$TypeId": 10, "Guid": "c463f95ec66fb4b108c8c74b402dc7d4", "FileId": 8300000, "Type": 3 },
+            "spinAgainText": { "$TypeId": 9, "Id": "a9937679a1624733b98e6a18c601803f", "Name": "Slots_SpinAgian" },
+            "winnerText": { "$TypeId": 9, "Id": "a5e8f110dd094041ba272e5db3b6fe04", "Name": "Slots_Jackpot1" },
+            "jackpotText": { "$TypeId": 9, "Id": "2dda79933dd7445084e7d50df337be26", "Name": "Slots_Jackpot" },
+            "slotsText": { "$TypeId": 9, "Id": "935e9fba10644a5887d3e8d071414efb", "Name": "Slots_Winner1" }
+        }
+    }, {
+        "Type": { "Id": "a60aa1b9ad84a83eefb0d5382a4d5967", "Name": "AudioSource" },
+        "Properties": {
+            "clip": { "$TypeId": 10, "Guid": "23e713779c01540909fd742a3db19ea9", "FileId": 8300000, "Type": 3 },
+            "volume": 1,
+            "loop": true
+        }
+    }, {
+        "Type": { "Id": "e816e7b93a13b9e5ddf993486ca79278", "Name": "AudioConfig" }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "c52d6158f87c4303bab8db4b3d3c9ea5",
+    "Name": "Column1",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": -9.5
+                }
+            },
+            "parent": { "$TypeId": 9, "Id": "9a4ea4da366941559771153583054544", "Name": "Entity" }
+        }
+    }, {
+        "Type": { "Id": "c1b85b54b0804513b8752a006932200e", "Name": "SymbolColumn" },
+        "Properties": {
+            "slowingScalar": 20,
+            "symbolSprites": {
+                "Type": { "Id": "cf54a635a25248ab87f2563bb840ed5b", "Name": "SpriteEntity" },
+                "Items": [
+                    { "$TypeId": 10, "Guid": "ba9dab5097b6c445e9024e0bf1689887", "FileId": 21300026, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "ba9dab5097b6c445e9024e0bf1689887", "FileId": 21300010, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "ba9dab5097b6c445e9024e0bf1689887", "FileId": 21300012, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "ba9dab5097b6c445e9024e0bf1689887", "FileId": 21300020, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "ba9dab5097b6c445e9024e0bf1689887", "FileId": 21300024, "Type": 3 }
+                ]
+            }
+        }
+    }, {
+        "Type": { "Id": "a60aa1b9ad84a83eefb0d5382a4d5967", "Name": "AudioSource" },
+        "Properties": {
+            "clip": { "$TypeId": 10, "Guid": "791849ae412f64721b329d7a5d5252a4", "FileId": 8300000, "Type": 3 },
+            "volume": 2
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "a18d84055e1747a2b7b0d7e49b66b147",
+    "Name": "Column2",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 0
+                }
+            },
+            "parent": { "$TypeId": 9, "Id": "9a4ea4da366941559771153583054544", "Name": "Entity" }
+        }
+    }, {
+        "Type": { "Id": "c1b85b54b0804513b8752a006932200e", "Name": "SymbolColumn" },
+        "Properties": {
+            "slowingScalar": 20,
+            "symbolSprites": {
+                "Type": { "Id": "cf54a635a25248ab87f2563bb840ed5b", "Name": "SpriteEntity" },
+                "Items": [
+                    { "$TypeId": 10, "Guid": "ba9dab5097b6c445e9024e0bf1689887", "FileId": 21300024, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "ba9dab5097b6c445e9024e0bf1689887", "FileId": 21300020, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "ba9dab5097b6c445e9024e0bf1689887", "FileId": 21300010, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "ba9dab5097b6c445e9024e0bf1689887", "FileId": 21300026, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "ba9dab5097b6c445e9024e0bf1689887", "FileId": 21300012, "Type": 3 }
+                ]
+            }
+        }
+    }, {
+        "Type": { "Id": "a60aa1b9ad84a83eefb0d5382a4d5967", "Name": "AudioSource" },
+        "Properties": {
+            "clip": { "$TypeId": 10, "Guid": "791849ae412f64721b329d7a5d5252a4", "FileId": 8300000, "Type": 3 },
+            "volume": 2
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "0dcdd8e5afb8438ea25453baa592c7e5",
+    "Name": "Column3",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 9.5
+                }
+            },
+            "parent": { "$TypeId": 9, "Id": "9a4ea4da366941559771153583054544", "Name": "Entity" }
+        }
+    }, {
+        "Type": { "Id": "c1b85b54b0804513b8752a006932200e", "Name": "SymbolColumn" },
+        "Properties": {
+            "slowingScalar": 20,
+            "symbolSprites": {
+                "Type": { "Id": "cf54a635a25248ab87f2563bb840ed5b", "Name": "SpriteEntity" },
+                "Items": [
+                    { "$TypeId": 10, "Guid": "ba9dab5097b6c445e9024e0bf1689887", "FileId": 21300010, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "ba9dab5097b6c445e9024e0bf1689887", "FileId": 21300026, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "ba9dab5097b6c445e9024e0bf1689887", "FileId": 21300012, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "ba9dab5097b6c445e9024e0bf1689887", "FileId": 21300024, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "ba9dab5097b6c445e9024e0bf1689887", "FileId": 21300020, "Type": 3 }
+                ]
+            }
+        }
+    }, {
+        "Type": { "Id": "a60aa1b9ad84a83eefb0d5382a4d5967", "Name": "AudioSource" },
+        "Properties": {
+            "clip": { "$TypeId": 10, "Guid": "791849ae412f64721b329d7a5d5252a4", "FileId": 8300000, "Type": 3 },
+            "volume": 2
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "7628c477c12a4f59a27cabaf7ea7ccbe",
+    "Name": "yellow line",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "z": 9
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 6,
+                    "y": 0.5
+                }
+            },
+            "parent": { "$TypeId": 9, "Id": "9a4ea4da366941559771153583054544", "Name": "SlotMachine" }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "58f64c6a320be4843bd2b18f1cd6f232", "FileId": 21300000, "Type": 3 }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "a84ab63e731c4d4f9772d6f9a0299029",
+    "Name": "Slot Screen",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "z": 10
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 3.5,
+                    "y": 3.5,
+                    "z": 4
+                }
+            },
+            "parent": { "$TypeId": 9, "Id": "9a4ea4da366941559771153583054544", "Name": "SlotMachine" }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "da3e87ea4bf814708800db26cd48c8dc", "FileId": 21300000, "Type": 3 }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "a9937679a1624733b98e6a18c601803f",
+    "Name": "Slots_SpinAgian",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "y": 2.05,
+                    "z": 0
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
+                }
+            },
+            "parent": { "$TypeId": 9, "Id": "a84ab63e731c4d4f9772d6f9a0299029", "Name": "Slot Screen" }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "4204ecc8173eac143a1a55fea2438e81", "FileId": 21300000, "Type": 3 }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "2dda79933dd7445084e7d50df337be26",
+    "Name": "Slots_Jackpot",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "y": 2.02,
+                    "z": 0
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
+                }
+            },
+            "parent": { "$TypeId": 9, "Id": "a84ab63e731c4d4f9772d6f9a0299029", "Name": "Slot Screen" }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "f27a2bb92b56ab940af667c8b5d23849", "FileId": 21300000, "Type": 3 }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "a5e8f110dd094041ba272e5db3b6fe04",
+    "Name": "Slots_Winner",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "y": 2,
+                    "z": 0
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
+                }
+            },
+            "parent": { "$TypeId": 9, "Id": "a84ab63e731c4d4f9772d6f9a0299029", "Name": "Slot Screen" }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "001b4d16c377a1942b90bdd29d25926d", "FileId": 21300000, "Type": 3 }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "935e9fba10644a5887d3e8d071414efb",
+    "Name": "Slots_SlotsText",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "y": 1.97,
+                    "z": 0
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
+                }
+            },
+            "parent": { "$TypeId": 9, "Id": "a84ab63e731c4d4f9772d6f9a0299029", "Name": "Slot Screen" }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "356b4045f41a9c84da3412a828eb3d16", "FileId": 21300000, "Type": 3 }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "840b14caa0f64152954856fb480e6dbe",
+    "Name": "StopButton",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "y": -1.857143,
+                    "z": 1
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 0.8571428,
+                    "y": 0.8571428,
+                    "z": 0.75
+                }
+            },
+            "parent": { "$TypeId": 9, "Id": "a84ab63e731c4d4f9772d6f9a0299029", "Name": "Slot Screen" }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "96bda2e6630384f51b40c22d5df043f5", "FileId": 21300000, "Type": 3 }
+        }
+    }, {
+        "Type": { "Id": "a60aa1b9ad84a83eefb0d5382a4d5967", "Name": "AudioSource" },
+        "Properties": {
+            "clip": { "$TypeId": 10, "Guid": "315d6fa4719344e828de8bcdee6b91da", "FileId": 8300000, "Type": 3 },
+            "volume": 1
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "e24b82f8d4494b14a622641da225e470",
+    "Name": "SpinButton",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "y": -1.857143,
+                    "z": 1.25
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 0.8571428,
+                    "y": 0.8571428,
+                    "z": 0.75
+                }
+            },
+            "parent": { "$TypeId": 9, "Id": "a84ab63e731c4d4f9772d6f9a0299029", "Name": "Slot Screen" }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "ed2ca488c956e460f97ea97b478a7b09", "FileId": 21300000, "Type": 3 }
+        }
+    }, {
+        "Type": { "Id": "324355c3d3ae75925565b701d9ad2256", "Name": "Sprite2DSequencePlayer" },
+        "Properties": {
+            "sequence": { "$TypeId": 9, "Id": "e24b82f8d4494b14a622641da225e470", "Name": "Slots_Button01" },
+            "speed": 1
+        }
+    }, {
+        "Type": { "Id": "f2f3ae228bd6cea4900f91e826243720", "Name": "Sprite2DSequence" },
+        "Properties": {
+            "sprites": {
+                "Type": { "Id": "cf54a635a25248ab87f2563bb840ed5b", "Name": "SpriteEntity" },
+                "Items": [
+                    { "$TypeId": 10, "Guid": "ed2ca488c956e460f97ea97b478a7b09", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "ffaeee0ed2e6b48e790cb5f02f833ebf", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "930d9541fcd104bdbae8390ceb601df3", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "a7b85933a531744b784c25bd7b9c1ea3", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "b8e685a2138ff43cd8a8595b51f77135", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "a3324a8c725324f74adfb97b482c03a6", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "53dd7f4d721804c808f1c9db5cd7a7ea", "FileId": 21300000, "Type": 3 }
+                ]
+            },
+            "frameRate": 10
+        }
+    }]
+},
+{
+    "$TypeId": 4,
+    "Id": "5ce3e88f0fc848b082dd33127466b5f2",
+    "Name": "GameOverGroup",
+    "Entities": [
+        { "$TypeId": 9, "Id": "744605837796407ab6af84e5e62c6a5d", "Name": "WorldScale" },
+        { "$TypeId": 9, "Id": "b48d95a820724fcb8c28f2710f4af522", "Name": "endscreen_UADS_landscape" }
+    ]
+},
+{
+    "$TypeId": 5,
+    "Id": "744605837796407ab6af84e5e62c6a5d",
+    "Name": "WorldScale",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                }
+            }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "b48d95a820724fcb8c28f2710f4af522",
+    "Name": "endscreen_UADS_landscape",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "z": 20
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 1.5,
+                    "y": 1.5,
+                    "z": 1.5
+                }
+            },
+            "parent": { "$TypeId": 9, "Id": "744605837796407ab6af84e5e62c6a5d", "Name": "WorldScale" }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "592bbfc6f55e946dbb98fb26eebcaeab", "FileId": 21300000, "Type": 3 }
+        }
+    }]
+},
+{
+    "$TypeId": 4,
+    "Id": "4eb39f7481cf48aeb491113ac89106e5",
+    "Name": "ScrollingSymbolPrefab",
+    "Entities": [
+        { "$TypeId": 9, "Id": "f837594f7ece4a14814e3ebdea640193", "Name": "Symbol" }
+    ]
+},
+{
+    "$TypeId": 5,
+    "Id": "f837594f7ece4a14814e3ebdea640193",
+    "Name": "Symbol",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 4,
+                    "y": 4,
+                    "z": 4
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "ba9dab5097b6c445e9024e0bf1689887", "FileId": 21300024, "Type": 3 }
+        }
+    }, {
+        "Type": { "Id": "da967c6d3a7644319231cd8830f35264", "Name": "ScrollingSymbol" },
+        "Properties": {
+            "offscreenValueY": -10
+        }
+    }]
+},
+{
+    "$TypeId": 4,
+    "Id": "0a65fa4386994f3f894b02b04b279253",
+    "Name": "WinEffectsGroup",
+    "Entities": [
+        { "$TypeId": 9, "Id": "d80876786a70426383299c986a386012", "Name": "Explosion" },
+        { "$TypeId": 9, "Id": "157f4e2a27844b49929e47dec20bb9da", "Name": "Explosion2" },
+        { "$TypeId": 9, "Id": "68fc34fc5d0a4810885dccd0a8d858d5", "Name": "Explosion3" }
+    ]
+},
+{
+    "$TypeId": 5,
+    "Id": "d80876786a70426383299c986a386012",
+    "Name": "Explosion",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "z": 20
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 5,
+                    "y": 5,
+                    "z": 5
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300000, "Type": 3 },
+            "color": {
+                "Type": { "Id": "83c08479d9d6e46c88247df9dbae2e1b", "Name": "Color" },
+                "Properties": {
+                    "r": 0.8727521,
+                    "g": 1,
+                    "b": 0,
+                    "a": 1
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "f2f3ae228bd6cea4900f91e826243720", "Name": "Sprite2DSequence" },
+        "Properties": {
+            "sprites": {
+                "Type": { "Id": "cf54a635a25248ab87f2563bb840ed5b", "Name": "SpriteEntity" },
+                "Items": [
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300002, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300004, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300006, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300008, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300010, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300012, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300014, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300016, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300018, "Type": 3 }
+                ]
+            },
+            "frameRate": 20
+        }
+    }, {
+        "Type": { "Id": "324355c3d3ae75925565b701d9ad2256", "Name": "Sprite2DSequencePlayer" },
+        "Properties": {
+            "sequence": { "$TypeId": 9, "Id": "d80876786a70426383299c986a386012", "Name": "Explostion" },
+            "paused": true,
+            "loop": {
+                "$TypeId": 8,
+                "Type": { "Id": "39f4b3a71b196dd53941ba383b9df4f4", "Name": "LoopMode" },
+                "Id": "0f0fd792064fcb10e39a09a5b321b302",
+                "Name": "Once",
+                "Value": 1
+            },
+            "speed": 0.8
+        }
+    }, {
+        "Type": { "Id": "057ab87043b848019dfa63204f075e1d", "Name": "Explosion" }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "157f4e2a27844b49929e47dec20bb9da",
+    "Name": "Explosion2",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "z": 20
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 5,
+                    "y": 5,
+                    "z": 5
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300000, "Type": 3 },
+            "color": {
+                "Type": { "Id": "83c08479d9d6e46c88247df9dbae2e1b", "Name": "Color" },
+                "Properties": {
+                    "r": 0.8031507,
+                    "g": 0,
+                    "b": 1,
+                    "a": 1
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "f2f3ae228bd6cea4900f91e826243720", "Name": "Sprite2DSequence" },
+        "Properties": {
+            "sprites": {
+                "Type": { "Id": "cf54a635a25248ab87f2563bb840ed5b", "Name": "SpriteEntity" },
+                "Items": [
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300002, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300004, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300006, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300008, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300010, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300012, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300014, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300016, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300018, "Type": 3 }
+                ]
+            },
+            "frameRate": 20
+        }
+    }, {
+        "Type": { "Id": "324355c3d3ae75925565b701d9ad2256", "Name": "Sprite2DSequencePlayer" },
+        "Properties": {
+            "sequence": { "$TypeId": 9, "Id": "157f4e2a27844b49929e47dec20bb9da", "Name": "Explosion1" },
+            "paused": true,
+            "loop": {
+                "$TypeId": 8,
+                "Type": { "Id": "39f4b3a71b196dd53941ba383b9df4f4", "Name": "LoopMode" },
+                "Id": "0f0fd792064fcb10e39a09a5b321b302",
+                "Name": "Once",
+                "Value": 1
+            },
+            "speed": 1
+        }
+    }, {
+        "Type": { "Id": "057ab87043b848019dfa63204f075e1d", "Name": "Explosion" }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "68fc34fc5d0a4810885dccd0a8d858d5",
+    "Name": "Explosion3",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "z": 20
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 5,
+                    "y": 5,
+                    "z": 5
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300000, "Type": 3 },
+            "color": {
+                "Type": { "Id": "83c08479d9d6e46c88247df9dbae2e1b", "Name": "Color" },
+                "Properties": {
+                    "r": 0.8301887,
+                    "g": 0.7968612,
+                    "b": 0,
+                    "a": 1
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "f2f3ae228bd6cea4900f91e826243720", "Name": "Sprite2DSequence" },
+        "Properties": {
+            "sprites": {
+                "Type": { "Id": "cf54a635a25248ab87f2563bb840ed5b", "Name": "SpriteEntity" },
+                "Items": [
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300002, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300004, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300006, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300008, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300010, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300012, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300014, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300016, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "07b52758fdca94c21ac315d227f23453", "FileId": 21300018, "Type": 3 }
+                ]
+            },
+            "frameRate": 20
+        }
+    }, {
+        "Type": { "Id": "324355c3d3ae75925565b701d9ad2256", "Name": "Sprite2DSequencePlayer" },
+        "Properties": {
+            "sequence": { "$TypeId": 9, "Id": "68fc34fc5d0a4810885dccd0a8d858d5", "Name": "Explosion1" },
+            "paused": true,
+            "loop": {
+                "$TypeId": 8,
+                "Type": { "Id": "39f4b3a71b196dd53941ba383b9df4f4", "Name": "LoopMode" },
+                "Id": "0f0fd792064fcb10e39a09a5b321b302",
+                "Name": "Once",
+                "Value": 1
+            },
+            "speed": 1.2
+        }
+    }, {
+        "Type": { "Id": "057ab87043b848019dfa63204f075e1d", "Name": "Explosion" }
+    }]
+},
+{
+    "$TypeId": 7,
+    "Id": "8b2a22d2e5394075be55e6a4cf1d95af",
+    "Name": "ScrollingSymbolSystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "6a1cc9c65e2204a69a72fa32e5b597a5", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "da967c6d3a7644319231cd8830f35264", "Name": "ScrollingSymbol" },
+        { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "11925dffde424d7d921dcb36ff842974",
+    "Name": "SymbolColumnSystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "90089905c09fa461aa0f79bc1efddd16", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "c1b85b54b0804513b8752a006932200e", "Name": "SymbolColumn" },
+        { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        { "Id": "a60aa1b9ad84a83eefb0d5382a4d5967", "Name": "AudioSource" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "2fc9bd1faa1f4710a7f7d2d09feef59d",
+    "Name": "SlotMachineSystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "5ce5533fb87e14755a960d56af77b285", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "bb9ac9b94d514ed5a1e0207227972a4e", "Name": "SlotMachine" },
+        { "Id": "a60aa1b9ad84a83eefb0d5382a4d5967", "Name": "AudioSource" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "782e1a226ec54326a5556bead9053f8d",
+    "Name": "ExplosionSystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "06deb59d401604d8fa620ee8f9c6880b", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "057ab87043b848019dfa63204f075e1d", "Name": "Explosion" },
+        { "Id": "324355c3d3ae75925565b701d9ad2256", "Name": "Sprite2DSequencePlayer" },
+        { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" }
+    ]
+}]

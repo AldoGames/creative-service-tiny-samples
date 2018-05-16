@@ -1,0 +1,766 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"pro",
+				"prototype"
+			],
+			[
+				"Dragon",
+				"DragonService"
+			],
+			[
+				"par",
+				"particleSprite"
+			],
+			[
+				"f",
+				"function"
+			],
+			[
+				"local",
+				"localPosition"
+			],
+			[
+				"for",
+				"for\tfor (…) {…}"
+			],
+			[
+				"l",
+				"length"
+			],
+			[
+				"draw",
+				"drawnCardValues"
+			],
+			[
+				"car",
+				"cardValue"
+			],
+			[
+				"game",
+				"gamemanager"
+			],
+			[
+				"card",
+				"cardSprite"
+			],
+			[
+				"get",
+				"getComponent"
+			],
+			[
+				"slot",
+				"slotmachine"
+			],
+			[
+				"set",
+				"setClip"
+			],
+			[
+				"symbo",
+				"symbolSprite"
+			],
+			[
+				"gam",
+				"GameOver"
+			],
+			[
+				"Game",
+				"game"
+			],
+			[
+				"curr",
+				"currentSpinSpeed"
+			],
+			[
+				"Symbol",
+				"symbolColumn"
+			],
+			[
+				"fun",
+				"function"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "JavaScript/DestroyMatchSystem.js.txt",
+			"settings":
+			{
+				"buffer_size": 2879,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "DragonService.js.txt",
+			"settings":
+			{
+				"buffer_size": 833,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "DragonSystem.js.txt",
+			"settings":
+			{
+				"buffer_size": 467,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Searching 77 files for \"GemType\"\n\n/Users/allensanderlin/projects/dragon-match/Assets/UTiny.Demo.DragonMatch.utproject:\n   59      ],\n   60      \"Enums\": [\n   61:         { \"Id\": \"e9081c3116e04fac9a0c5902d5768392\", \"Name\": \"GemType\" }\n   62      ],\n   63      \"EntityGroups\": [\n   ..\n   93          \"Id\": \"de62da0c96c24f9f82f609c5a4e45518\",\n   94          \"Name\": \"type\",\n   95:         \"FieldType\": { \"Id\": \"e9081c3116e04fac9a0c5902d5768392\", \"Name\": \"GemType\" }\n   96      }, {\n   97          \"Id\": \"fda9d789fdda43bf8bec0f9953bffb95\",\n   ..\n  311      \"$TypeId\": 3,\n  312      \"Id\": \"e9081c3116e04fac9a0c5902d5768392\",\n  313:     \"Name\": \"GemType\",\n  314      \"TypeCode\": \"Enum\",\n  315      \"BaseType\": { \"Id\": \"9633c95a0a68473682f09ed6a01194b4\", \"Name\": \"Int32\" },\n  ...\n  332      }],\n  333      \"DefaultValue\": {\n  334:         \"Type\": { \"Id\": \"e9081c3116e04fac9a0c5902d5768392\", \"Name\": \"GemType\" },\n  335          \"Properties\": {\n  336              \"Red\": 0,\n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/BoardService.js.txt:\n   14   * @desc Creates a new instance of a gem and sets up the intial state\n   15   * @param {game.Cell} cell\n   16:  * @param {game.GemType} type\n   17   * @returns {ut.Entity}\n   18   */\n   ..\n   37  \n   38      switch (type) {\n   39:         case game.GemType.Red:\n   40              color = new ut.Core2D.Color(1, 0, 0, 1);\n   41              break;\n   42:         case game.GemType.Green:\n   43              color = new ut.Core2D.Color(0, 1, 0, 1);\n   44              break;\n   45:         case game.GemType.Blue:\n   46              color = new ut.Core2D.Color(0, 0, 1, 1);\n   47              break;\n   48:         case game.GemType.Purple:\n   49              color = new ut.Core2D.Color(1, 0, 1, 1);\n   50              break;\n   ..\n   99   * @desc Returns all gems that match the given type along the x-axis for the given cell\n  100   * @param {game.Cell} cell\n  101:  * @param {game.GemType} type\n  102   * @returns {ut.Entity[]} entities\n  103   */\n  ...\n  130   * @desc Returns all entities that match the given type along the y-axis for the given cell\n  131   * @param {game.Cell} cell\n  132:  * @param {game.GemType} type\n  133   * @returns {ut.Entity[]} entities\n  134   */\n  ...\n  161   * @desc Gets all entities that are a 'match' with the given cell and type using the given thresold (e.g. 3 for match3)\n  162   * @param {game.Cell} cell\n  163:  * @param {game.GemType} type\n  164   * @param {int32} threshold\n  165   * @returns {ut.Entity[]} entities\n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/DestroyMatchSystem.js.txt:\n   28  \n   29      switch (gem.getComponent(game.Gem).type()) {\n   30:         case game.GemType.Red:\n   31              color = new ut.Core2D.Color(1, 0, 0, 1);\n   32              break;\n   33:         case game.GemType.Green:\n   34              color = new ut.Core2D.Color(0, 1, 0, 1);\n   35              break;\n   36:         case game.GemType.Blue:\n   37              color = new ut.Core2D.Color(0, 0, 1, 1);\n   38              break;\n   39:         case game.GemType.Purple:\n   40              color = new ut.Core2D.Color(.4, .6, .7, 1);\n   41              break;\n\n16 matches across 3 files\n\n\nSearching 77 files for \"GemType\"\n\n/Users/allensanderlin/projects/dragon-match/Assets/UTiny.Demo.DragonMatch.utproject:\n   59      ],\n   60      \"Enums\": [\n   61:         { \"Id\": \"e9081c3116e04fac9a0c5902d5768392\", \"Name\": \"GemType\" }\n   62      ],\n   63      \"EntityGroups\": [\n   ..\n   93          \"Id\": \"de62da0c96c24f9f82f609c5a4e45518\",\n   94          \"Name\": \"type\",\n   95:         \"FieldType\": { \"Id\": \"e9081c3116e04fac9a0c5902d5768392\", \"Name\": \"GemType\" }\n   96      }, {\n   97          \"Id\": \"fda9d789fdda43bf8bec0f9953bffb95\",\n   ..\n  311      \"$TypeId\": 3,\n  312      \"Id\": \"e9081c3116e04fac9a0c5902d5768392\",\n  313:     \"Name\": \"GemType\",\n  314      \"TypeCode\": \"Enum\",\n  315      \"BaseType\": { \"Id\": \"9633c95a0a68473682f09ed6a01194b4\", \"Name\": \"Int32\" },\n  ...\n  332      }],\n  333      \"DefaultValue\": {\n  334:         \"Type\": { \"Id\": \"e9081c3116e04fac9a0c5902d5768392\", \"Name\": \"GemType\" },\n  335          \"Properties\": {\n  336              \"Red\": 0,\n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/BoardService.js.txt:\n   14   * @desc Creates a new instance of a gem and sets up the intial state\n   15   * @param {game.Cell} cell\n   16:  * @param {game.GemType} type\n   17   * @returns {ut.Entity}\n   18   */\n   ..\n   37  \n   38      switch (type) {\n   39:         case game.GemType.Red:\n   40              color = new ut.Core2D.Color(1, 0, 0, 1);\n   41              break;\n   42:         case game.GemType.Green:\n   43              color = new ut.Core2D.Color(0, 1, 0, 1);\n   44              break;\n   45:         case game.GemType.Blue:\n   46              color = new ut.Core2D.Color(0, 0, 1, 1);\n   47              break;\n   48:         case game.GemType.Purple:\n   49              color = new ut.Core2D.Color(1, 0, 1, 1);\n   50              break;\n   ..\n   99   * @desc Returns all gems that match the given type along the x-axis for the given cell\n  100   * @param {game.Cell} cell\n  101:  * @param {game.GemType} type\n  102   * @returns {ut.Entity[]} entities\n  103   */\n  ...\n  130   * @desc Returns all entities that match the given type along the y-axis for the given cell\n  131   * @param {game.Cell} cell\n  132:  * @param {game.GemType} type\n  133   * @returns {ut.Entity[]} entities\n  134   */\n  ...\n  161   * @desc Gets all entities that are a 'match' with the given cell and type using the given thresold (e.g. 3 for match3)\n  162   * @param {game.Cell} cell\n  163:  * @param {game.GemType} type\n  164   * @param {int32} threshold\n  165   * @returns {ut.Entity[]} entities\n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/DestroyMatchSystem.js.txt:\n   28  \n   29      switch (gem.getComponent(game.Gem).type()) {\n   30:         case game.GemType.Swirl:\n   31              color = new ut.Core2D.Color(1, 0, 0, 1);\n   32              break;\n   33:         case game.GemType.Circle:\n   34              color = new ut.Core2D.Color(0, 1, 0, 1);\n   35              break;\n   36:         case game.GemType.D20:\n   37              color = new ut.Core2D.Color(0, 0, 1, 1);\n   38              break;\n   39:         case game.GemType.Star:\n   40              color = new ut.Core2D.Color(.4, .6, .7, 1);\n   41              break;\n\n16 matches across 3 files\n\n\nSearching 79 files for \"getDragonTransform\"\n\n/Users/allensanderlin/projects/dragon-match/Assets/DragonService.js.txt:\n    6  game.DragonService.prototype.constructor = game.DragonService;\n    7  \n    8: game.DragonService.prototype.getDragonTransform = function() {\n    9      return world.getByName('Dragon').getComponent(ut.Core2D.Transform);\n   10  }\n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/BoardService.js.txt:\n    6  game.BoardService.prototype.constructor = game.BoardService;\n    7  \n    8: game.BoardService.prototype.getDragonTransform = function() {\n    9      return world.getByName('Dragon').getComponent(ut.Core2D.Transform);\n   10  }\n\n2 matches across 2 files\n\n\nSearching 79 files for \"createGem\"\n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/BoardService.js.txt:\n   13   * @returns {ut.Entity}\n   14   */\n   15: game.BoardService.prototype.createGem = function (cell, type) {\n   16      var group = ut.Flow.Service.instantiate(\"game.GemPrefab\");\n   17      var entity = group.root;\n   ..\n   76                  // @todo select a type that will not trigger a match\n   77  \n   78:                 var entity = Board.createGem(cell, type);\n   79  \n   80                  entity.getComponent(game.Gem).setAnimating(true);\n   ..\n  360                  var type = getRandomInt(0, 3);\n  361  \n  362:                 var entity = Board.createGem(cell, type);\n  363                  var transform = entity.getComponent(ut.Core2D.Transform);\n  364  \n\n3 matches in 1 file\n\n\nSearching 84 files for \"prefab\"\"\n\n/Users/allensanderlin/projects/dragon-match/Assets/UTiny.Demo.DragonMatch.utproject:\n   64      \"EntityGroups\": [\n   65          { \"Id\": \"4106bb38df6246028c88eb73d48d17ab\", \"Name\": \"Level_Base\" },\n   66:         { \"Id\": \"85cd58012b1a44adb954d3453e2fae31\", \"Name\": \"GemPrefab\" },\n   67:         { \"Id\": \"a511468a78aa4770a65ed5fbf90998eb\", \"Name\": \"ParticlePrefab\" },\n   68:         { \"Id\": \"4dac95cd0810483ea6cbe6c6ec664271\", \"Name\": \"SlashPrefab\" },\n   69          { \"Id\": \"321ebfd4335744608cf0bfdc681f588d\", \"Name\": \"VictoryGroup\" }\n   70      ],\n   ..\n  729      \"$TypeId\": 4,\n  730      \"Id\": \"85cd58012b1a44adb954d3453e2fae31\",\n  731:     \"Name\": \"GemPrefab\",\n  732      \"Entities\": [\n  733          { \"$TypeId\": 9, \"Id\": \"f2c8cc2abd5c4c60b3327074979c8cc3\", \"Name\": \"Gem\" }\n  ...\n  806      \"$TypeId\": 4,\n  807      \"Id\": \"a511468a78aa4770a65ed5fbf90998eb\",\n  808:     \"Name\": \"ParticlePrefab\",\n  809      \"Entities\": [\n  810          { \"$TypeId\": 9, \"Id\": \"03565d60e01c4a3aa89b0ee2e0b03772\", \"Name\": \"ParticleEmitter\" },\n  ...\n  927      \"$TypeId\": 4,\n  928      \"Id\": \"4dac95cd0810483ea6cbe6c6ec664271\",\n  929:     \"Name\": \"SlashPrefab\",\n  930      \"Entities\": [\n  931          { \"$TypeId\": 9, \"Id\": \"fa09cbde36074ecbb4a890f765e4cc0c\", \"Name\": \"SlashEffect\" }\n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/BoardService.js.txt:\n   14   */\n   15  game.BoardService.prototype.createGem = function (cell, type) {\n   16:     var group = ut.Flow.Service.instantiate(\"game.GemPrefab\");\n   17      var entity = group.root;\n   18  \n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/DestroyMatchSystem.js.txt:\n   18  \n   19      // trigger particle effect\n   20:     var particleGroup = ut.Flow.Service.instantiate(\"game.ParticlePrefab\");\n   21      var particleEmitterEntity = particleGroup.root;\n   22      var particleTransform = particleEmitterEntity.getComponent(ut.Core2D.Transform);\n   ..\n   65  function spawnSlashEffect(targetPos)\n   66  {\n   67:     var slashGroup = ut.Flow.Service.instantiate(\"game.SlashPrefab\");\n   68      var slashTransform = slashGroup.root.getComponent(ut.Core2D.Transform);\n   69  \n\n9 matches across 3 files\n",
+			"settings":
+			{
+				"buffer_size": 10131,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "SlashEffectSystem.js.txt",
+			"settings":
+			{
+				"buffer_size": 198,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "ParticleEmitterSystem.js.txt",
+			"settings":
+			{
+				"buffer_size": 451,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "JavaScript/BoardService.js.txt",
+			"settings":
+			{
+				"buffer_size": 12506,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "packa",
+		"selected_items":
+		[
+			[
+				"packa",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 444.0
+	},
+	"console":
+	{
+		"height": 130.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/allensanderlin/projects/dragon-match/Assets",
+		"/Users/allensanderlin/projects/dragon-match/Assets/JavaScript"
+	],
+	"file_history":
+	[
+		"/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/GraphService.txt",
+		"/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/GemDragSystem.js.txt",
+		"/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/DestroyMatchSystem.js.txt",
+		"/Users/allensanderlin/projects/dragon-match/Assets/dragon-match.sublime-project",
+		"/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/GemDestroySystem.js.txt",
+		"/Users/allensanderlin/projects/dice-roller/Assets/dice-roller.sublime-project",
+		"/Users/allensanderlin/projects/dice-roller/Assets/UTinySamples/Flappy/JavaScript/ResetGameSystem.js.txt",
+		"/Users/allensanderlin/projects/blackjack/Assets/UTinySamples/Flappy/JavaScript/GameNumberTextValueSystem.js.txt",
+		"/Users/allensanderlin/projects/blackjack/Assets/UTinySamples/Match3/JavaScript/BoardService.js.txt",
+		"/Users/allensanderlin/projects/blackjack/Assets/GameService.js.txt",
+		"/Users/allensanderlin/projects/slot-machine/Assets/slot-machine.sublime-project",
+		"/Users/allensanderlin/projects/slot-machine/Assets/ScrollingSymbolSystem.js.txt",
+		"/Users/allensanderlin/projects/slot-machine/Assets/SlotMachineSystem.js.txt",
+		"/Users/allensanderlin/projects/slot-machine/Assets/ExplosionSystem.js.txt",
+		"/Users/allensanderlin/projects/slot-machine/Assets/SymbolColumnSystem.js.txt",
+		"/Users/allensanderlin/projects/slot-machine/Assets/UTinySamples/Match3/JavaScript/BoardService.js.txt",
+		"/Users/allensanderlin/projects/slot-machine/Assets/GameService.js.txt",
+		"/Users/allensanderlin/projects/slot-machine/Assets/UTinySamples/Flappy/JavaScript/GameScrollSpeedSystem.js.txt",
+		"/Users/allensanderlin/projects/slot-machine/Assets/UTinySamples/Flappy/JavaScript/PipeSpacingSystem.js.txt",
+		"/Users/allensanderlin/projects/slot-machine/Packages/manifest.json",
+		"/Users/allensanderlin/projects/tiny-robot-runner/Assets/ResetGameSystem.js.txt",
+		"/Users/allensanderlin/projects/tiny-robot-runner/Assets/UTinySamples/Flappy/JavaScript/GameService.js.txt",
+		"/Users/allensanderlin/projects/tiny-robot-runner/Assets/robot-runner.sublime-project",
+		"/Users/allensanderlin/projects/tiny-robot-runner/Assets/GameService.js.txt.meta",
+		"/Users/allensanderlin/projects/tiny-robot-runner/Assets/RepeatingBackgroundSystem.js.txt",
+		"/Users/allensanderlin/projects/Personal Access Token"
+	],
+	"find":
+	{
+		"height": 24.0
+	},
+	"find_in_files":
+	{
+		"height": 101.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"prefab\"",
+			"createGem",
+			"getDragonTransform",
+			"GemType",
+			"gemttype",
+			"setcolor",
+			"setlocalrotation",
+			"EaseType",
+			".tween",
+			"distance",
+			"lerp",
+			"gemprefab",
+			"delta",
+			"addnode",
+			".Trans",
+			"animat",
+			"isanimating",
+			"removeNode",
+			"mouse",
+			"GemType"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "JavaScript/DestroyMatchSystem.js.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2879,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1823,
+								1823
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Babel/JavaScript (Babel).tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 155.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "DragonService.js.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 833,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								737,
+								737
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Babel/JavaScript (Babel).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "DragonSystem.js.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 467,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								465,
+								465
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Babel/JavaScript (Babel).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10131,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										223,
+										230
+									],
+									[
+										452,
+										459
+									],
+									[
+										640,
+										647
+									],
+									[
+										893,
+										900
+									],
+									[
+										1183,
+										1190
+									],
+									[
+										1305,
+										1312
+									],
+									[
+										1429,
+										1436
+									],
+									[
+										1555,
+										1562
+									],
+									[
+										1680,
+										1687
+									],
+									[
+										1940,
+										1947
+									],
+									[
+										2169,
+										2176
+									],
+									[
+										2426,
+										2433
+									],
+									[
+										2696,
+										2703
+									],
+									[
+										2820,
+										2827
+									],
+									[
+										2946,
+										2953
+									],
+									[
+										3071,
+										3078
+									],
+									[
+										3428,
+										3435
+									],
+									[
+										3657,
+										3664
+									],
+									[
+										3845,
+										3852
+									],
+									[
+										4098,
+										4105
+									],
+									[
+										4388,
+										4395
+									],
+									[
+										4510,
+										4517
+									],
+									[
+										4634,
+										4641
+									],
+									[
+										4760,
+										4767
+									],
+									[
+										4885,
+										4892
+									],
+									[
+										5145,
+										5152
+									],
+									[
+										5374,
+										5381
+									],
+									[
+										5631,
+										5638
+									],
+									[
+										5901,
+										5908
+									],
+									[
+										6027,
+										6034
+									],
+									[
+										6154,
+										6161
+									],
+									[
+										6278,
+										6285
+									],
+									[
+										6642,
+										6660
+									],
+									[
+										6959,
+										6977
+									],
+									[
+										7305,
+										7314
+									],
+									[
+										7579,
+										7588
+									],
+									[
+										7793,
+										7802
+									],
+									[
+										8230,
+										8237
+									],
+									[
+										8317,
+										8324
+									],
+									[
+										8401,
+										8408
+									],
+									[
+										8617,
+										8624
+									],
+									[
+										8852,
+										8859
+									],
+									[
+										9097,
+										9104
+									],
+									[
+										9454,
+										9461
+									],
+									[
+										9717,
+										9724
+									],
+									[
+										10004,
+										10011
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								9701,
+								9701
+							]
+						],
+						"settings":
+						{
+							"default_dir": "/Users/allensanderlin/projects/dragon-match/Assets/JavaScript",
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 5,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 3222.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "SlashEffectSystem.js.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 198,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								152,
+								152
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Babel/JavaScript (Babel).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "ParticleEmitterSystem.js.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 451,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								185,
+								202
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Babel/JavaScript (Babel).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "JavaScript/BoardService.js.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12506,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7450,
+								7457
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Babel/JavaScript (Babel).tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3280.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "dragon-match.sublime-project",
+	"replace":
+	{
+		"height": 44.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 333.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

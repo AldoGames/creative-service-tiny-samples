@@ -1,0 +1,41 @@
+var index = tweensequence.index();
+var sequence = Tween.getById(entity.mId);
+
+for (var i = 0, len = sequence._and.length; i < len; i++) {
+    var tween = sequence._and[i];
+
+    // our tween was destroyed (either by system or user)
+    // remove it and continue execution
+    if (null == tween || tween.entity == null) {
+        sequence._and.splice(i, 1);
+        i--; len--;
+        continue;
+    }
+
+    // always force the tween to play
+    // even if the user calls stop
+    // the sequence is in control of the tween
+    tween.play();
+}
+
+while (index < sequence._then.length) {
+    var tween = sequence._then[index];
+
+    if (null == tween || tween.entity == null) {
+        index++;
+        continue;
+    }
+
+    // always force the tween to play
+    // even if the user calls stop
+    // the sequence is in control of the tween
+    tween.play();
+
+    if (!tween.isDone()) {
+        break;
+    }
+
+    index++;
+}
+
+tweensequence.setIndex(index);

@@ -1,0 +1,156 @@
+var numDiceToUse = gamemanager.numDiceToUse();
+
+switch (gamemanager.state()) {
+    case game.GameState.PrepareToRoll:
+    {
+    	gamemanager.rollButton().setEnabled(true);
+    	gamemanager.countContainer().setEnabled(true);
+    	gamemanager.dieCountText().setEnabled(true);
+
+        // disable gravity
+        world.config(ut.Physics2D.Physics2DConfig).setGravity(new Vector2(0, 0));
+
+        if (ut.Runtime.Input.getMouseButtonDown(0)) {
+        	if(isMouseOnButton(gamemanager.plusButton()))
+        	{
+        		if(numDiceToUse < 31)
+        		{
+        			numDiceToUse++;
+        			gamemanager.setNumDiceToUse(numDiceToUse);
+        		}
+
+        	}else if(isMouseOnButton(gamemanager.minusButton()))
+        	{
+        		if(numDiceToUse > 1)
+        		{
+        			numDiceToUse--;
+        			gamemanager.setNumDiceToUse(numDiceToUse);
+        		}
+        	}else if(isMouseOnButton(gamemanager.rollButton()))
+        	{
+         		gamemanager.setState(game.GameState.CreateDice);
+        	}
+        	//console.log("getMouseButtonDown");
+         	//gamemanager.setState(game.GameState.CreateDice);
+        }
+		gamemanager.dieCountText().getComponent(ut.Text.TextRenderer).setText(String(numDiceToUse));
+    }
+    break;
+    case game.GameState.CreateDice:
+    {
+    	gamemanager.rollButton().setEnabled(false);
+    	gamemanager.countContainer().setEnabled(false);
+    	gamemanager.dieCountText().setEnabled(false);
+    	gamemanager.totalText().setEnabled(false);
+
+    	// destroy existing dice
+    	ut.Flow.Service.destroyAll('game.DiePrefab');
+    	gamemanager.setDiceOnTable([]);
+
+        console.log("game.GameState.CreateDice");
+        for (var i = 0; i < numDiceToUse; i++) {
+        	var index = i;
+			setTimeout(
+				function(){
+					spawnDie();
+				}, getRandomInt(0,10) * 100);
+        }
+
+
+         gamemanager.setState(game.GameState.Rolling);
+    }
+    break;
+    case game.GameState.Rolling:
+    {
+    	if(gamemanager.diceOnTable().length > 0 && !anyDieRolling())
+    	{
+    		gamemanager.totalText().setEnabled(true);
+    		var textComponent = gamemanager.totalText().getComponent(ut.Text.TextRenderer);
+			textComponent.setText("Total:" + getDiceTotal());
+
+         	gamemanager.setState(game.GameState.PrepareToRoll);
+    	}
+    }
+    break;
+}
+
+function getDiceTotal()
+{
+    var total = 0;
+    var diceOnTable = gamemanager.diceOnTable();
+	for (var i = 0; i < diceOnTable.length; i++) {
+    	var die = diceOnTable[i].getComponent(game.Die);
+    	total += die.result();
+	}
+	return total;
+}
+
+function anyDieRolling()
+{
+    var diceOnTable = gamemanager.diceOnTable();
+	for (var i = 0; i < diceOnTable.length; i++) {
+    	var die = diceOnTable[i].getComponent(game.Die);
+    	if(die.result() == 0)
+    	{
+    		return true;
+    	}
+	}
+	return false;
+}
+
+function spawnDie()
+{
+    var diceOnTable = gamemanager.diceOnTable();
+    //console.log("spawnDie:" + diceOnTable.length);
+    var group = ut.Flow.Service.instantiate("game.DiePrefab");
+    var entity = group.root;
+    diceOnTable.push(entity);
+
+    // die setup
+    var die = entity.getComponent(game.Die);
+
+    // spread them out
+    var transform = entity.getComponent(ut.Core2D.Transform);
+    var localPosition = transform.localPosition();
+    localPosition.x = getRandomInt(-100,100);
+    transform.setLocalPosition(localPosition);
+
+    var sequencePlayer = die.animEntity().getComponent(ut.Core2D.Sprite2DSequencePlayer);
+    sequencePlayer.setSpeed(getRandomInt(5,10)/10);
+    sequencePlayer.setTime(getRandomInt(0,10)/10);
+
+    var velocity = entity.getComponent(ut.Physics2D.Velocity2D);
+    velocity.setVelocity(new Vector2(getRandomInt(-1000,1000), getRandomInt(5000,10000)));
+
+   	gamemanager.setDiceOnTable(diceOnTable);
+}
+
+function isMouseOnButton(button)
+{
+    var rectTransform = button.getComponent(ut.Core2D.Transform);
+    var rectHitBox = button.getComponent(ut.HitBox2D.RectHitBox2D);
+
+    // @todo rect helper methods
+    let xMin = rectTransform.worldPosition().x - rectHitBox.box().width * 0.5;
+    let xMax = rectTransform.worldPosition().x + rectHitBox.box().width * 0.5;
+
+    let yMin = rectTransform.worldPosition().y - rectHitBox.box().height * 0.5;
+    let yMax = rectTransform.worldPosition().y + rectHitBox.box().height * 0.5;
+
+    var mouse = ut.Runtime.Input.getWorldInputPosition(world);
+
+    var x = mouse.x;
+    var y = mouse.y;
+
+    if (x > xMin && x < xMax && y > yMin && y < yMax)  {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * @todo move to random class
+ */
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}

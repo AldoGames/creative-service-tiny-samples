@@ -1,0 +1,189 @@
+// if the user clicks the left mouse button do things based on the state
+if (ut.Runtime.Input.getMouseButtonDown(0)) 
+{
+	switch(slotmachine.currentState()){
+		case game.SlotMachineState.AtRest:
+		{
+			slotmachine.spinAgainText().setEnabled(false);
+			slotmachine.stopButton().setEnabled(true);
+			slotmachine.stopButton().getComponent(ut.Audio.AudioSource).setPlaying(true);
+
+			// if the slot machine is at rest, start spinning
+			pullHandle();
+			slotmachine.setCurrentState(game.SlotMachineState.Spinning);
+		}
+		break;
+		case game.SlotMachineState.Spinning:
+		{
+			// if the slot machine is spinning, stop the first wheel
+			slotmachine.setCurrentState(game.SlotMachineState.StoppingColumn1);
+			stopColumn(0);
+
+			slotmachine.stopButton().getComponent(ut.Audio.AudioSource).setPlaying(true);
+		}
+		break;
+		case game.SlotMachineState.StoppingColumn1:
+		{
+			// if the slot machine is spinning, stop the second wheel
+			slotmachine.setCurrentState(game.SlotMachineState.StoppingColumn2);
+			stopColumn(1);
+
+			slotmachine.stopButton().getComponent(ut.Audio.AudioSource).setPlaying(true);
+		}
+		break;
+		case game.SlotMachineState.StoppingColumn2:
+		{
+			// if the slot machine is spinning, stop the last wheel
+			slotmachine.setCurrentState(game.SlotMachineState.StoppingColumn3);
+			stopColumn(2);
+
+			// hide the stop button
+			slotmachine.stopButton().setEnabled(false);
+
+			slotmachine.stopButton().getComponent(ut.Audio.AudioSource).setPlaying(true);
+		}
+		break;
+	}
+}
+
+if(slotmachine.currentState() == game.SlotMachineState.Uninitialized)
+{
+	resetSlotMachine();
+	slotmachine.setCurrentState(game.SlotMachineState.AtRest);
+	slotmachine.slotsText().setEnabled(true);
+}
+
+// once everything has been stopped, we can go to game over
+if(slotmachine.currentState() == game.SlotMachineState.StoppingColumn3)
+{
+	if(allColumnsStopped())
+	{
+		var sameSymbols = numberOfSameSymbols();
+		if(sameSymbols <= 1)
+		{
+			// no win, spin again
+			resetSlotMachine();
+			slotmachine.spinAgainText().setEnabled(true);
+		}else
+		{
+	
+			if(sameSymbols == 2)
+			{
+				slotmachine.winnerText().setEnabled(true);
+			 	var r = slotmachine.winnerText().getComponent(ut.Core2D.Sprite2DRenderer);
+				r.tween("color.a", 0, 1)
+					.setDuration(.2)
+					.setEase(ut.tween.EaseType.EaseOutQuad)
+					.setLoop(ut.tween.LoopType.PingPong);
+			}else
+			{
+				slotmachine.jackpotText().setEnabled(true);
+			 	var r = slotmachine.jackpotText().getComponent(ut.Core2D.Sprite2DRenderer);
+				r.tween("color.a", 0, 1)
+					.setDuration(.2)
+					.setEase(ut.tween.EaseType.EaseOutQuad)
+					.setLoop(ut.tween.LoopType.PingPong);
+			}
+			slotmachine.setCurrentState(game.SlotMachineState.GameOver);
+
+			// wait a few seconds to show the popup
+			setTimeout(function(){
+				audiosource.setPlaying(false);
+
+			    // show the game over view
+			    //ut.Flow.Service.instantiate('game.GameOverGroup');
+			}, 3000);
+
+			// stop the spinning sound and play the win sound after a delay
+			audiosource.setPlaying(false);
+			setTimeout(function(){
+
+	    		ut.Flow.Service.instantiate('game.WinEffectsGroup');
+				audiosource.setClip(slotmachine.winSound());
+				audiosource.setPlaying(true);
+			}, 500);
+		}
+	}
+}
+
+function resetSlotMachine()
+{
+	slotmachine.setCurrentState(game.SlotMachineState.AtRest);
+	slotmachine.spinButton().setEnabled(true);
+	audiosource.setPlaying(false);
+	slotmachine.jackpotText().setEnabled(false);
+	slotmachine.winnerText().setEnabled(false);
+	slotmachine.spinAgainText().setEnabled(false);
+}
+
+function numberOfSameSymbols()
+{
+	// count up each sprite name shown and put the total in a dictionary
+	var total = 0;
+	var dictionary = {};
+	slotmachine.symbolColumns().forEach(function(item, index)
+	{
+		var symbolColumn = item.getComponent(game.SymbolColumn);
+		var spriteName = symbolColumn.currentShownEntity().getComponent(ut.Core2D.Sprite2DRenderer).sprite().name();
+		if(dictionary[spriteName] == undefined)
+		{
+			dictionary[spriteName] = 1;
+		}else
+		{
+			dictionary[spriteName]++;
+		}
+	});
+
+	var highest = 0;
+	for(var key in dictionary) {
+		console.log("key:" + key);
+		if(dictionary[key] > highest)
+		{
+			highest = dictionary[key];
+		}
+	}
+
+	return highest;
+}
+
+function pullHandle()
+{
+	console.log("pullHandle");
+	// tell all the columns to start spinning
+	slotmachine.symbolColumns().forEach(function(item, index)
+	{
+		var symbolColumn = item.getComponent(game.SymbolColumn);
+		symbolColumn.setCurrentState(game.SymbolColumnState.Spinning);
+	});
+
+	// turn off spin button
+	slotmachine.spinButton().setEnabled(false);
+	slotmachine.slotsText().setEnabled(false);
+
+	setTimeout(function(){
+		// play the spinning sound
+		audiosource.setClip(slotmachine.spinSound());
+		audiosource.setPlaying(true);
+	}, 250);
+}
+
+function allColumnsStopped()
+{
+	var allStopped = true;
+	slotmachine.symbolColumns().forEach(function(item, index)
+	{
+		var columnToCheck = item.getComponent(game.SymbolColumn);
+		if(columnToCheck.currentState() != game.SymbolColumnState.AtRest)
+		{
+			allStopped = false;
+		}
+	});
+	return allStopped;
+}
+
+function stopColumn(index)
+{
+ 	var column = slotmachine.symbolColumns()[index];
+	var symbolColumn = column.getComponent(game.SymbolColumn);
+	symbolColumn.setCurrentState(game.SymbolColumnState.ComeToStop);
+}

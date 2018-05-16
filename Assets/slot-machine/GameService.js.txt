@@ -1,0 +1,30 @@
+game.GameService = function() {};
+game.GameService.prototype = Object.create(null);
+game.GameService.prototype.constructor = game.GameService;
+
+game.GameService.prototype.getGameManager = function() {
+    return world.getByName('GameManager').getComponent(game.GameManager);
+}
+
+/**
+ * @desc ends the current game and shows the win popup
+ */
+game.GameService.prototype.initialize = function() {
+
+    // prep to start spinning
+};
+
+/**
+ * @desc ends the current game and shows the win popup
+ */
+game.GameService.prototype.gameOver = function() {
+
+    // show the game over view
+    ut.Flow.Service.instantiate('game.GameOverGroup');
+};
+
+/**
+ * @type {game.GameService}
+ * @desc Singleton game instance
+ */
+var Game = new game.GameService();

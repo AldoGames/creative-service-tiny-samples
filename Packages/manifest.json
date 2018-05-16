@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+  },
+  "testables": [
+    "com.unity.tiny.editor",
+    "com.unity.properties"
+  ],
+  "registry": "https://staging-packages.unity.com"
+}

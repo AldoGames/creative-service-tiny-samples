@@ -1,0 +1,174 @@
+game = game || {}
+
+/**
+ * @abstract
+ * @class
+ * @tutorial 4_game.GettingStarted
+ */
+game.GraphService = function() {
+    this.position = new Vector2(0, 0);
+    this.nodes = {};
+};
+game.GraphService.prototype = Object.create(null);
+game.GraphService.prototype.constructor = game.GraphService;
+
+/**
+ * @method
+ * @desc Clears all nodes from the graph
+ */
+game.GraphService.prototype.clear = function() {
+    this.nodes = {};
+};
+
+/**
+ * @extends game.GraphService
+ * @class
+ * @classdesc GraphService with a cell based layout of nodes (i.e. Grid)
+ * @property {int32} width
+ * @property {int32} height
+ * @property {game.CellLayout} layout
+ */
+game.CellGraphService = function() {
+    game.GraphService.prototype.constructor.call(this);
+    this.width = 4;
+    this.height = 4;
+    this.layout = new game.CellLayout();
+};
+game.CellGraphService.prototype = Object.create(game.GraphService.prototype);
+game.CellGraphService.prototype.constructor = game.CellGraphService;
+
+/**
+ * @method
+ * @desc Converts the given world space position into a cell position 
+ * @param {ut.Vector3} pos - World space position
+ * @returns {ut.Vector2} Cell position
+ */
+game.CellGraphService.prototype.getCell = function (pos) {
+    // convert to local graph space
+    var p = new Vector2(pos.x - this.position.x, pos.y - this.position.y);
+
+    // graph origin is the center, offset if needed
+    if (this.width % 2 != 0) {
+        p.x += this.layout.size.x * 0.5;
+    }
+            
+    if (this.height % 2 != 0) {
+        p.y += this.layout.size.y * 0.5;
+    }
+
+    // shift origin to bottom left
+    p.x += this.width * this.layout.size.x * 0.5;
+    p.y += this.height * this.layout.size.y * 0.5;
+
+    // compute our cell
+    var cell = new game.Cell(p.x / this.layout.size.x, p.y / this.layout.size.y).ceil();
+
+    // @todo clamp function
+    if (cell.x < 0) {
+        cell.x = 0;
+    } else if (cell.x >= this.width - 1) {
+        cell.x = this.width - 1;
+    }
+
+    // @todo clamp function
+    if (cell.y < 0) {
+        cell.y = 0;
+    } else if (cell.y >= this.height - 1) {
+        cell.y = this.height - 1;
+    }
+
+    return cell;
+};
+
+/**
+ * @method
+ * @desc Converts the cell position to a world space position
+ * @param {ut.Vector2} pos - Cell position
+ * @returns {ut.Vector2} World space position
+ */
+game.CellGraphService.prototype.getPosition = function (cell) {
+    var p = new Vector3(cell.x * this.layout.size.x, cell.y * this.layout.size.y, 0);
+
+    if (this.width % 2 == 0)
+    {
+        p.x += this.layout.size.x * 0.5;
+    }
+
+    if (this.width % 2 == 0)
+    {
+        p.y += this.layout.size.y * 0.5;
+    }
+    
+    p.x -= this.width * this.layout.size.x * 0.5;
+    p.y -= this.height * this.layout.size.y * 0.5;
+
+    p.x += this.position.x;
+    p.y += this.position.y;
+    p.z += this.position.z;
+    
+    return p;
+};
+
+/**
+ * @method
+ * @desc Add or overwrite a node at the given cell position
+ * @param {ut.Vector2} cell - Cell position
+ * @param {ut.Entity} node - Entity to store in the graph
+ */
+game.CellGraphService.prototype.addNode = function (cell, node) {
+    var key = cell.getHashCode();
+    this.nodes[key] = node;
+};
+
+/**
+ * @method
+ * @desc Removes the node for the given cell from the graph
+ * @param {ut.Vector2} cell - Cell position
+ */
+game.CellGraphService.prototype.removeNode = function (cell) {
+    var key = cell.getHashCode();
+    if (!this.nodes.hasOwnProperty(key)) {
+        return;
+    }
+    delete this.nodes[key];
+};
+
+/**
+ * @method
+ * @desc Returns the node for the given cell
+ * @param {ut.Vector2} cell - Cell position
+ * @returns {ut.Entity} Entity that was stored
+ */
+game.CellGraphService.prototype.getNode = function (cell) {
+    var key = cell.getHashCode();
+    if (!this.nodes.hasOwnProperty(key)) {
+        return null;
+    }
+    return this.nodes[key];
+};
+
+/**
+ * @method
+ * @desc Computes the hash code for this cell
+ * @returns {int32} computed hash
+ */
+game.Cell.prototype.getHashCode = function() {
+    return this.x * 31 + this.y;
+};
+
+/**
+ * @method
+ * @desc Ceil the x and y properties
+ */
+game.Cell.prototype.ceil = function() {
+    this.x = Math.ceil(this.x);
+    this.y = Math.ceil(this.y);
+    return this;
+};
+
+/**
+ * @type {game.CellGraphService}
+ * @desc Singleton graph instance
+ * @tutorial 4_game.GettingStarted
+ */
+var Graph = new game.CellGraphService();

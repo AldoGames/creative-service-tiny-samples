@@ -1,0 +1,49 @@
+﻿[{
+    "$TypeId": 2,
+    "Id": "caa624a7fb461368575347703e7a89e7",
+    "Name": "UTiny.AdSupport",
+    "ExportFlags": 1,
+    "Namespace": "ut.AdSupport",
+    "Options": 1,
+    "Dependencies": [
+        { "Id": "2af0cd3b47a732bf738688ceab312689", "Name": "UTiny.Core" },
+        { "Id": "a1b50987659c653138795a8f4079fc10", "Name": "UTiny.Math" }
+    ],
+    "Enums": [
+        { "Id": "186f43a79f6e3b16ce2cc930d3868261", "Name": "AdState" }
+    ]
+},
+{
+    "$TypeId": 3,
+    "Id": "186f43a79f6e3b16ce2cc930d3868261",
+    "Name": "AdState",
+    "ExportFlags": 1,
+    "TypeCode": "Enum",
+    "BaseType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
+    "Fields": [{
+        "Id": "2fc1c328b5e256c180be8e5daf07da6f",
+        "Name": "Hidden",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "17b65c315ca8a1bcf7f90fd5dcc16db6",
+        "Name": "Default",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "90de353f93547ab69d4b9bff80f4bd06",
+        "Name": "Loading",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "7ad53981e0288174e372bea87c749e63",
+        "Name": "Expanded",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "186f43a79f6e3b16ce2cc930d3868261", "Name": "AdState" },
+        "Properties": {
+            "Hidden": 0,
+            "Default": 1,
+            "Loading": 2,
+            "Expanded": 3
+        }
+    }
+}]

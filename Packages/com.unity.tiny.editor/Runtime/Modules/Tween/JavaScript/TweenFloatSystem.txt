@@ -1,0 +1,44 @@
+var t = tweentime.interpolation();
+var target = tweentarget.entity();
+var start = tweenfloat.start();
+var end = tweenfloat.end();
+var ctype = Tween._types[tweentarget.component()];
+
+if (!target.hasComponent(ctype)) {
+    return;
+}
+
+var component = target.getComponent(ctype);
+var property = tweentarget.property();
+
+// @todo ideally we shouldnt be using strings and unpacking dynamic javascript objects
+// instead we should really just store an offset to the data along with the type and access it directly
+var e = property.split('.');
+var pName = e.shift();
+var vName = e.length > 0 ? e.pop() : null;
+
+// root represents our component property.
+// this value must be accessed using component.{pName}() and 
+// ALWAYS be written back using component.set{pName}()
+// root can be the value being tweened
+var root = component[pName]();
+
+// host represents the lowest depth 'object' we can reference
+// or root if none exists
+var host = e.length > 0 ? e.reduce(function (v, p) {
+    return v[p];
+}, root) : root;
+
+// value represents the 'float' we are tweening
+var value = null != vName ? host[vName] : root;
+
+// apply linear interpolation
+value = start + (end - start) * t;
+
+// write the value to the host if any
+if (null != vName) {
+    host[vName] = value;
+}
+
+// @hack use dynamic string until we have _view access for all properties
+component['set' + pName.charAt(0).toUpperCase() + pName.slice(1)](root);

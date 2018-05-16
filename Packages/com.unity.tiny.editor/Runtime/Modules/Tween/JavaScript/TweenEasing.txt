@@ -1,0 +1,87 @@
+ut.tween.Easing = {
+  linear: function (t) { return t },
+  inQuad: function (t) { return t*t },
+  outQuad: function (t) { return t*(2-t) },
+  inOutQuad: function (t) { return t<.5 ? 2*t*t : -1+(4-2*t)*t },
+  inCubic: function (t) { return t*t*t },
+  outCubic: function (t) { return (--t)*t*t+1 },
+  inOutCubic: function (t) { return t<.5 ? 4*t*t*t : (t-1)*(2*t-2)*(2*t-2)+1 },
+  inQuart: function (t) { return t*t*t*t },
+  outQuart: function (t) { return 1-(--t)*t*t*t },
+  inOutQuart: function (t) { return t<.5 ? 8*t*t*t*t : 1-8*(--t)*t*t*t },
+  inQuint: function (t) { return t*t*t*t*t },
+  outQuint: function (t) { return 1+(--t)*t*t*t*t }, 
+  inOutQuint: function (t) { return t<.5 ? 16*t*t*t*t*t : 1+16*(--t)*t*t*t*t },
+  inBack: function (t) { var s = 1.70158; return t * t * (( s + 1 ) * t - s); },
+  outBack: function (t) { var s = 1.70158; return --t * t * ((s + 1) * t + s) + 1; },
+  inOutBack: function (t) { var s = 1.70158 * 1.525; if ( ( t *= 2 ) < 1 ) return 0.5 * ( t * t * ( ( s + 1 ) * t - s ) ); return 0.5 * ( ( t -= 2 ) * t * ( ( s + 1 ) * t + s ) + 2 ); },
+  inBounce: function(t) { 
+    return 1 - ut.tween.Easeing.outBounce(1 - t);
+  },
+  outBounce: function(t) { 
+    if (t < (1 / 2.75)) {
+        return t * t * 7.5625;
+      }
+      else if (t < (2 / 2.75)) {
+        t = t - (1.5 / 2.75);
+        return t * t * 7.5625 + 0.75;
+      }
+      else if (t < (2.5 / 2.75)) {
+        t = t - (2.25 / 2.75);
+        return t * t * 7.5625 + 0.9375;
+      }
+
+      t = t - (2.625 / 2.75);
+      return t * t * 7.5625 + 0.984375;
+  },
+  inOutBounce: function(t) { 
+      t *= 2;
+      if (t < 1) {
+        return 0.5 * ut.tween.Easing.inBounce(t);
+      }
+      return 0.5 * ut.tween.Easing.outBounce(t - 1) + 0.5;
+  },
+
+  getFunction: function(type) {
+    switch (type) {
+        case ut.tween.EaseType.Linear:
+            return ut.tween.Easing.linear;
+        case ut.tween.EaseType.EaseInQuad:
+            return ut.tween.Easing.inQuad;
+        case ut.tween.EaseType.EaseOutQuad:
+            return ut.tween.Easing.outQuad;
+        case ut.tween.EaseType.EaseInOutQuad:
+            return ut.tween.Easing.inOutQuad;
+        case ut.tween.EaseType.EaseInCubic:
+            return ut.tween.Easing.inCubic;
+        case ut.tween.EaseType.EaseOutCubic:
+            return ut.tween.Easing.outCubic;
+        case ut.tween.EaseType.EaseInOutCubic:
+            return ut.tween.Easing.inOutCubic;
+        case ut.tween.EaseType.EaseInQuart:
+            return ut.tween.Easing.inQuart;
+        case ut.tween.EaseType.EaseOutQuart:
+            return ut.tween.Easing.outQuart;
+        case ut.tween.EaseType.EaseInOutQuart:
+            return ut.tween.Easing.inOutQuart;
+        case ut.tween.EaseType.EaseInQuint:
+            return ut.tween.Easing.inQuint;
+        case ut.tween.EaseType.EaseOutQuint:
+            return ut.tween.Easing.outQuart;
+        case ut.tween.EaseType.EaseInOutQuint:
+            return ut.tween.Easing.inOutQuint;
+        case ut.tween.EaseType.EaseInBack:
+            return ut.tween.Easing.inBack;
+        case ut.tween.EaseType.EaseOutBack:
+            return ut.tween.Easing.outBack;
+        case ut.tween.EaseType.EaseInOutBack:
+            return ut.tween.Easing.inOutBack;
+        case ut.tween.EaseType.EaseInBounce:
+            return ut.tween.Easing.inBounce;
+        case ut.tween.EaseType.EaseOutBounce:
+            return ut.tween.Easing.outBounce;
+        case ut.tween.EaseType.EaseInOutBounce:
+            return ut.tween.Easing.inOutBounce;
+    }
+  }
+};

@@ -1,0 +1,107 @@
+
+var mouse = ut.Runtime.Input.getWorldInputPosition(world);
+
+if (ut.Runtime.Input.getMouseButtonDown(0))
+{
+    if(isMouseOverThisGem())
+    {
+        gem.setDragStart(mouse);
+        gem.setIsDragged(true);
+    }
+}else if(ut.Runtime.Input.getMouseButton(0))
+{
+    if(gem.isDragged())
+    {
+        var deltaX = mouse.x - gem.dragStart().x;
+        var deltaY = mouse.y - gem.dragStart().y;
+
+        var node = entity.getComponent(game.CellGraphNode);
+        var nextCellEntity = null;
+        var adjacentCell = node.cell();
+
+        var dragResolved = false;
+
+        if(deltaX < -10)
+        {
+            // drag left
+            gem.setIsDragged(false);
+            adjacentCell.x--;
+            dragResolved = true;
+        }else if(deltaX >10)
+        {
+            // drag right
+            gem.setIsDragged(false);
+            adjacentCell.x++;
+            dragResolved = true;
+        }else if(deltaY < -10)
+        {
+            // drag down
+            gem.setIsDragged(false);
+            adjacentCell.y--;
+            dragResolved = true;
+        }else if(deltaY >10)
+        {
+            // drag up
+            gem.setIsDragged(false);
+            adjacentCell.y++;
+            dragResolved = true;
+        }
+
+        nextCellEntity = Graph.getNode(adjacentCell);
+
+        if(dragResolved && nextCellEntity != null)
+        {
+            // swap cell values for the 2 nodes
+            var nextNode = nextCellEntity.getComponent(game.CellGraphNode);
+            var myCell = node.cell();
+            node.setCell(nextNode.cell());
+            nextNode.setCell(myCell);
+
+            // update the graph with the values
+            Graph.addNode(node.cell(), entity);
+            Graph.addNode(nextNode.cell(), nextCellEntity);
+
+            // animate them to their new positions
+            entity.getComponent(game.Gem).setAnimating(true);
+            nextCellEntity.getComponent(game.Gem).setAnimating(true);
+
+            transform.tween("localPosition", transform.localPosition(), Graph.getPosition(node.cell()))
+             .setDuration(0.5)
+             .setEase(ut.tween.EaseType.EaseOutBounce)
+             .onComplete(function(e) {
+                e.getComponent(game.Gem).setAnimating(false);
+            }, entity);
+
+            var nextCellTransform = nextCellEntity.getComponent(ut.Core2D.Transform);
+            var targetPos = Graph.getPosition(nextNode.cell());
+            nextCellTransform.tween("localPosition", nextCellTransform.localPosition(), targetPos)
+             .setDuration(0.5)
+             .setEase(ut.tween.EaseType.EaseOutBounce)
+             .onComplete(function(e) {
+                e.getComponent(game.Gem).setAnimating(false);
+            }, nextCellEntity);
+            
+        }
+    }
+}
+
+function isMouseOverThisGem()
+{
+    var position = transform.localPosition();
+
+    let xMin = position.x - Graph.layout.size.x * 0.5;
+    let xMax = position.x + Graph.layout.size.x * 0.5;
+
+    let yMin = position.y - Graph.layout.size.y * 0.5;
+    let yMax = position.y + Graph.layout.size.y * 0.5;
+
+    var mouse = ut.Runtime.Input.getWorldInputPosition(world);
+
+    var x = mouse.x;
+    var y = mouse.y;
+
+    if (x > xMin && x < xMax && y > yMin && y < yMax)  {
+        return true;
+    }
+    return false;
+}

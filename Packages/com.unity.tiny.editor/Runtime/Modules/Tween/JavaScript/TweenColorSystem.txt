@@ -1,0 +1,39 @@
+var t = tweentime.interpolation();
+var target = tweentarget.entity();
+if (null == target || !target.valid()) {
+    return;
+}
+var ctype = Tween._types[tweentarget.component()];
+if (!target.hasComponent(ctype)) {
+    return;
+}
+var component = target.getComponent(ctype);
+var property = tweentarget.property();
+
+// @todo ideally we shouldnt be using strings and unpacking dynamic javascript objects
+// instead we should really just store an offset to the data along with the type and access it directly
+var e = property.split('.');
+var pName = e.shift();
+
+// root represents our component property.
+// this value must be accessed using component.{pName}() and 
+// ALWAYS be written back using component.set{pName}()
+// root can be the value being tweened
+var root = component[pName]();
+
+// resolve the tree to get the target value we should tween
+var value = e.length > 0 ? e.reduce(function (v, p) {
+    return v[p];
+}, root) : root;
+
+var start = tweencolor.start();
+var end = tweencolor.end();
+
+// apply linear interpolation
+value.r = start.r + (end.r - start.r) * t;
+value.g = start.g + (end.g - start.g) * t;
+value.b = start.b + (end.b - start.b) * t;
+value.a = start.a + (end.a - start.a) * t;
+
+// @hack use dynamic string until we have _view access for all properties
+component['set' + pName.charAt(0).toUpperCase() + pName.slice(1)](root);

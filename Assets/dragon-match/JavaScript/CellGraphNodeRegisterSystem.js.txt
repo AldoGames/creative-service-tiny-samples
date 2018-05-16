@@ -1,0 +1,18 @@
+// get the current cell and node we are at
+var cell = cellgraphnode.cell();
+var node = Graph.getNode(cell);
+var target = Graph.getCell(transform.localPosition()); 
+
+var nodeId = null != node ? node.mId : -1;
+
+// Has anything changed?
+if (cell.x != target.x || cell.y != target.y || nodeId != entity.mId) {
+    if (null != node && nodeId == entity.mId) {
+        // unregister from the graph
+        Graph.removeNode(cell);
+    }
+
+    Graph.addNode(target, entity);
+}
+
+cellgraphnode.setCell(target);

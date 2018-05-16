@@ -1,0 +1,11 @@
+
+/* Used for the scrollable view (Detail, Repro steps and Attached files) */
+.scrollable{
+	background-color:#434343;
+	border-color:#666666;
+}
+
+
+.file{
+	border-color:#0F0F0F;
+}

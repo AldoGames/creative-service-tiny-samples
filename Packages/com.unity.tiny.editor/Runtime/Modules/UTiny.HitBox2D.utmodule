@@ -1,0 +1,116 @@
+﻿[{
+    "$TypeId": 2,
+    "Id": "36f73ad23c8a63c53fa510f0621474f5",
+    "Name": "UTiny.HitBox2D",
+    "ExportFlags": 1,
+    "Namespace": "ut.HitBox2D",
+    "Options": 1,
+    "Dependencies": [
+        { "Id": "2af0cd3b47a732bf738688ceab312689", "Name": "UTiny.Core" },
+        { "Id": "a1b50987659c653138795a8f4079fc10", "Name": "UTiny.Math" }
+    ],
+    "Components": [
+        { "Id": "a015bc52c7befa4d7484891d74d2b574", "Name": "RectHitBox2D" },
+        { "Id": "5a68c59783d93e60c704f63111bcb0ad", "Name": "Sprite2DRendererHitBox2D" },
+        { "Id": "44ad5544b1b1c11651e308e1f949fd69", "Name": "HitBoxOverlapResults" }
+    ],
+    "Structs": [
+        { "Id": "ccb700dda656de657dd05de3a74c1eca", "Name": "HitBoxOverlap" },
+        { "Id": "c526d2181ca14153cd401551a1ce0c1d", "Name": "HitTestResult" },
+        { "Id": "ef2e90bfc8b339fe2cd3d8f14d96759c", "Name": "RayCastResult" },
+        { "Id": "f6e97f5cb3f8cbac67ac85536dde8416", "Name": "DetailedHitBoxOverlap" }
+    ],
+    "Systems": [
+        { "Id": "f92c58d2aaa59f57d3b765b50da1cd18", "Name": "HitBox2DSystem" }
+    ]
+},
+{
+    "$TypeId": 3,
+    "Id": "a015bc52c7befa4d7484891d74d2b574",
+    "Name": "RectHitBox2D",
+    "ExportFlags": 1,
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "6610c1384b1e04ad886b287ed914f35a",
+        "Name": "box",
+        "FieldType": { "Id": "f216da154c4054842adb590807e977ba", "Name": "Rect" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "a015bc52c7befa4d7484891d74d2b574", "Name": "RectHitBox2D" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "5a68c59783d93e60c704f63111bcb0ad",
+    "Name": "Sprite2DRendererHitBox2D",
+    "ExportFlags": 1,
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "4e9eb21ee35dcb5e34dcec92d0ac2e73",
+        "Name": "pixelAccurate",
+        "FieldType": { "Id": "2b477f505af74487b7092b5617d88d3f", "Name": "Boolean" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "5a68c59783d93e60c704f63111bcb0ad", "Name": "Sprite2DRendererHitBox2D" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "44ad5544b1b1c11651e308e1f949fd69",
+    "Name": "HitBoxOverlapResults",
+    "ExportFlags": 1,
+    "TypeCode": "Component",
+    "DefaultValue": {
+        "Type": { "Id": "44ad5544b1b1c11651e308e1f949fd69", "Name": "HitBoxOverlapResults" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "ccb700dda656de657dd05de3a74c1eca",
+    "Name": "HitBoxOverlap",
+    "ExportFlags": 1,
+    "TypeCode": "Struct",
+    "DefaultValue": {
+        "Type": { "Id": "ccb700dda656de657dd05de3a74c1eca", "Name": "HitBoxOverlap" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "c526d2181ca14153cd401551a1ce0c1d",
+    "Name": "HitTestResult",
+    "ExportFlags": 1,
+    "TypeCode": "Struct",
+    "DefaultValue": {
+        "Type": { "Id": "c526d2181ca14153cd401551a1ce0c1d", "Name": "HitTestResult" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "ef2e90bfc8b339fe2cd3d8f14d96759c",
+    "Name": "RayCastResult",
+    "ExportFlags": 1,
+    "TypeCode": "Struct",
+    "DefaultValue": {
+        "Type": { "Id": "ef2e90bfc8b339fe2cd3d8f14d96759c", "Name": "RayCastResult" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "f6e97f5cb3f8cbac67ac85536dde8416",
+    "Name": "DetailedHitBoxOverlap",
+    "ExportFlags": 1,
+    "TypeCode": "Struct",
+    "DefaultValue": {
+        "Type": { "Id": "f6e97f5cb3f8cbac67ac85536dde8416", "Name": "DetailedHitBoxOverlap" }
+    }
+},
+{
+    "$TypeId": 7,
+    "Id": "f92c58d2aaa59f57d3b765b50da1cd18",
+    "Name": "HitBox2DSystem",
+    "ExportFlags": 1,
+    "Options": 3,
+    "ExecuteAfter": [
+        { "Id": "18b3911e585818981221fbf523fc3eb0", "Name": "DisplayList" }
+    ]
+}]

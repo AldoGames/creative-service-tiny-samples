@@ -1,0 +1,264 @@
+﻿[{
+    "$TypeId": 2,
+    "Id": "0bc66cc14cafcceaaebf78d21c72cede",
+    "Name": "UTiny.Particles",
+    "ExportFlags": 1,
+    "Namespace": "ut.Particles",
+    "Options": 1,
+    "Dependencies": [
+        { "Id": "2af0cd3b47a732bf738688ceab312689", "Name": "UTiny.Core" },
+        { "Id": "a1b50987659c653138795a8f4079fc10", "Name": "UTiny.Math" }
+    ],
+    "Components": [
+        { "Id": "c8371d148850d1a696b747b09999a478", "Name": "ParticleEmitter" },
+        { "Id": "821d318d8d12611a0128b1f68eed9489", "Name": "EmitterBoxSource" },
+        { "Id": "97965e0b55ef0d896b686b4dd4ee330d", "Name": "EmitterInitialScale" },
+        { "Id": "95bc12996b73a0a56dc927d7646aa0f7", "Name": "EmitterInitialVelocity" },
+        { "Id": "5b3dc8e5f243676c125024480ebbe8b0", "Name": "EmitterInitialRotation" },
+        { "Id": "79f839cbe194578f85eb58c8c7b53e89", "Name": "LifetimeColor" },
+        { "Id": "1f666b173bd5eb1a572b169e4ea28271", "Name": "LifetimeAlpha" },
+        { "Id": "eb8a89020902b70571b96db92e8ea046", "Name": "LifetimeScale" },
+        { "Id": "58c3d510fda899a3a546a9d183cf3d08", "Name": "LifetimeRotation" },
+        { "Id": "8e728c1655262fe61666df6d06df2ade", "Name": "LifetimeVelocity" }
+    ],
+    "Systems": [
+        { "Id": "811a01ef006a40f3996b1c3d3470a8ba", "Name": "ParticleSystem" }
+    ]
+},
+{
+    "$TypeId": 3,
+    "Id": "c8371d148850d1a696b747b09999a478",
+    "Name": "ParticleEmitter",
+    "ExportFlags": 1,
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "a4edf64869ad2f3870e0e3df039d42f6",
+        "Name": "particle",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }, {
+        "Id": "13086d56f39cb49c5b0e1e401d4e806e",
+        "Name": "maxParticles",
+        "FieldType": { "Id": "1da58c8ba95a4c85a2b5920bd0663f70", "Name": "UInt32" }
+    }, {
+        "Id": "84390aea1b8206bde9a10198c173a24f",
+        "Name": "emitRate",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "a675fd72921bfa278164047166dfe720",
+        "Name": "startDelay",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "2f64513b25f125986dc075392f627c8f",
+        "Name": "prewarmPercent",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "40e4136a8ca14c6a7142dc7fd7e41bdf",
+        "Name": "lifetime",
+        "FieldType": { "Id": "0617b7f4431866888bfdb077d683c2ce", "Name": "Range" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "c8371d148850d1a696b747b09999a478", "Name": "ParticleEmitter" },
+        "Properties": {
+            "maxParticles": 1000,
+            "emitRate": 10,
+            "lifetime": {
+                "Type": { "Id": "0617b7f4431866888bfdb077d683c2ce", "Name": "Range" },
+                "Properties": {
+                    "start": 5,
+                    "end": 5
+                }
+            }
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "821d318d8d12611a0128b1f68eed9489",
+    "Name": "EmitterBoxSource",
+    "ExportFlags": 1,
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "ca80b0243a3b5585516c2f5119dee106",
+        "Name": "rect",
+        "FieldType": { "Id": "f216da154c4054842adb590807e977ba", "Name": "Rect" }
+    }, {
+        "Id": "f1ed1a7a56b70ad5eb756e4938ead8d7",
+        "Name": "attachToEmitter",
+        "FieldType": { "Id": "2b477f505af74487b7092b5617d88d3f", "Name": "Boolean" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "821d318d8d12611a0128b1f68eed9489", "Name": "EmitterBoxSource" },
+        "Properties": {
+            "rect": {
+                "Type": { "Id": "f216da154c4054842adb590807e977ba", "Name": "Rect" },
+                "Properties": {
+                    "width": 50,
+                    "height": 50
+                }
+            }
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "97965e0b55ef0d896b686b4dd4ee330d",
+    "Name": "EmitterInitialScale",
+    "ExportFlags": 1,
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "40b32a4ee322ca02737c2dfa68a9cd1d",
+        "Name": "scale",
+        "FieldType": { "Id": "0617b7f4431866888bfdb077d683c2ce", "Name": "Range" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "97965e0b55ef0d896b686b4dd4ee330d", "Name": "EmitterInitialScale" },
+        "Properties": {
+            "scale": {
+                "Type": { "Id": "0617b7f4431866888bfdb077d683c2ce", "Name": "Range" },
+                "Properties": {
+                    "start": 1,
+                    "end": 1
+                }
+            }
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "95bc12996b73a0a56dc927d7646aa0f7",
+    "Name": "EmitterInitialVelocity",
+    "ExportFlags": 1,
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "33458020a4f57ae744f865e25cfc7a7c",
+        "Name": "direction",
+        "FieldType": { "Id": "0617b7f4431866888bfdb077d683c2ce", "Name": "Range" }
+    }, {
+        "Id": "d9732bd3e594ae30d2a37e0e3813f140",
+        "Name": "speed",
+        "FieldType": { "Id": "0617b7f4431866888bfdb077d683c2ce", "Name": "Range" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "95bc12996b73a0a56dc927d7646aa0f7", "Name": "EmitterInitialVelocity" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "5b3dc8e5f243676c125024480ebbe8b0",
+    "Name": "EmitterInitialRotation",
+    "ExportFlags": 1,
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "bc3bb5fd09c136e5637f2e2a702ed0d8",
+        "Name": "rotation",
+        "FieldType": { "Id": "0617b7f4431866888bfdb077d683c2ce", "Name": "Range" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "5b3dc8e5f243676c125024480ebbe8b0", "Name": "EmitterInitialRotation" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "79f839cbe194578f85eb58c8c7b53e89",
+    "Name": "LifetimeColor",
+    "ExportFlags": 1,
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "c9ee1713729ea16980529a11b6fead85",
+        "Name": "gradient",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }, {
+        "Id": "4d5e6dd9d0b657d2daa0c7bcddd62f29",
+        "Name": "modulate",
+        "FieldType": { "Id": "2b477f505af74487b7092b5617d88d3f", "Name": "Boolean" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "79f839cbe194578f85eb58c8c7b53e89", "Name": "LifetimeColor" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "1f666b173bd5eb1a572b169e4ea28271",
+    "Name": "LifetimeAlpha",
+    "ExportFlags": 1,
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "b0c2ef96872d0b32fd920e92368cc0d4",
+        "Name": "curve",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }, {
+        "Id": "e05372c77fb3b8d7a84bb1dacce73232",
+        "Name": "modulate",
+        "FieldType": { "Id": "2b477f505af74487b7092b5617d88d3f", "Name": "Boolean" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "1f666b173bd5eb1a572b169e4ea28271", "Name": "LifetimeAlpha" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "eb8a89020902b70571b96db92e8ea046",
+    "Name": "LifetimeScale",
+    "ExportFlags": 1,
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "5d56da19950e35819ea2c3ce379ae8dd",
+        "Name": "curve",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }, {
+        "Id": "a01b63f60325a9b524587e68ed38f0c7",
+        "Name": "modulate",
+        "FieldType": { "Id": "2b477f505af74487b7092b5617d88d3f", "Name": "Boolean" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "eb8a89020902b70571b96db92e8ea046", "Name": "LifetimeScale" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "58c3d510fda899a3a546a9d183cf3d08",
+    "Name": "LifetimeRotation",
+    "ExportFlags": 1,
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "057098756dab4f3cbfe8cab7a5c23c32",
+        "Name": "curve",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }, {
+        "Id": "85a3c12fa66312c35a86e94bd263c4df",
+        "Name": "modulate",
+        "FieldType": { "Id": "2b477f505af74487b7092b5617d88d3f", "Name": "Boolean" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "58c3d510fda899a3a546a9d183cf3d08", "Name": "LifetimeRotation" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "8e728c1655262fe61666df6d06df2ade",
+    "Name": "LifetimeVelocity",
+    "ExportFlags": 1,
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "99370a1cec1e8e26eb58d17ea6cb21fb",
+        "Name": "curve",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }, {
+        "Id": "8cbe68051027e6a6358c47942565cd60",
+        "Name": "modulate",
+        "FieldType": { "Id": "2b477f505af74487b7092b5617d88d3f", "Name": "Boolean" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "8e728c1655262fe61666df6d06df2ade", "Name": "LifetimeVelocity" }
+    }
+},
+{
+    "$TypeId": 7,
+    "Id": "811a01ef006a40f3996b1c3d3470a8ba",
+    "Name": "ParticleSystem",
+    "ExportFlags": 1,
+    "Options": 3,
+    "ExecuteBefore": [
+        { "Id": "face704baaa19cca19003460bfcd42ee", "Name": "RenderingFence" }
+    ]
+}]

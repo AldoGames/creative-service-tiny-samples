@@ -1,0 +1,7 @@
+var time = tweentime.time();
+var duration = tweentime.duration();
+
+if (time >= duration) {
+    var tween = Tween.getById(entity.mId);
+    Tween.destroy(tween);
+}

@@ -1,0 +1,14 @@
+var healthFillTransform = dragon.healthFillEntity().getComponent(ut.Core2D.Transform);
+if(dragon.health() > 0)
+{
+	var fillPct = dragon.health() / 100.0;
+	//console.log("health:" + dragon.health());
+	var newScale = healthFillTransform.localScale();
+	newScale.x = fillPct;
+	healthFillTransform.setLocalScale(newScale);
+}else
+{
+	dragon.healthFillEntity().setEnabled(false);
+    ut.Flow.Service.instantiate("game.VictoryGroup");
+    entity.removeComponent(game.Dragon);
+}

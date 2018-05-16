@@ -1,0 +1,402 @@
+﻿[{
+    "$TypeId": 2,
+    "Id": "a1b50987659c653138795a8f4079fc10",
+    "Name": "UTiny.Math",
+    "ExportFlags": 1,
+    "Documentation": {
+        "Summary": "Math module provides basic geometric types."
+    },
+    "Namespace": "ut.Math",
+    "Options": 3,
+    "Dependencies": [
+        { "Id": "2af0cd3b47a732bf738688ceab312689", "Name": "UTiny.Core" }
+    ],
+    "Structs": [
+        { "Id": "f216da154c4054842adb590807e977ba", "Name": "Rect" },
+        { "Id": "b240677e897e91900828c714b14de819", "Name": "RectInt" },
+        { "Id": "3abb69286ddfc2d1c617a173c1eeb35d", "Name": "Vector2" },
+        { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+        { "Id": "ab9074756b77ee15b6b7f762b5dfb8a7", "Name": "Vector4" },
+        { "Id": "dc7e11e5d517ed01fd5d084a6c9fd64d", "Name": "Quaternion" },
+        { "Id": "dd50796f201dc95331552ad2e74482a1", "Name": "Matrix3x3" },
+        { "Id": "d6e1c2cc517e0e1efa253889f20abedb", "Name": "Matrix4x4" },
+        { "Id": "0617b7f4431866888bfdb077d683c2ce", "Name": "Range" },
+        { "Id": "54779ffb6892017b68062aaf8eed243d", "Name": "RangeInt" }
+    ],
+    "Enums": [
+        { "Id": "5f12673ca88e126d8f47e976dfee2963", "Name": "RotationOrder" }
+    ]
+},
+{
+    "$TypeId": 3,
+    "Id": "f216da154c4054842adb590807e977ba",
+    "Name": "Rect",
+    "ExportFlags": 1,
+    "TypeCode": "Struct",
+    "Fields": [{
+        "Id": "6d7a401cd5d559b501baea6508993c3a",
+        "Name": "x",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "dd7ab78b39c1b42dcd10dc0634c93392",
+        "Name": "y",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "30c207d6f2e22dfebc5c4b9864098ae5",
+        "Name": "width",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "f69501239509e96fb93e873749b00de2",
+        "Name": "height",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "f216da154c4054842adb590807e977ba", "Name": "Rect" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "b240677e897e91900828c714b14de819",
+    "Name": "RectInt",
+    "ExportFlags": 1,
+    "TypeCode": "Struct",
+    "Fields": [{
+        "Id": "ff76aad4c0a9d6b2b4b86375b2cbab46",
+        "Name": "x",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "a736fe7412f2433fe14322381e5b90c7",
+        "Name": "y",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "24cd6ef76bf1a1e8500dae8c49894ff7",
+        "Name": "width",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "dc350c211796f65e0634068ea27a7474",
+        "Name": "height",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "b240677e897e91900828c714b14de819", "Name": "RectInt" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "3abb69286ddfc2d1c617a173c1eeb35d",
+    "Name": "Vector2",
+    "ExportFlags": 1,
+    "TypeCode": "Struct",
+    "Fields": [{
+        "Id": "91107fce648b84ecb35c4fd437c9454d",
+        "Name": "x",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "9852ffe5bf577dbc3b5151abda906fc8",
+        "Name": "y",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "3abb69286ddfc2d1c617a173c1eeb35d", "Name": "Vector2" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "f139194553e8ae4a3250c5527d6de169",
+    "Name": "Vector3",
+    "ExportFlags": 1,
+    "TypeCode": "Struct",
+    "Fields": [{
+        "Id": "c4cf934c568d577bdc5ee349f64cead8",
+        "Name": "x",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "a3827b7d8647aea4b9d9615d13d273c4",
+        "Name": "y",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "29df8a14e4f0eae4f63a9e6edfff75dd",
+        "Name": "z",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "ab9074756b77ee15b6b7f762b5dfb8a7",
+    "Name": "Vector4",
+    "ExportFlags": 1,
+    "TypeCode": "Struct",
+    "Fields": [{
+        "Id": "3a8674afb1befbadbf338857a6fb9d83",
+        "Name": "x",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "1edddf900cf99cb93b243ba2bf1421db",
+        "Name": "y",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "4f19f980fec415bd16bc96d2a407dfa8",
+        "Name": "z",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "a416bdd060a1e5b1db99cc26b5f2f99f",
+        "Name": "w",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "ab9074756b77ee15b6b7f762b5dfb8a7", "Name": "Vector4" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "dc7e11e5d517ed01fd5d084a6c9fd64d",
+    "Name": "Quaternion",
+    "ExportFlags": 1,
+    "TypeCode": "Struct",
+    "Fields": [{
+        "Id": "9089c7c2ff8f99229fe49e46f022eb74",
+        "Name": "x",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "dff0fabfa3f44921f90c7150e7ebbb06",
+        "Name": "y",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "d6a3236731fbc216c0d8f74f86f514b7",
+        "Name": "z",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "1026a8e1d845fb159eb433779fa05601",
+        "Name": "w",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "dc7e11e5d517ed01fd5d084a6c9fd64d", "Name": "Quaternion" },
+        "Properties": {
+            "w": 1
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "dd50796f201dc95331552ad2e74482a1",
+    "Name": "Matrix3x3",
+    "ExportFlags": 1,
+    "TypeCode": "Struct",
+    "Fields": [{
+        "Id": "4b5af123e9d76f39f29a318185a93af5",
+        "Name": "m00",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "c34c9a6ac9e822f6cf9852111f517683",
+        "Name": "m01",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "4b80a04516d7f2cd47b1283e6267a8f5",
+        "Name": "m02",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "9ac3d7dfd1f0cd71f8ed4be5d636c93e",
+        "Name": "m10",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "2c4afa778f203fe77838e2ece6f85d69",
+        "Name": "m11",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "45c90c09ffe67e6d97fc0c0398a3d2ca",
+        "Name": "m12",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "a00bd5a00ed926e1813cdad25f98fdc2",
+        "Name": "m20",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "a0f6cc59d2d1c5d6245e3dfcb3f22fd8",
+        "Name": "m21",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "57dce88e196f1f22fbd4166dfa48acea",
+        "Name": "m22",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "dd50796f201dc95331552ad2e74482a1", "Name": "Matrix3x3" },
+        "Properties": {
+            "m00": 1,
+            "m11": 1,
+            "m22": 1
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "d6e1c2cc517e0e1efa253889f20abedb",
+    "Name": "Matrix4x4",
+    "ExportFlags": 1,
+    "TypeCode": "Struct",
+    "Fields": [{
+        "Id": "35bc021dd4e9648fa774bb050d30de4f",
+        "Name": "m00",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "b39d7312efafaa32a6654907279e1128",
+        "Name": "m01",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "45e0ece189492b37d449366e2baa472c",
+        "Name": "m02",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "289472cdfd873526ae0e633b70a79d6b",
+        "Name": "m03",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "25ff968103811c6aaf38c16fbc7ab91a",
+        "Name": "m10",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "4ddb3cf93e1c2395303c114854d66ca6",
+        "Name": "m11",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "88b7ba20bddfec59399d099fa9c80cf3",
+        "Name": "m12",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "84993c0628744c35d77eede1c5b910f4",
+        "Name": "m13",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "18c7ad46009f7ea1586f87817140908c",
+        "Name": "m20",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "4dfe45b87aea608a6c6b2e84e32d69f4",
+        "Name": "m21",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "a2146e88624cd18d87e3e202b9db34e1",
+        "Name": "m22",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "e40e55ac4c59c0e2c32cd8e53f809d66",
+        "Name": "m23",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "880bbd8279cd3ab50c0e3f8ac57c4247",
+        "Name": "m30",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "d4a959870f8d6e68ace3d8d2c7fdb72e",
+        "Name": "m31",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "92c4cff5061d4911cd164cf41a8318f9",
+        "Name": "m32",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "27a793517eace53d5fcf34676c5ae0d3",
+        "Name": "m33",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "d6e1c2cc517e0e1efa253889f20abedb", "Name": "Matrix4x4" },
+        "Properties": {
+            "m00": 1,
+            "m11": 1,
+            "m22": 1,
+            "m33": 1
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "0617b7f4431866888bfdb077d683c2ce",
+    "Name": "Range",
+    "ExportFlags": 1,
+    "TypeCode": "Struct",
+    "Fields": [{
+        "Id": "47075d97cbfb40bdadbc97caca87f198",
+        "Name": "start",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "b7fe1a12c0eee962ef1375803d44503f",
+        "Name": "end",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "0617b7f4431866888bfdb077d683c2ce", "Name": "Range" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "54779ffb6892017b68062aaf8eed243d",
+    "Name": "RangeInt",
+    "ExportFlags": 1,
+    "TypeCode": "Struct",
+    "Fields": [{
+        "Id": "c857f797a66cecdd5f6536285178a6c4",
+        "Name": "start",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "eb1d0013aa66270c54034cc095a61b12",
+        "Name": "end",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "54779ffb6892017b68062aaf8eed243d", "Name": "RangeInt" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "5f12673ca88e126d8f47e976dfee2963",
+    "Name": "RotationOrder",
+    "ExportFlags": 1,
+    "TypeCode": "Enum",
+    "BaseType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
+    "Fields": [{
+        "Id": "7ce29d0594a308c2d98ce6e6ff9c0aa7",
+        "Name": "XYZ",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "fc5451f8cbde7519b7d5c0200fc6d8d8",
+        "Name": "XZY",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "3e2adbdbd44cce0f2580379990b77875",
+        "Name": "YZX",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "aa466033e40f92ce13a3aad16417b1bd",
+        "Name": "YXZ",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "21fbf75dcff54b825137414fff7ecb8a",
+        "Name": "ZXY",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "d7de6ab51b299cc6e36d4ae0fde70b17",
+        "Name": "Default",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "a5f20df757b54adefc5ff22d7aa3bf74",
+        "Name": "ZYX",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "5f12673ca88e126d8f47e976dfee2963", "Name": "RotationOrder" },
+        "Properties": {
+            "XYZ": 0,
+            "XZY": 1,
+            "YZX": 2,
+            "YXZ": 3,
+            "ZXY": 4,
+            "Default": 4,
+            "ZYX": 5
+        }
+    }
+}]

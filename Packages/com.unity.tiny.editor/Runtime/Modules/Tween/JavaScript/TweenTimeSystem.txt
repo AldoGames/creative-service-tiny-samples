@@ -1,0 +1,23 @@
+var time = tweentime.time();
+var duration = tweentime.duration();
+var reverse = tweentime.reverse();
+var dt = sched.deltaTime();
+
+time += dt;
+
+var t = time / duration;
+
+// @todo use math.clamp01
+if (t < 0) {
+    t = 0;
+} 
+else if (t > 1) {
+    t = 1;
+}
+
+if (reverse) {
+    t = 1 - t;
+}
+
+tweentime.setTime(time);
+tweentime.setInterpolation(t);

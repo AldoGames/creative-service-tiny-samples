@@ -1,0 +1,20 @@
+world.forEachEntity([ut.Text.Font], function (entity, font) {
+    if (font.loaded()) {
+        return;
+    }
+
+    var url = font.file();
+    if (url.substring(0, 9) == "ut-asset:") {
+        url = UT_ASSETS[url.substring(9)];
+    }
+
+    var name = entity.name().substr(entity.name().lastIndexOf('/') + 1);
+    var face = new FontFace(name, 'url('+url+')', {});
+
+    face.load().then(function(f) {
+        console.log("font loaded: " + f.family);
+        document.fonts.add(f);
+    });
+
+    font.setLoaded(true);
+});

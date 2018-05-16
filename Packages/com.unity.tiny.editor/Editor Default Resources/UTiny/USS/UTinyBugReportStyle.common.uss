@@ -1,0 +1,61 @@
+.prefix-label{
+	max-width:250px;
+}
+
+.right{
+	justify-content:flex-end;
+}
+
+.row{
+	flex-direction: row;
+}
+
+.row>*{
+	flex: 1 1;
+}
+
+/* A scroll view has the following structure:
+	- Scroll View				(scrollable)
+		- Content Container		(scrollable-content)
+			- Content
+		*/
+
+
+/* Used for the scrollable view (Detail, Repro steps and Attached files) */
+.scrollable{
+	display:flex;
+	border-top-width:2px;
+	border-bottom-width:2px;
+	border-left-width:2px;
+	border-right-width:2px;
+	flex-grow:1;
+}
+
+.scrollable-content{
+	position: relative;
+  	position-top: 0;
+	position-left: 0;
+  	position-right: 0;
+  	word-wrap: normal;
+}
+
+.scrollable-content>TextField{
+	word-wrap: true;
+}
+
+.button{
+	max-width: 100px;
+}
+
+.error-message{
+	text-color:#FF0000;
+}
+
+.file{
+	border-bottom-width:1px;
+}
+
+.remove-button{
+	max-height:30px;
+	max-width:30px;
+}

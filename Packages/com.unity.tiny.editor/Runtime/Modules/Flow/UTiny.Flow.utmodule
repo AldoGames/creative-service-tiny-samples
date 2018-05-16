@@ -1,0 +1,24 @@
+﻿[{
+    "$TypeId": 2,
+    "Id": "3aa8828c0eaa4fb0a2faaa1ee3f85c59",
+    "Name": "UTiny.Flow",
+    "Documentation": {
+        "Summary": "Flow module provides a basic scene management API."
+    },
+    "Namespace": "ut.Flow",
+    "Options": 1,
+    "Dependencies": [
+        { "Id": "2af0cd3b47a732bf738688ceab312689", "Name": "UTiny.Core" },
+        { "Id": "a1b50987659c653138795a8f4079fc10", "Name": "UTiny.Math" }
+    ],
+    "Scripts": [
+        { "Id": "380a5d6bffbb4194b0421474ded9966a", "Name": "Service" }
+    ],
+    "Tutorial": { "$TypeId": 10, "Guid": "507bc042d79fd7a4c8938306ebbb9de9", "FileId": 4900000, "Type": 3 }
+},
+{
+    "$TypeId": 6,
+    "Id": "380a5d6bffbb4194b0421474ded9966a",
+    "Name": "Service",
+    "TextAsset": { "$TypeId": 10, "Guid": "5f88ac1f58225104398ddba2f178a96e", "FileId": 4900000, "Type": 3 }
+}]

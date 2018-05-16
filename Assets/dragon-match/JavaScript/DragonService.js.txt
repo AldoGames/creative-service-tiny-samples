@@ -1,0 +1,36 @@
+game.DragonService = function() {
+
+};
+
+game.DragonService.prototype = Object.create(null);
+game.DragonService.prototype.constructor = game.DragonService;
+
+game.DragonService.prototype.getDragonTransform = function() {
+    return world.getByName('Dragon').getComponent(ut.Core2D.Transform);
+}
+
+game.DragonService.prototype.getDragon = function() {
+    return world.getByName('Dragon').getComponent(game.Dragon);
+}
+
+game.DragonService.prototype.applyDamage = function(amount) {
+	var dragon = Dragon.getDragon();
+	if(dragon != null)
+	{
+		var newHealth = dragon.health();
+		newHealth -= amount;
+	    dragon.setHealth(newHealth);
+	}
+}
+
+
+game.DragonService.prototype.isAlive = function() {
+	var dragon = Dragon.getDragon();
+	if(dragon != null)
+	{
+	    return dragon.health() > 0;
+	}
+	return false;
+}
+
+var Dragon = new game.DragonService();

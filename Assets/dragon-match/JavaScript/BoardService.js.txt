@@ -1,0 +1,393 @@
+game.BoardService = function() {
+
+};
+
+game.BoardService.prototype = Object.create(null);
+game.BoardService.prototype.constructor = game.BoardService;
+
+/**
+ * @method 
+ * @desc Creates a new instance of a gem and sets up the intial state
+ * @param {game.Cell} cell
+ * @param {game.GemType} type
+ * @returns {ut.Entity}
+ */
+game.BoardService.prototype.createGem = function (cell, type) {
+    var group = ut.Flow.Service.instantiate("game.GemPrefab");
+    var entity = group.root;
+
+    // gem setup
+    var gem = entity.getComponent(game.Gem);
+    gem.setType(type);
+    gem.setAnimating(false);
+
+    // node setup
+    var node = entity.getComponent(game.CellGraphNode);
+    node.setCell(cell);
+    Graph.addNode(cell, entity);
+
+    // renderer setup
+    var renderer = entity.getComponent(ut.Sprite2DRenderer);
+    /*
+    var color = null;
+
+    switch (type) {
+        case game.GemType.Red:
+            color = new ut.Core2D.Color(1, 0, 0, 1);
+            break;
+        case game.GemType.Green:
+            color = new ut.Core2D.Color(0, 1, 0, 1);
+            break;
+        case game.GemType.Blue:
+            color = new ut.Core2D.Color(0, 0, 1, 1);
+            break;
+        case game.GemType.Purple:
+            color = new ut.Core2D.Color(1, 0, 1, 1);
+            break;
+    }
+
+    renderer.setColor(color);
+    */
+    renderer.setSprite(gem.pieces()[type]);
+
+    // transform setup
+    var transform = entity.getComponent(ut.Core2D.Transform);
+    transform.setLocalPosition(Graph.getPosition(cell));
+
+    return entity;
+};
+
+/**
+ * @system
+ * @desc Spawns the initial board state
+ */
+game.BoardSpawnSystem.update = function(sched, world) {
+    world.forEachEntity([game.Board, game.BoardSpawn], function(entity, board, spawn) {
+        for (var x = 0; x < Graph.width; x++) {
+            for (var y = 0; y < Graph.height; y++) {
+                var cell = new game.Cell(x, y);
+                if (null != Graph.getNode(cell)) {
+                    continue;
+                }
+
+                // Select a random gem type
+                var type = getRandomInt(0, 3);
+
+                // @todo select a type that will not trigger a match
+
+                var entity = Board.createGem(cell, type);
+
+                entity.getComponent(game.Gem).setAnimating(true);
+                entity.getComponent(ut.Core2D.Transform).tween("localScale", new Vector3(0, 0, 0), entity.getComponent(ut.Core2D.Transform).localScale())
+                                              .setDuration(0.5)
+                                              .setEase(ut.tween.EaseType.EaseOutBack)
+                                              .onComplete(function(e) {
+                                                  e.getComponent(game.Gem).setAnimating(false); 
+                                              }, entity);
+            }
+        }
+        entity.removeComponent(game.BoardSpawn);
+    });
+}
+
+/**
+ * @method
+ * @desc Returns all gems that match the given type along the x-axis for the given cell
+ * @param {game.Cell} cell
+ * @param {game.GemType} type
+ * @returns {ut.Entity[]} entities
+ */
+game.BoardService.prototype.getHorizontalMatchingEntities = function (cell, type) {
+    var entities = [];
+
+    for (var x = cell.x + 1; x < Graph.width; x++) {
+        var entity = Graph.getNode(new game.Cell(x, cell.y));
+        if (null == entity) { break; } 
+        var gem = entity.getComponent(game.Gem);
+        if (gem.animating()) { break; }
+        if (gem.type() != type) { break; }
+        entities.push(entity);
+    }
+
+    for (var x = cell.x - 1; x >= 0; x--) {
+        var entity = Graph.getNode(new game.Cell(x, cell.y));
+        if (null == entity) { break; } 
+        var gem = entity.getComponent(game.Gem);
+        if (gem.animating()) { break; }
+        if (gem.type() != type) { break; }
+        entities.push(entity);
+    }
+
+    return entities;
+};
+
+/**
+ * @method
+ * @desc Returns all entities that match the given type along the y-axis for the given cell
+ * @param {game.Cell} cell
+ * @param {game.GemType} type
+ * @returns {ut.Entity[]} entities
+ */
+game.BoardService.prototype.getVerticalMatchingEntities = function (cell, type) {
+    var entities = [];
+
+    for (var y = cell.y + 1; y < Graph.height; y++) {
+        var entity = Graph.getNode(new game.Cell(cell.x, y));
+        if (null == entity) { break; } 
+        var gem = entity.getComponent(game.Gem);
+        if (gem.animating()) { break; }
+        if (gem.type() != type) { break; }
+        entities.push(entity);
+    }
+
+    for (var y = cell.y - 1; y >= 0; y--) {
+        var entity = Graph.getNode(new game.Cell(cell.x, y));
+        if (null == entity) { break; } 
+        var gem = entity.getComponent(game.Gem);
+        if (gem.animating()) { break; }
+        if (gem.type() != type) { break; }
+        entities.push(entity);
+    }
+
+    return entities;
+};
+
+/**
+ * @method
+ * @desc Gets all entities that are a 'match' with the given cell and type using the given thresold (e.g. 3 for match3)
+ * @param {game.Cell} cell
+ * @param {game.GemType} type
+ * @param {int32} threshold
+ * @returns {ut.Entity[]} entities
+ */
+game.BoardService.prototype.getMatchingEntities = function (cell, type, threshold) {
+    var entities = [];
+
+    var horizontal = this.getHorizontalMatchingEntities(cell, type);
+    if (horizontal.length >= threshold - 1) {
+        entities = entities.concat(horizontal);
+    }
+
+    var vertical = this.getVerticalMatchingEntities(cell, type);
+    if (vertical.length >= threshold - 1) {
+        entities = entities.concat(vertical);
+    }
+
+    return entities;
+};
+
+/**
+ * @method
+ * @desc Returns a list of match entities that currently exist for the given gems
+ * @param {ut.Entity[]} entities - Array of gem entities to query
+ * @returns {ut.Entity[]} matches - Array of match entities
+ */
+game.BoardService.prototype.getExistingMatches = function (entities) {
+    var matches = [];
+    for (var i=0; i<entities.length; i++) {
+        var matched = entities[i].getComponent(game.Matched);
+        if (null != matched) {
+            matches.push(matched.match());
+        }
+    }
+    return matches;
+};
+
+/**
+ * @method
+ * @desc Merges a collection of match entities to a single match object
+ * @param {ut.Entity[]} matches - Collection of matches
+ * @returns {ut.Entity} match Single match entity
+ */
+game.BoardService.prototype.mergeMatches = function (matches) {
+    while (matches.length > 1) {
+        var matchEntity = matches[0];
+        var otherEntity = matches[1];
+
+        if (matchEntity._mId == otherEntity._mId) {
+            matches.splice(1, 1);
+            continue;
+        }
+
+        var match = matchEntity.getComponent(game.Match);
+        var other = otherEntity.getComponent(game.Match);
+
+        var matchGems = match.gems();
+        var otherGems = other.gems();
+
+        for (var i=0; i<otherGems.length; i++) {
+            if (null != matchGems.find(function(e) { return e._mId == otherGems[i]._mId; })) {
+                continue;
+            }
+
+            otherGems[i].getOrAddComponent(game.Matched).setMatch(matchEntity);
+
+            matchGems.push(otherGems[i]);
+        }
+
+        match.setGems(matchGems);
+        otherEntity.destroy();
+        matches.splice(1, 1);
+    }
+
+    return matches[0];
+};
+
+/**
+ * @system
+ * @desc Computes all matches and creates match entities
+ */
+game.CreateMatchSystem.update = function(sched, world) {
+    world.forEachEntity([game.Board], function (entity, board) {
+
+        if(!Dragon.isAlive())
+        {
+            // the dragon is dead, stop processing the board
+            entity.removeComponent(game.Board);
+        }
+
+        for (var x = 0; x < Graph.width; x++) {
+            for (var y = 0; y < Graph.height; y++) {
+                var cell = new game.Cell(x, y);
+                var entity = Graph.getNode(cell);
+
+                if (null == entity) {
+                    continue;
+                }
+
+                // Entities with a Matched component has already been processed
+                if (entity.hasComponent(game.Matched)) {
+                    continue;
+                }
+
+                var gem = entity.getComponent(game.Gem);
+
+                // Ignore animating gems
+                if (gem.animating()) {
+                    continue;
+                }
+
+                var type = gem.type();
+
+                // Get all adjacent gems that match our type IF there are 3 or more
+                var matchedGemEntities = Board.getMatchingEntities(cell, type, 3);
+
+                // Did we detect any sort of match?
+                if (matchedGemEntities.length == 0) {
+                    continue;
+                }
+
+                // If these entities are already part of a match fetch those entities
+                var matchEntities = Board.getExistingMatches(matchedGemEntities);
+
+                // Merge exiting matches down to a single match (since this new entity provides the link)
+                // or generate a new match object
+                var matchEntity = matchEntities.length > 0 ? Board.mergeMatches(matchEntities) : world.create();
+                var match = matchEntity.getOrAddComponent(game.Match);
+                var matchGems = match.gems();
+
+                matchGems.push(entity);
+                entity.getOrAddComponent(game.Matched).setMatch(matchEntity);
+
+                for (var i=0; i<matchedGemEntities.length; i++) {
+                    if (null != matchGems.find(function(e) { return e._mId == matchedGemEntities[i]._mId; })) {
+                        continue;
+                    }
+
+                    matchedGemEntities[i].getOrAddComponent(game.Matched).setMatch(matchEntity);
+                    matchGems.push(matchedGemEntities[i]);
+                }
+
+                match.setGems(matchGems);
+            }
+        }
+    });
+}
+
+/**
+ * @system
+ * @desc Collapses the board state
+ */
+game.BoardCollapseSystem.update = function(sched, world) {
+    world.forEachEntity([game.Board], function (entity, board) {
+        for (var x = 0; x < Graph.width; x++) {
+            var dropDistance = 0;
+
+            for (var y = 0; y < Graph.height; y++) {
+                var cell = new game.Cell(x, y);
+                var node = Graph.getNode(cell);
+
+                if (null == node) {
+                    dropDistance++;
+                    continue;    
+                }
+
+                if (dropDistance <= 0) {
+                    continue;
+                }
+
+                var g = node.getComponent(game.Gem);
+
+                if (g.animating()) {
+                    break;
+                }
+
+                var t = node.getComponent(ut.Core2D.Transform);
+
+                var c = new game.Cell(x, y - dropDistance);
+
+                t.tween("localPosition", t.localPosition(), Graph.getPosition(c))
+                 .setDuration(0.5)
+                 .setEase(ut.tween.EaseType.EaseOutBounce)
+                 .onComplete(function(e) {
+                    e.getComponent(game.Gem).setAnimating(false);
+                }, node);
+
+                g.setAnimating(true);
+
+                var n = node.getComponent(game.CellGraphNode);
+                n.setCell(c);
+                Graph.removeNode(cell);
+                Graph.addNode(c, node);
+            }
+        }
+    });
+}
+
+game.BoardRefillSystem.update = function(sched, world) {
+    world.forEachEntity([game.Board], function (entity, board) {
+        for (var x = 0; x < Graph.width; x++) {
+            for (var y = Graph.height - 1; y >= 0; y--) {
+                var cell = new game.Cell(x, y);
+                if (null != Graph.getNode(cell)) {
+                    break;
+                }
+
+                // Select a random type
+                var type = getRandomInt(0, 3);
+
+                var entity = Board.createGem(cell, type);
+                var transform = entity.getComponent(ut.Core2D.Transform);
+
+                var start = Graph.getPosition(new game.Cell(cell.x, cell.y + Graph.height));
+                var end = Graph.getPosition(cell);
+
+                entity.getComponent(game.Gem).setAnimating(true);
+                transform.tween("localPosition", start, end)
+                         .setDuration(0.5)
+                         .onComplete(function(e) {
+                             e.getComponent(game.Gem).setAnimating(false);
+                         }, entity);
+            }
+        }
+    });
+};
+
+var Board = new game.BoardService();
+
+/**
+ * @todo move to random class
+ */
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}

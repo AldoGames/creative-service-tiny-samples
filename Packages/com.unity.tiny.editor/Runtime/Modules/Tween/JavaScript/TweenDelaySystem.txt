@@ -1,0 +1,15 @@
+var time = tweendelay.time();
+var delay = tweendelay.delay();
+var dt = sched.deltaTime();
+
+time += dt;
+
+var delta = delay - time;
+
+if (delta > 0) {
+    tweentime.setTime(tweentime.time() - Math.min(delta, dt));
+    tweendelay.setTime(time);
+} 
+else {
+    entity.removeComponent(ut.tween.TweenDelay);
+}

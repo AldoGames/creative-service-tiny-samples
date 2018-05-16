@@ -1,0 +1,9 @@
+{
+    "name": "Unity.Tiny",
+    "references": [
+      "Unity.Properties"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true
+}

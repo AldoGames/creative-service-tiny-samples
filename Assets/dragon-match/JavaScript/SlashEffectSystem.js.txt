@@ -1,0 +1,9 @@
+var newScale = transform.localScale();
+newScale.x += sched.deltaTime() * 800;
+transform.setLocalScale(newScale);
+
+if(newScale.x > 200)
+{
+	entity.destroy();
+}
+

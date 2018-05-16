@@ -1,0 +1,20 @@
+/*
+var newPos = transform.localPosition();
+var targetPos = new Vector2(0,0);
+console.log("newPos:" + newPos.x);
+console.log("targetPos:" + targetPos.x);
+newPos = newPos.lerp(targetPos, sched.deltaTime() * 600);
+transform.setLocalPosition(newPos);
+*/
+//var distanceTo = newPos.distanceTo(targetPos);
+//console.log("distanceTo:" + distanceTo);
+
+/*
+if(newPos.distanceTo(targetPos) < 10)
+{
+	console.log("entity.destroy");
+	//entity.destroy();
+}else
+{
+}
+*/

@@ -1,0 +1,50 @@
+﻿[{
+    "$TypeId": 2,
+    "Id": "eae58004250dcd15a6c834b07677ca28",
+    "Name": "UTiny.HTML",
+    "ExportFlags": 1,
+    "Documentation": {
+        "Summary": "HTML module provides input and rendering functionality for HTML5."
+    },
+    "Namespace": "ut.HTML",
+    "Options": 1,
+    "Dependencies": [
+        { "Id": "2af0cd3b47a732bf738688ceab312689", "Name": "UTiny.Core" },
+        { "Id": "a1b50987659c653138795a8f4079fc10", "Name": "UTiny.Math" }
+    ],
+    "Systems": [
+        { "Id": "faa9836d6a891fdc916d24ed5adb90a0", "Name": "Renderer" },
+        { "Id": "624141ac039664daa461faa7328b16fc", "Name": "InputHandler" },
+        { "Id": "a79c72041b16e09cc5b5488ee425eab6", "Name": "AssetLoader" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "faa9836d6a891fdc916d24ed5adb90a0",
+    "Name": "Renderer",
+    "ExportFlags": 1,
+    "Options": 3,
+    "ExecuteAfter": [
+        { "Id": "647bb4bfb4a59b61e21e3b365e7c9ad3", "Name": "PlatformRenderingFence" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "624141ac039664daa461faa7328b16fc",
+    "Name": "InputHandler",
+    "ExportFlags": 1,
+    "Options": 3,
+    "ExecuteAfter": [
+        { "Id": "73aba45e7276d09f30af9f49bb5ecb67", "Name": "InputFence" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "a79c72041b16e09cc5b5488ee425eab6",
+    "Name": "AssetLoader",
+    "ExportFlags": 1,
+    "Options": 3,
+    "ExecuteBefore": [
+        { "Id": "face704baaa19cca19003460bfcd42ee", "Name": "RenderingFence" }
+    ]
+}]

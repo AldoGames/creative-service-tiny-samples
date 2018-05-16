@@ -1,0 +1,4 @@
+var t = tweentime.interpolation();
+var easeType = tweenease.easeType();
+var ease = ut.tween.Easing.getFunction(easeType);
+tweentime.setInterpolation(ease(t));

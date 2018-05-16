@@ -1,0 +1,10 @@
+var time = tweentime.time();
+var duration = tweentime.duration();
+
+if (time >= duration) {
+    var tween = Tween.getById(entity.mId);
+    for (var i = 0, len = tween.onCompleteCallbacks.length; i < len; i++) {
+        var complete = tween.onCompleteCallbacks[i];
+        complete.callback(complete.args);
+    }
+}

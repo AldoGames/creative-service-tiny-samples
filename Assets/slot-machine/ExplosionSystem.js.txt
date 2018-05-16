@@ -1,0 +1,15 @@
+//console.log("sprite2dsequenceplayer.paused():" + sprite2dsequenceplayer.paused());
+if(sprite2dsequenceplayer.paused())
+{
+	var newPos = transform.localPosition();
+	newPos.x = getRandomInt(-10,10);
+	newPos.y = getRandomInt(-5,5);
+	transform.setLocalPosition(newPos);
+
+	sprite2dsequenceplayer.setTime(0);
+	sprite2dsequenceplayer.setPaused(false);
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}

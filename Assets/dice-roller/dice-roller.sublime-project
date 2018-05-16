@@ -1,0 +1,14 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+	
+    "syntax_override": {
+        "\\.html$": ["Handlebars", "grammars", "Handlebars"],
+        "\\.js$": ["Babel", "JavaScript (Babel)"],
+        "\\.js.txt$": ["Babel", "JavaScript (Babel)"]
+    }
+}

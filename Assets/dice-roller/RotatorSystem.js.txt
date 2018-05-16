@@ -1,0 +1,4 @@
+var radAngle = Math.PI*180/180;
+//console.log("radAngle:" + radAngle);
+var localRotation = new Quaternion().setFromEuler(new ut.Math.Euler(0,0,radAngle));
+transform.setLocalRotation(localRotation);

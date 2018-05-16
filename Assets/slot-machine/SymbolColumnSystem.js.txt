@@ -1,0 +1,115 @@
+switch(symbolcolumn.currentState()){
+	case game.SymbolColumnState.Uninitialized:
+	{
+		createColumnSymbols();
+		symbolcolumn.setCurrentState(game.SymbolColumnState.AtRest);
+	}
+	break;
+	case game.SymbolColumnState.AtRest:
+	{
+	}
+	break;
+	case game.SymbolColumnState.Spinning:
+	{
+		if(!symbolcolumn.isSpinning())
+		{
+			console.log("SymbolColumnState.Spinning");
+			symbolcolumn.setIsSpinning(true);
+
+			symbolcolumn.setCurrentSpinSpeed(25);
+			setSpeedForScrollingItems();
+		}
+	}
+	break;
+	case game.SymbolColumnState.ComeToStop:
+	{
+		var newSpinSpeed = symbolcolumn.currentSpinSpeed();
+		/*
+
+		// slow spinner down before stopping
+		if(newSpinSpeed > 5)
+		{
+			newSpinSpeed  -= sched.deltaTime() * symbolcolumn.slowingScalar();
+		}else
+		{
+			if(anySymbolAtStoppingPoint())
+			{
+				newSpinSpeed = 0;
+				symbolcolumn.setCurrentState(game.SymbolColumnState.AtRest);
+			}
+		}
+		*/
+		if(anySymbolAtStoppingPoint())
+		{
+			newSpinSpeed = 0;
+			symbolcolumn.setIsSpinning(false);
+			symbolcolumn.setCurrentState(game.SymbolColumnState.AtRest);
+			audiosource.setPlaying(true);
+		}
+		symbolcolumn.setCurrentSpinSpeed(newSpinSpeed);
+		setSpeedForScrollingItems();
+	}
+	break;
+}
+
+function setSpeedForScrollingItems()
+{
+	symbolcolumn.scrollingSymbols().forEach(function(item, index)
+	{
+		var scrollingItem = item.getComponent(game.ScrollingSymbol);
+		if(scrollingItem != null)
+		{
+			scrollingItem.setCurrentScrollSpeed(symbolcolumn.currentSpinSpeed());
+		}
+	});
+};
+
+function anySymbolAtStoppingPoint()
+{
+	var anyItemAtStoppingPoint = false;
+	symbolcolumn.scrollingSymbols().forEach(function(item, index)
+	{
+		var scrollingItem = item.getComponent(game.ScrollingSymbol);
+		if(scrollingItem != null)
+		{
+			if(scrollingItem.isAtStoppingPoint())
+			{
+				symbolcolumn.setCurrentShownEntity(item);
+				anyItemAtStoppingPoint = true;
+			}
+		}
+	});
+	return anyItemAtStoppingPoint;
+}
+
+function createColumnSymbols()
+{
+	// create a symbol "prefab" for each item we want to have scrolling
+
+	var entityList = [];
+
+	var numberOfSymbolsToCreate = symbolcolumn.symbolSprites().length;
+	var symbolSeperation = 6;
+	for (var i = 0; i < numberOfSymbolsToCreate; i++) {
+	    var group = ut.Flow.Service.instantiate("game.ScrollingSymbolPrefab");
+	    var entity = group.root;
+
+	    // symbol setup
+	    var scrollingsymbol = entity.getComponent(game.ScrollingSymbol);
+	    scrollingsymbol.setPositionResetAmount(numberOfSymbolsToCreate * symbolSeperation);
+
+	    var symbolSprite = entity.getComponent(ut.Core2D.Sprite2DRenderer);
+	    var spriteToUse = symbolcolumn.symbolSprites()[i];
+        var color = new ut.Core2D.Color(1, 0, 0, 1);
+
+	    symbolSprite.setSprite(spriteToUse);
+
+	    // transform setup
+	    var enityTransform = entity.getComponent(ut.Core2D.Transform);
+	    enityTransform.setLocalPosition(new Vector3(transform.localPosition().x,-symbolSeperation + i * symbolSeperation,transform.localPosition().z));
+
+		entityList.push(entity);
+	}
+
+    symbolcolumn.setScrollingSymbols(entityList);
+}

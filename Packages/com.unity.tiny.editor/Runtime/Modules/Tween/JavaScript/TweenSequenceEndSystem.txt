@@ -1,0 +1,32 @@
+var index = tweensequence.index();
+var sequence = Tween.getById(entity.mId);
+
+var done = true;
+
+for (var i = 0, len = sequence._and.length; i < len; i++) {
+    var tween = sequence._and[i];
+
+    // our tween was destroyed (either by system or user)
+    // remove it and continue execution
+    if (null == tween || tween.entity == null) {
+        sequence._and.splice(i, 1);
+        i--; len--;
+        continue;
+    }
+
+    if (!tween.isDone()) {
+        done = false;
+        break;
+    }
+}
+
+if (index < sequence._then.length) {
+    done = false;
+}
+
+// freeze time at 0 until we are done
+// the duration of the sequence is arbitrarty and can be any value except 0
+// the time component only exists to add lifecycle functionality to the sequence
+// @note in theory we can compute the real duration by checking all tweens in the sequence
+// however this is costly and adds very little
+tweentime.setTime(done ? tweentime.duration() : 0);

@@ -1,0 +1,1168 @@
+﻿[{
+    "$TypeId": 1,
+    "Version": 1,
+    "Id": "128f0d0a055c471cb8387e9dc8dcbcb7",
+    "Name": "UTiny.Demo.DragonMatch",
+    "Settings": {
+        "CanvasWidth": 1440,
+        "CanvasHeight": 2560,
+        "CanvasAutoResize": true,
+        "EmbedAssets": true,
+        "DefaultTextureSettings": {
+            "FormatType": 1,
+            "JpgCompressionQuality": 1,
+            "WebPCompressionQuality": 60,
+            "Embedded": true
+        },
+        "DefaultAudioClipSettings": {
+            "Embedded": true
+        },
+        "LocalHTTPServerPort": 9050,
+        "MemorySize": 16,
+        "IncludeWSClient": true,
+        "RunBabel": true
+    },
+    "Module": { "Id": "0aa7d838e17c439ea6c2f336d135d5b2", "Name": "Main" },
+    "Configuration": { "$TypeId": 9, "Id": "8790b75ba5ca4c89bf7cde8622f565d3", "Name": "Configuration" }
+},
+{
+    "$TypeId": 2,
+    "Id": "0aa7d838e17c439ea6c2f336d135d5b2",
+    "Name": "Main",
+    "Namespace": "game",
+    "Options": 4,
+    "Dependencies": [
+        { "Id": "2af0cd3b47a732bf738688ceab312689", "Name": "UTiny.Core" },
+        { "Id": "eae58004250dcd15a6c834b07677ca28", "Name": "UTiny.HTML" },
+        { "Id": "3aa8828c0eaa4fb0a2faaa1ee3f85c59", "Name": "UTiny.Flow" },
+        { "Id": "7a630ae9230a41848287fbe2dc371ade", "Name": "UTiny.Tween" },
+        { "Id": "a1b50987659c653138795a8f4079fc10", "Name": "UTiny.Math" },
+        { "Id": "30097418841f56d73400bf82ee859ac9", "Name": "UTiny.Core2D" },
+        { "Id": "251df5ef6819533f94e1cbf3181f722e", "Name": "UTiny.Audio" },
+        { "Id": "0bc66cc14cafcceaaebf78d21c72cede", "Name": "UTiny.Particles" },
+        { "Id": "0aa7d838e17c439ea6c2f336d135d5b2", "Name": "Main" }
+    ],
+    "Components": [
+        { "Id": "31f9ea2e09d245118f7494b9975a4b15", "Name": "Gem" },
+        { "Id": "c45ce8e260fc4dfb8602034ffdfae16b", "Name": "Board" },
+        { "Id": "feea97d5bab5410295043cb64984d851", "Name": "BoardSpawn" },
+        { "Id": "311bd8e158bf454daf50d42c4fa09937", "Name": "Matched" },
+        { "Id": "7033abf69ce145e38c80738467fc7d17", "Name": "Match" },
+        { "Id": "caee399f786c4e8cb96c912983fcb5a8", "Name": "CellGraph" },
+        { "Id": "133c5aba03b34a66a2370903dae87e42", "Name": "CellGraphNode" },
+        { "Id": "376129136c9f423db86e5295edd04fd3", "Name": "CellGraphNodeRegister" },
+        { "Id": "e78886212626462a833a3faaa2d3b497", "Name": "SlashEffect" },
+        { "Id": "c975ca89630242fbac82f1022942ed80", "Name": "Dragon" }
+    ],
+    "Structs": [
+        { "Id": "26fcb3dfb77f4f2ea28b272d4ad540c0", "Name": "Cell" },
+        { "Id": "ab59d7568ac943d690448f10ca1f7a53", "Name": "CellLayout" }
+    ],
+    "Enums": [
+        { "Id": "e9081c3116e04fac9a0c5902d5768392", "Name": "GemType" }
+    ],
+    "EntityGroups": [
+        { "Id": "4106bb38df6246028c88eb73d48d17ab", "Name": "Level_Base" },
+        { "Id": "85cd58012b1a44adb954d3453e2fae31", "Name": "GemPrefab" },
+        { "Id": "a511468a78aa4770a65ed5fbf90998eb", "Name": "ParticlePrefab" },
+        { "Id": "4dac95cd0810483ea6cbe6c6ec664271", "Name": "SlashPrefab" },
+        { "Id": "321ebfd4335744608cf0bfdc681f588d", "Name": "VictoryGroup" }
+    ],
+    "Scripts": [
+        { "Id": "404c62e2ffc24c0991aa36fe32b175e8", "Name": "BoardService" },
+        { "Id": "73f7aecd54754bf89b76d2460fa96eb2", "Name": "GraphService" },
+        { "Id": "875797e1be3f4708b6961cfc61479091", "Name": "DragonService" }
+    ],
+    "Systems": [
+        { "Id": "2d46171ed97540a7b522a53cc945d1ac", "Name": "BoardRefillSystem" },
+        { "Id": "184b8bf14e1b493697fa3ac5fca258f6", "Name": "GemDragSystem" },
+        { "Id": "0c3b12bbe5f24d96aff6e4df4fd415df", "Name": "CreateMatchSystem" },
+        { "Id": "506959545e754ec1a8b55a98a770861b", "Name": "BoardCollapseSystem" },
+        { "Id": "d69d185627df4ea19de2aac8de50b548", "Name": "BoardSpawnSystem" },
+        { "Id": "7f5f43e1ee3c42abb2997c32888b3834", "Name": "DestroyMatchSystem" },
+        { "Id": "05dc4fffc06841c58cdc020c62aa245a", "Name": "CellGraphNodeRegisterSystem" },
+        { "Id": "ed83ba2b75da48b79d0ed75bcff4426b", "Name": "CellGraphSystem" },
+        { "Id": "fbf971ade54c4ba4a49b09eaadf7465f", "Name": "ParticleEmitterSystem" },
+        { "Id": "2054d268b6c64d7790103ec239787cf1", "Name": "SlashEffectSystem" },
+        { "Id": "f12f89db47574e64b767f74c2f1cabe3", "Name": "DragonSystem" }
+    ],
+    "StartupEntityGroup": { "Id": "4106bb38df6246028c88eb73d48d17ab", "Name": "Level_Base" }
+},
+{
+    "$TypeId": 3,
+    "Id": "31f9ea2e09d245118f7494b9975a4b15",
+    "Name": "Gem",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "de62da0c96c24f9f82f609c5a4e45518",
+        "Name": "type",
+        "FieldType": { "Id": "e9081c3116e04fac9a0c5902d5768392", "Name": "GemType" }
+    }, {
+        "Id": "fda9d789fdda43bf8bec0f9953bffb95",
+        "Name": "animating",
+        "FieldType": { "Id": "2b477f505af74487b7092b5617d88d3f", "Name": "Boolean" }
+    }, {
+        "Id": "1ed8714165ec41c0b96a49e086016363",
+        "Name": "pieces",
+        "FieldType": { "Id": "cf54a635a25248ab87f2563bb840ed5b", "Name": "SpriteEntity" },
+        "Array": true
+    }, {
+        "Id": "cdbbdef7894246c78fcabbafc93f0758",
+        "Name": "dragStart",
+        "FieldType": { "Id": "3abb69286ddfc2d1c617a173c1eeb35d", "Name": "Vector2" }
+    }, {
+        "Id": "d929865c25b04adb955ff877a11600b6",
+        "Name": "isDragged",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "31f9ea2e09d245118f7494b9975a4b15", "Name": "Gem" },
+        "Properties": {
+            "animating": false
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "c45ce8e260fc4dfb8602034ffdfae16b",
+    "Name": "Board",
+    "TypeCode": "Component",
+    "DefaultValue": {
+        "Type": { "Id": "c45ce8e260fc4dfb8602034ffdfae16b", "Name": "Board" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "feea97d5bab5410295043cb64984d851",
+    "Name": "BoardSpawn",
+    "TypeCode": "Component",
+    "DefaultValue": {
+        "Type": { "Id": "feea97d5bab5410295043cb64984d851", "Name": "BoardSpawn" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "311bd8e158bf454daf50d42c4fa09937",
+    "Name": "Matched",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "18476cfb70ba45ea8fe0efbb5f100941",
+        "Name": "match",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "311bd8e158bf454daf50d42c4fa09937", "Name": "Matched" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "7033abf69ce145e38c80738467fc7d17",
+    "Name": "Match",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "60542d1a19104a67a884ec0843c345b6",
+        "Name": "gems",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" },
+        "Array": true
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "7033abf69ce145e38c80738467fc7d17", "Name": "Match" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "caee399f786c4e8cb96c912983fcb5a8",
+    "Name": "CellGraph",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "69c9101dd3864954bb24af54cb1847a4",
+        "Name": "width",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "c4ce9a03eee54677b3f352800e42fbee",
+        "Name": "height",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "01aace21a8824080bb884df1ef23601e",
+        "Name": "layout",
+        "FieldType": { "Id": "ab59d7568ac943d690448f10ca1f7a53", "Name": "CellLayout" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "caee399f786c4e8cb96c912983fcb5a8", "Name": "CellGraph" },
+        "Properties": {
+            "width": 4,
+            "height": 4,
+            "layout": {
+                "Type": { "Id": "ab59d7568ac943d690448f10ca1f7a53", "Name": "CellLayout" },
+                "Properties": {
+                    "size": {
+                        "Type": { "Id": "3abb69286ddfc2d1c617a173c1eeb35d", "Name": "Vector2" },
+                        "Properties": {
+                            "x": 100,
+                            "y": 100
+                        }
+                    },
+                    "spacing": {
+                        "Type": { "Id": "3abb69286ddfc2d1c617a173c1eeb35d", "Name": "Vector2" },
+                        "Properties": {
+                            "x": 0,
+                            "y": 0
+                        }
+                    }
+                }
+            }
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "133c5aba03b34a66a2370903dae87e42",
+    "Name": "CellGraphNode",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "550f1067827840cdb07896b987bb73e5",
+        "Name": "cell",
+        "FieldType": { "Id": "26fcb3dfb77f4f2ea28b272d4ad540c0", "Name": "Cell" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "133c5aba03b34a66a2370903dae87e42", "Name": "CellGraphNode" },
+        "Properties": {
+            "cell": {
+                "Type": { "Id": "26fcb3dfb77f4f2ea28b272d4ad540c0", "Name": "Cell" },
+                "Properties": {
+                    "x": 0,
+                    "y": 0
+                }
+            }
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "376129136c9f423db86e5295edd04fd3",
+    "Name": "CellGraphNodeRegister",
+    "TypeCode": "Component",
+    "DefaultValue": {
+        "Type": { "Id": "376129136c9f423db86e5295edd04fd3", "Name": "CellGraphNodeRegister" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "e78886212626462a833a3faaa2d3b497",
+    "Name": "SlashEffect",
+    "TypeCode": "Component",
+    "DefaultValue": {
+        "Type": { "Id": "e78886212626462a833a3faaa2d3b497", "Name": "SlashEffect" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "c975ca89630242fbac82f1022942ed80",
+    "Name": "Dragon",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "38209ba97dc3404dbde28e1043870a5a",
+        "Name": "health",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "9f1e63a3b6e84c0dbee2b86c66ab05b1",
+        "Name": "healthFillEntity",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "c975ca89630242fbac82f1022942ed80", "Name": "Dragon" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "26fcb3dfb77f4f2ea28b272d4ad540c0",
+    "Name": "Cell",
+    "TypeCode": "Struct",
+    "Fields": [{
+        "Id": "eaeef81ae3be42b1acb30125132b506f",
+        "Name": "x",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "39ce939f820e4557924a565c20dd9b47",
+        "Name": "y",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "26fcb3dfb77f4f2ea28b272d4ad540c0", "Name": "Cell" },
+        "Properties": {
+            "x": 0,
+            "y": 0
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "ab59d7568ac943d690448f10ca1f7a53",
+    "Name": "CellLayout",
+    "TypeCode": "Struct",
+    "Fields": [{
+        "Id": "619b556a6cb94c69814df855a2f76180",
+        "Name": "size",
+        "FieldType": { "Id": "3abb69286ddfc2d1c617a173c1eeb35d", "Name": "Vector2" }
+    }, {
+        "Id": "ca573b65b28345418a927db2405574c5",
+        "Name": "spacing",
+        "FieldType": { "Id": "3abb69286ddfc2d1c617a173c1eeb35d", "Name": "Vector2" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "ab59d7568ac943d690448f10ca1f7a53", "Name": "CellLayout" },
+        "Properties": {
+            "size": {
+                "Type": { "Id": "3abb69286ddfc2d1c617a173c1eeb35d", "Name": "Vector2" },
+                "Properties": {
+                    "x": 100,
+                    "y": 100
+                }
+            },
+            "spacing": {
+                "Type": { "Id": "3abb69286ddfc2d1c617a173c1eeb35d", "Name": "Vector2" },
+                "Properties": {
+                    "x": 0,
+                    "y": 0
+                }
+            }
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "e9081c3116e04fac9a0c5902d5768392",
+    "Name": "GemType",
+    "TypeCode": "Enum",
+    "BaseType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
+    "Fields": [{
+        "Id": "d5adde330da34667abb8f7bc08bde710",
+        "Name": "Swirl",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "81847b54c6fe4c87b3b39652c8142418",
+        "Name": "Circle",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "651daa1fd7914485a3784083adc82c40",
+        "Name": "D20",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "f0fbf11e65dc4265a23baa85709901dd",
+        "Name": "Star",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "e9081c3116e04fac9a0c5902d5768392", "Name": "GemType" },
+        "Properties": {
+            "Swirl": 0,
+            "Circle": 1,
+            "D20": 2,
+            "Star": 3
+        }
+    }
+},
+{
+    "$TypeId": 4,
+    "Id": "4106bb38df6246028c88eb73d48d17ab",
+    "Name": "Level_Base",
+    "Entities": [
+        { "$TypeId": 9, "Id": "ce4b3f63be904b16aa463edbc2563a35", "Name": "Match_Bk" },
+        { "$TypeId": 9, "Id": "c99e47268f5244d883727067e0780acf", "Name": "Match_base" },
+        { "$TypeId": 9, "Id": "2411dbb623de40758b73a6652ddb03f8", "Name": "Dragon" },
+        { "$TypeId": 9, "Id": "cdc5c059d29c47619a3100b9e489d45e", "Name": "Match_life" },
+        { "$TypeId": 9, "Id": "b6bf679a7e3d424eba60d0e41b447b3a", "Name": "HealthFillScaler" },
+        { "$TypeId": 9, "Id": "c4136ea349094eacad84011828585292", "Name": "HealthFill" },
+        { "$TypeId": 9, "Id": "4d3cbf8bba484b9e80818c5e2a68f00a", "Name": "Match_GemBK" },
+        { "$TypeId": 9, "Id": "2c69680cca0f4b11b03ff87bd759b4ad", "Name": "Board" },
+        { "$TypeId": 9, "Id": "c2f2dcfe487a44388815cc26e2981642", "Name": "Camera" }
+    ]
+},
+{
+    "$TypeId": 5,
+    "Id": "ce4b3f63be904b16aa463edbc2563a35",
+    "Name": "Match_Bk",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "y": 194
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 250,
+                    "y": 250,
+                    "z": 1
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "3a9ba4164124742ea88dc8cef0e963d1", "FileId": 21300000, "Type": 3 }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "c99e47268f5244d883727067e0780acf",
+    "Name": "Match_base",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 0,
+                    "y": -336.3999
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 130,
+                    "y": 130,
+                    "z": 1
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "9b67a5693620449d0afd521be713d1fc", "FileId": 21300000, "Type": 3 }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "2411dbb623de40758b73a6652ddb03f8",
+    "Name": "Dragon",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 0,
+                    "y": 579
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 79.99998,
+                    "y": 79.99998,
+                    "z": 1
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "6a3a80895afa342fba1386aa623a6ff2", "FileId": 21300000, "Type": 3 }
+        }
+    }, {
+        "Type": { "Id": "f2f3ae228bd6cea4900f91e826243720", "Name": "Sprite2DSequence" },
+        "Properties": {
+            "sprites": {
+                "Type": { "Id": "cf54a635a25248ab87f2563bb840ed5b", "Name": "SpriteEntity" },
+                "Items": [
+                    { "$TypeId": 10, "Guid": "8825d707305a84daab699d23fa75f83d", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "6a3a80895afa342fba1386aa623a6ff2", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "7c2fea21d8fc84897b9a8d5611202cfb", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "1a69c4d628ec1461492514a78dcd2042", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "db373b70878c94f8592eb698d4c02945", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "5ba7c03ce8142488ba71b4f4e6173e48", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "4bcb07fbe93ea408094792a8ddea4e6d", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "04ac8ca64d720413d9fb0e0c9af91f91", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "8e610c1ebbfc8409ebf551b32fdf7537", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "2b014a35df19b4f7c89b4d5e6cbd5a0c", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "160ce18508dc244f797b87e75be2a990", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "8a7acaafc8edb4ba9a249d8672c176da", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "39f78f543ef9045739a298669d575af5", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "01584f1bdd00641bcb85699b918c38ca", "FileId": 21300000, "Type": 3 }
+                ]
+            },
+            "frameRate": 5
+        }
+    }, {
+        "Type": { "Id": "324355c3d3ae75925565b701d9ad2256", "Name": "Sprite2DSequencePlayer" },
+        "Properties": {
+            "sequence": { "$TypeId": 9, "Id": "2411dbb623de40758b73a6652ddb03f8", "Name": "Match_base1" },
+            "speed": 1
+        }
+    }, {
+        "Type": { "Id": "c975ca89630242fbac82f1022942ed80", "Name": "Dragon" },
+        "Properties": {
+            "health": 100,
+            "healthFillEntity": { "$TypeId": 9, "Id": "c4136ea349094eacad84011828585292", "Name": "HealthFill" }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "cdc5c059d29c47619a3100b9e489d45e",
+    "Name": "Match_life",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 0,
+                    "y": -2.975001
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 2.500001,
+                    "y": 1.25
+                }
+            },
+            "parent": { "$TypeId": 9, "Id": "2411dbb623de40758b73a6652ddb03f8", "Name": "Dragon" }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "bf7c591a77a0544ec950cad576aae7e4", "FileId": 21300000, "Type": 3 }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "b6bf679a7e3d424eba60d0e41b447b3a",
+    "Name": "HealthFillScaler",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 1.2,
+                    "y": 0.2,
+                    "z": 1
+                }
+            },
+            "parent": { "$TypeId": 9, "Id": "cdc5c059d29c47619a3100b9e489d45e", "Name": "Match_life" }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "c4136ea349094eacad84011828585292",
+    "Name": "HealthFill",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": -0.5,
+                    "y": 0
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 1,
+                    "y": 1
+                }
+            },
+            "parent": { "$TypeId": 9, "Id": "b6bf679a7e3d424eba60d0e41b447b3a", "Name": "HealthFillScaler" }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10 },
+            "color": {
+                "Type": { "Id": "83c08479d9d6e46c88247df9dbae2e1b", "Name": "Color" },
+                "Properties": {
+                    "r": 1,
+                    "g": 0,
+                    "b": 0.04700279,
+                    "a": 1
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "41377b658afd7ea04a761173ca8e2826", "Name": "Sprite2D" },
+        "Properties": {
+            "image": { "$TypeId": 10, "Guid": "65050f4fd724f35459b67ecdee15725f", "FileId": 2800000, "Type": 3 },
+            "pivot": {
+                "Type": { "Id": "3abb69286ddfc2d1c617a173c1eeb35d", "Name": "Vector2" },
+                "Properties": {
+                    "x": 0
+                }
+            }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "4d3cbf8bba484b9e80818c5e2a68f00a",
+    "Name": "Match_GemBK",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "y": 30.40001
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 559.9999,
+                    "y": 559.9999,
+                    "z": 3
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "65050f4fd724f35459b67ecdee15725f", "FileId": 21300000, "Type": 3 },
+            "color": {
+                "Type": { "Id": "83c08479d9d6e46c88247df9dbae2e1b", "Name": "Color" },
+                "Properties": {
+                    "r": 0.2926722,
+                    "g": 0.2054557,
+                    "b": 0.764151,
+                    "a": 0.6509804
+                }
+            }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "2c69680cca0f4b11b03ff87bd759b4ad",
+    "Name": "Board",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "caee399f786c4e8cb96c912983fcb5a8", "Name": "CellGraph" },
+        "Properties": {
+            "width": 6,
+            "height": 6,
+            "layout": {
+                "Type": { "Id": "ab59d7568ac943d690448f10ca1f7a53", "Name": "CellLayout" },
+                "Properties": {
+                    "size": {
+                        "Type": { "Id": "3abb69286ddfc2d1c617a173c1eeb35d", "Name": "Vector2" },
+                        "Properties": {
+                            "x": 90,
+                            "y": 90
+                        }
+                    }
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "c45ce8e260fc4dfb8602034ffdfae16b", "Name": "Board" }
+    }, {
+        "Type": { "Id": "feea97d5bab5410295043cb64984d851", "Name": "BoardSpawn" }
+    }, {
+        "Type": { "Id": "a60aa1b9ad84a83eefb0d5382a4d5967", "Name": "AudioSource" },
+        "Properties": {
+            "clip": { "$TypeId": 10, "Guid": "890dfd485cbfa47fcb5f3b07110132e0", "FileId": 8300000, "Type": 3 },
+            "volume": 1,
+            "loop": true,
+            "playing": true
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "c2f2dcfe487a44388815cc26e2981642",
+    "Name": "Camera",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "y": 175
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "12692383f3fef3bb74c209888c5b0939", "Name": "Camera2D" },
+        "Properties": {
+            "halfVerticalSize": 512,
+            "clearFlags": {
+                "$TypeId": 8,
+                "Type": { "Id": "76a06ddd38e99125d930e77c6a287872", "Name": "CameraClearFlags" },
+                "Id": "9faedc246f34513076701ef66b5ad74f",
+                "Name": "SolidColor",
+                "Value": 1
+            }
+        }
+    }]
+},
+{
+    "$TypeId": 4,
+    "Id": "85cd58012b1a44adb954d3453e2fae31",
+    "Name": "GemPrefab",
+    "Entities": [
+        { "$TypeId": 9, "Id": "f2c8cc2abd5c4c60b3327074979c8cc3", "Name": "Gem" }
+    ]
+},
+{
+    "$TypeId": 5,
+    "Id": "f2c8cc2abd5c4c60b3327074979c8cc3",
+    "Name": "Gem",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 250,
+                    "y": 250,
+                    "z": 0
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 35,
+                    "y": 35,
+                    "z": 1
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "1a86bb2c2e89a414596e15d2248d639a", "FileId": 21300000, "Type": 3 }
+        }
+    }, {
+        "Type": { "Id": "133c5aba03b34a66a2370903dae87e42", "Name": "CellGraphNode" },
+        "Properties": {
+            "cell": {
+                "Type": { "Id": "26fcb3dfb77f4f2ea28b272d4ad540c0", "Name": "Cell" },
+                "Properties": {
+                    "x": 5,
+                    "y": 5
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "31f9ea2e09d245118f7494b9975a4b15", "Name": "Gem" },
+        "Properties": {
+            "pieces": {
+                "Type": { "Id": "cf54a635a25248ab87f2563bb840ed5b", "Name": "SpriteEntity" },
+                "Items": [
+                    { "$TypeId": 10, "Guid": "34a7c863ea93645a1bfcbccb08c15017", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "a443afd7b7dbd4159bcf545e75396c30", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "1a86bb2c2e89a414596e15d2248d639a", "FileId": 21300000, "Type": 3 },
+                    { "$TypeId": 10, "Guid": "971e3fe231e5946b8b2798e57946c920", "FileId": 21300000, "Type": 3 }
+                ]
+            }
+        }
+    }, {
+        "Type": { "Id": "e9dcdfe910714bd893c4ebd43bbd9c87", "Name": "TweenColor" },
+        "Properties": {
+            "start": {
+                "Type": { "Id": "83c08479d9d6e46c88247df9dbae2e1b", "Name": "Color" },
+                "Properties": {
+                    "r": 172.4798,
+                    "g": 275.84,
+                    "b": 317.9627,
+                    "a": 255
+                }
+            }
+        }
+    }]
+},
+{
+    "$TypeId": 4,
+    "Id": "a511468a78aa4770a65ed5fbf90998eb",
+    "Name": "ParticlePrefab",
+    "Entities": [
+        { "$TypeId": 9, "Id": "03565d60e01c4a3aa89b0ee2e0b03772", "Name": "ParticleEmitter" },
+        { "$TypeId": 9, "Id": "5e4f0b7dee40427c8ef0be25f656b7df", "Name": "Particle" }
+    ]
+},
+{
+    "$TypeId": 5,
+    "Id": "03565d60e01c4a3aa89b0ee2e0b03772",
+    "Name": "ParticleEmitter",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "y": -200,
+                    "z": 10
+                }
+            },
+            "localRotation": {
+                "Type": { "Id": "dc7e11e5d517ed01fd5d084a6c9fd64d", "Name": "Quaternion" },
+                "Properties": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0,
+                    "w": 1
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "c8371d148850d1a696b747b09999a478", "Name": "ParticleEmitter" },
+        "Properties": {
+            "particle": { "$TypeId": 9, "Id": "5e4f0b7dee40427c8ef0be25f656b7df", "Name": "Particle" },
+            "maxParticles": 300,
+            "emitRate": 200,
+            "prewarmPercent": 0,
+            "lifetime": {
+                "Type": { "Id": "0617b7f4431866888bfdb077d683c2ce", "Name": "Range" },
+                "Properties": {
+                    "start": 0.5,
+                    "end": 1
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "821d318d8d12611a0128b1f68eed9489", "Name": "EmitterBoxSource" },
+        "Properties": {
+            "attachToEmitter": false
+        }
+    }, {
+        "Type": { "Id": "eb8a89020902b70571b96db92e8ea046", "Name": "LifetimeScale" },
+        "Properties": {
+            "curve": { "$TypeId": 9, "Id": "03565d60e01c4a3aa89b0ee2e0b03772", "Name": "ParticleEmitter" }
+        }
+    }, {
+        "Type": { "Id": "13d73e947e361e7dddd76ec6fc21f63d", "Name": "Curve" },
+        "Properties": {
+            "stops": {
+                "Type": { "Id": "f0e6a08200bee22a93335cd996f94aff", "Name": "CurveStop" },
+                "Items": [{
+                    "Type": { "Id": "f0e6a08200bee22a93335cd996f94aff", "Name": "CurveStop" },
+                    "Properties": {
+                        "value": 10,
+                        "offset": 0
+                    }
+                }, {
+                    "Type": { "Id": "f0e6a08200bee22a93335cd996f94aff", "Name": "CurveStop" },
+                    "Properties": {
+                        "value": 1,
+                        "offset": 1
+                    }
+                }]
+            }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "5e4f0b7dee40427c8ef0be25f656b7df",
+    "Name": "Particle",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 0,
+                    "y": 0
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "fa46fc8ae16604318aac9644e761e720", "FileId": 21300000, "Type": 3 },
+            "color": {
+                "Type": { "Id": "83c08479d9d6e46c88247df9dbae2e1b", "Name": "Color" },
+                "Properties": {
+                    "r": 1,
+                    "g": 0,
+                    "b": 0.03584909,
+                    "a": 1
+                }
+            }
+        }
+    }]
+},
+{
+    "$TypeId": 4,
+    "Id": "4dac95cd0810483ea6cbe6c6ec664271",
+    "Name": "SlashPrefab",
+    "Entities": [
+        { "$TypeId": 9, "Id": "fa09cbde36074ecbb4a890f765e4cc0c", "Name": "SlashEffect" }
+    ]
+},
+{
+    "$TypeId": 5,
+    "Id": "fa09cbde36074ecbb4a890f765e4cc0c",
+    "Name": "SlashEffect",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "z": 20
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 100,
+                    "y": 100
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "885eba52ccecc4487bca13ff07173c0a", "FileId": 21300000, "Type": 3 }
+        }
+    }, {
+        "Type": { "Id": "e78886212626462a833a3faaa2d3b497", "Name": "SlashEffect" }
+    }]
+},
+{
+    "$TypeId": 4,
+    "Id": "321ebfd4335744608cf0bfdc681f588d",
+    "Name": "VictoryGroup",
+    "Entities": [
+        { "$TypeId": 9, "Id": "75ace5c5911b4c1e8ec4732513cb9e45", "Name": "Match_Victory" }
+    ]
+},
+{
+    "$TypeId": 5,
+    "Id": "75ace5c5911b4c1e8ec4732513cb9e45",
+    "Name": "Match_Victory",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        "Properties": {
+            "localPosition": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "y": 311,
+                    "z": 30
+                }
+            },
+            "localScale": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 150,
+                    "y": 150
+                }
+            }
+        }
+    }, {
+        "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
+        "Properties": {
+            "sprite": { "$TypeId": 10, "Guid": "14226923f84e3452c9969e640e459c80", "FileId": 21300000, "Type": 3 }
+        }
+    }]
+},
+{
+    "$TypeId": 6,
+    "Id": "404c62e2ffc24c0991aa36fe32b175e8",
+    "Name": "BoardService",
+    "TextAsset": { "$TypeId": 10, "Guid": "7a80465e66fb23446b5baa25ba112440", "FileId": 4900000, "Type": 3 }
+},
+{
+    "$TypeId": 6,
+    "Id": "73f7aecd54754bf89b76d2460fa96eb2",
+    "Name": "GraphService",
+    "TextAsset": { "$TypeId": 10, "Guid": "1960d037de36818449dcf8a63722f4cc", "FileId": 4900000, "Type": 3 }
+},
+{
+    "$TypeId": 6,
+    "Id": "875797e1be3f4708b6961cfc61479091",
+    "Name": "DragonService",
+    "TextAsset": { "$TypeId": 10, "Guid": "c7f1513c984574efeb690f6808a32503", "FileId": 4900000, "Type": 3 }
+},
+{
+    "$TypeId": 7,
+    "Id": "2d46171ed97540a7b522a53cc945d1ac",
+    "Name": "BoardRefillSystem",
+    "Options": 7,
+    "Components": [
+        { "Id": "c45ce8e260fc4dfb8602034ffdfae16b", "Name": "Board" }
+    ],
+    "ExecuteAfter": [
+        { "Id": "506959545e754ec1a8b55a98a770861b", "Name": "BoardCollapseSystem" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "184b8bf14e1b493697fa3ac5fca258f6",
+    "Name": "GemDragSystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "f5d40d4eb7d428641a381b55f1e5d9f6", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        { "Id": "31f9ea2e09d245118f7494b9975a4b15", "Name": "Gem" }
+    ],
+    "ExecuteAfter": [
+        { "Id": "624141ac039664daa461faa7328b16fc", "Name": "InputHandler" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "0c3b12bbe5f24d96aff6e4df4fd415df",
+    "Name": "CreateMatchSystem",
+    "Options": 7,
+    "Components": [
+        { "Id": "c45ce8e260fc4dfb8602034ffdfae16b", "Name": "Board" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "506959545e754ec1a8b55a98a770861b",
+    "Name": "BoardCollapseSystem",
+    "Options": 7,
+    "Components": [
+        { "Id": "c45ce8e260fc4dfb8602034ffdfae16b", "Name": "Board" }
+    ],
+    "ExecuteAfter": [
+        { "Id": "d69d185627df4ea19de2aac8de50b548", "Name": "BoardSpawnSystem" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "d69d185627df4ea19de2aac8de50b548",
+    "Name": "BoardSpawnSystem",
+    "Options": 7,
+    "Components": [
+        { "Id": "c45ce8e260fc4dfb8602034ffdfae16b", "Name": "Board" },
+        { "Id": "feea97d5bab5410295043cb64984d851", "Name": "BoardSpawn" }
+    ],
+    "ExecuteAfter": [
+        { "Id": "ed83ba2b75da48b79d0ed75bcff4426b", "Name": "CellGraphSystem" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "7f5f43e1ee3c42abb2997c32888b3834",
+    "Name": "DestroyMatchSystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "507c8b04e8ea7644595159a4910eab7d", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "7033abf69ce145e38c80738467fc7d17", "Name": "Match" }
+    ],
+    "ExecuteAfter": [
+        { "Id": "0c3b12bbe5f24d96aff6e4df4fd415df", "Name": "CreateMatchSystem" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "05dc4fffc06841c58cdc020c62aa245a",
+    "Name": "CellGraphNodeRegisterSystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "fc6bdd43ed92cf147870a029020086f2", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        { "Id": "133c5aba03b34a66a2370903dae87e42", "Name": "CellGraphNode" },
+        { "Id": "376129136c9f423db86e5295edd04fd3", "Name": "CellGraphNodeRegister" }
+    ],
+    "ExecuteAfter": [
+        { "Id": "ed83ba2b75da48b79d0ed75bcff4426b", "Name": "CellGraphSystem" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "ed83ba2b75da48b79d0ed75bcff4426b",
+    "Name": "CellGraphSystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "cc567c82cbfcec34cb1b6ae0f863e0f5", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "caee399f786c4e8cb96c912983fcb5a8", "Name": "CellGraph" }
+    ],
+    "ExecuteBefore": [
+        { "Id": "face704baaa19cca19003460bfcd42ee", "Name": "RenderingFence" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "fbf971ade54c4ba4a49b09eaadf7465f",
+    "Name": "ParticleEmitterSystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "2b758a92f4c0b4ea38ae63638b13f82f", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        { "Id": "c8371d148850d1a696b747b09999a478", "Name": "ParticleEmitter" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "2054d268b6c64d7790103ec239787cf1",
+    "Name": "SlashEffectSystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "fcf0d1598e05d4b25a16000df1c6faae", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "e78886212626462a833a3faaa2d3b497", "Name": "SlashEffect" },
+        { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" },
+        { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "f12f89db47574e64b767f74c2f1cabe3",
+    "Name": "DragonSystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "0d52f0e3c3c874b3b9c4ee83da8db929", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "c975ca89630242fbac82f1022942ed80", "Name": "Dragon" }
+    ]
+},
+{
+    "$TypeId": 5,
+    "Id": "8790b75ba5ca4c89bf7cde8622f565d3",
+    "Name": "Configuration",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "575fe161bc06950c954480d04c70c9ab", "Name": "DisplayInfo" },
+        "Properties": {
+            "width": 1440,
+            "height": 2560,
+            "autoSizeToFrame": true
+        }
+    }]
+}]

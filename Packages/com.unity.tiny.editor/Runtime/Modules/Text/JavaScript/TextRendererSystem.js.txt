@@ -1,0 +1,126 @@
+world.forEachEntity([ut.Core2D.Transform, ut.Core2D.Camera2D], function (cE, cTransform, camera) {
+
+    // global context and display info
+    var ctx = document.getElementById('UT_CANVAS').getContext('2d');
+    var di = world.config(ut.DisplayInfo);
+
+    // compute the camera clipping area
+    var size = new Vector2(di.width(), di.height());
+    var rect = camera.rect();
+
+    if (rect.width <= 0 || rect.height <= 0) {
+        rect.width = size.width;
+        rect.height = size.height;
+    } else {
+        var clip = new Rect(rect.x * size.width, rect.y * size.height, rect.width * size.width, rect.height * size.height);
+        ctx.beginPath();
+        ctx.rect(clip.x, di.height() - (clip.y + clip.height), clip.width, clip.height);
+        rect = clip;
+    }
+
+    // convert camera to y-down
+    var cPosition = cTransform.worldPosition();
+    cPosition.y *= -1;
+
+    // compute the view matrix
+    var viewMatrix = camera.worldToWindowTransform(
+        new Matrix4x4().compose(
+            cPosition, 
+            cTransform.worldRotation(), 
+            cTransform.worldScaleLossy()), 
+        size);
+
+    world.forEachEntity([ut.Transform, ut.Text.TextRenderer], function (tE, rTransform, renderer) {
+        var fontSize = renderer.fontSize();
+        var text = renderer.text();
+        var color = renderer.color();
+
+        // convert renderer to y-down
+        var rPosition = rTransform.worldPosition();
+        rPosition.y *= -1;
+
+        var rRotation = new Euler().setFromQuaternion(rTransform.worldRotation());
+        rRotation.z *= -1;
+
+        var trs = new Matrix4x4().compose(rPosition, new Quaternion().setFromEuler(rRotation), rTransform.worldScaleLossy());
+        var m = trs.premultiply(viewMatrix);
+        var e = m.elements;
+
+        var textBaseline = 'middle';
+        var textAlign = 'left';
+        switch (renderer.anchor()) {
+
+            case ut.Text.TextAnchor.UpperLeft:
+                textBaseline = 'top';
+                textAlign = 'left';
+                break;
+
+            case ut.Text.TextAnchor.UpperCenter:
+                textBaseline = 'top';
+                textAlign = 'center';
+                break;
+
+            case ut.Text.TextAnchor.UpperRight:
+                textBaseline = 'top';
+                textAlign = 'right';
+                break;
+
+            case ut.Text.TextAnchor.MiddleLeft:
+                textBaseline = 'middle';
+                textAlign = 'left';
+                break;
+
+            case ut.Text.TextAnchor.MiddleCenter:
+                textBaseline = 'middle';
+                textAlign = 'center';
+                break;
+
+            case ut.Text.TextAnchor.MiddleRight:
+                textBaseline = 'middle';
+                textAlign = 'right';
+                break;
+
+            case ut.Text.TextAnchor.LowerLeft:
+                textBaseline = 'bottom';
+                textAlign = 'left';
+                break;
+
+            case ut.Text.TextAnchor.LowerCenter:
+                textBaseline = 'bottom';
+                textAlign = 'center';
+                break;
+
+            case ut.Text.TextAnchor.LowerRight:
+                textBaseline = 'bottom';
+                textAlign = 'right';
+                break;
+        }
+
+        // fetch the font asset
+        var font = renderer.font();
+
+        // default to Arial font if no asset was provided
+        var family = "Arial";
+
+        // extract the family name from the asset
+        if (font && font.valid()) {
+            var name = font.name();
+            family = name.substr(name.lastIndexOf('/') + 1);
+
+            if (!document.fonts.check(fontSize + 'px ' + family)) {
+                return;
+            }
+        }
+        
+        ctx.save();
+        ctx.setTransform(e[0], e[1], e[4], e[5], e[12], e[13]);
+        ctx.textBaseline = textBaseline;
+        ctx.textAlign = textAlign;
+        ctx.font = (renderer.bold() ? 'bold ' : '') + (renderer.italic() ? 'italic ' : '') + fontSize + 'px ' + family;
+        ctx.fillStyle = 'rgba('+((color.r * 255)|0)+','+((color.g * 255)|0)+','+((color.b * 255)|0)+','+((color.a * 255)|0)+')'
+        ctx.fillText(text, 0, 0);
+        ctx.restore();
+    });
+
+    ctx.restore();
+});

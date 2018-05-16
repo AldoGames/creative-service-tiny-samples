@@ -1,0 +1,11 @@
+// @hack this should a singleton component
+// for now we bind the entity to a runtime js object (Graph)
+Graph.entity = entity;
+
+if (entity.hasComponent(ut.Core2D.Transform)) {
+    Graph.position = entity.getComponent(ut.Core2D.Transform).localPosition();
+}
+
+Graph.width = cellgraph.width();
+Graph.height = cellgraph.height();
+Graph.layout = cellgraph.layout();

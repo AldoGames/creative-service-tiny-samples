@@ -1,0 +1,76 @@
+ut.Flow = ut.Flow || {};
+
+/**
+ * @class
+ * @classdesc A handle to a collection of instantiated entities. This can be used to keep track of multiple instances of the same group
+ * @property {ut.Entity}   root     - The root entity for this group (entities[0])
+ * @property {ut.Entity[]} entities - Entities belonging to this group instance
+ */
+ut.Flow.EntityGroup = function() {
+    this.root = null;
+    this.entities = [];
+};
+ut.Flow.EntityGroup.prototype = Object.create(null);
+ut.Flow.EntityGroup.prototype.constructor = ut.Flow.EntityGroup;
+
+/**
+ * @method
+ * @desc Destroys all entities for this group instance
+ */
+ut.Flow.EntityGroup.prototype.destroy = function() {
+    for (var i=0; i<this.entities.length; i++) {
+        if (null != this.entities[i] && this.entities[i].valid()) {
+            this.entities[i].destroy();
+        }
+    }
+
+    this.root = null;
+    this.entities = [];
+};
+
+ut.Flow.Service = {
+    /**
+     * @method
+     * @desc Returns an entity group object by name
+     * @param {string} name - Fully qualified group name
+     */
+    getEntityGroupData: function(name) {
+        var parts = name.split('.');
+        return parts.reduce(function (v, p) {
+            return v[p];
+        }, entities[parts.shift()]);
+    },
+
+    /**
+     * @method
+     * @desc Creates an instance of a scene and returns a scene handle
+     * @param {string} name - EntityGroup name
+     * @returns {ut.Flow.EntityGroup} EntityGroup handle
+     */
+    instantiate: function(name) {
+        var group = new ut.Flow.EntityGroup();
+        var data = this.getEntityGroupData(name);
+        if (data == undefined)
+        {
+            throw "ut.Flow.Service.instantiate: No 'EntityGroup' was found with the name '" + name + "'"
+        }
+        group.entities = data.load(world);
+        if (group.entities.length > 0) {
+            group.root = group.entities[0];
+        } 
+        return group;
+    },
+
+    /**
+     * @method
+     * @desc Destroys all entities belonging to a scene
+     * @param {string} name - EntityGroup name
+     */
+    destroyAll: function(name) {
+        var ctype = this.getEntityGroupData(name).Component;
+        // iterate over all entities that have this component and destroy them
+        world.forEachEntity([ctype], function (entity, component) {
+            entity.destroy();
+        });
+    }
+};

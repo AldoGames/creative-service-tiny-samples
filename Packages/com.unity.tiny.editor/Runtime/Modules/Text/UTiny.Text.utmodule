@@ -1,0 +1,164 @@
+﻿[{
+    "$TypeId": 2,
+    "Id": "77db3a3f0ecf4c26a7ba12a90a61e639",
+    "Name": "UTiny.Text",
+    "Namespace": "ut.Text",
+    "Dependencies": [
+        { "Id": "2af0cd3b47a732bf738688ceab312689", "Name": "UTiny.Core" },
+        { "Id": "30097418841f56d73400bf82ee859ac9", "Name": "UTiny.Core2D" },
+        { "Id": "eae58004250dcd15a6c834b07677ca28", "Name": "UTiny.HTML" }
+    ],
+    "Components": [
+        { "Id": "de741c68b67240148cdb8aa42a46bfdf", "Name": "TextRenderer" },
+        { "Id": "e79a7d9b043443d8a6b5207058702290", "Name": "Font" }
+    ],
+    "Enums": [
+        { "Id": "b6b0725afe984c18ad6086cc6eba4e2b", "Name": "TextAnchor" }
+    ],
+    "Systems": [
+        { "Id": "01b80f0709e34958b086b6d73de1f988", "Name": "TextRendererSystem" },
+        { "Id": "7242350985a7407b83d53f90890dfb1e", "Name": "FontLoaderSystem" }
+    ]
+},
+{
+    "$TypeId": 3,
+    "Id": "de741c68b67240148cdb8aa42a46bfdf",
+    "Name": "TextRenderer",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "205ba3d46108445d88fbd9ccd7ff6a1d",
+        "Name": "text",
+        "FieldType": { "Id": "1bff5adddd7c41de98d3329c7c641208", "Name": "String" }
+    }, {
+        "Id": "f13bb7f60af441cabd23df1c599139c3",
+        "Name": "fontSize",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "11ef98a4ead4431b867cc9f00c7724dc",
+        "Name": "bold",
+        "FieldType": { "Id": "2b477f505af74487b7092b5617d88d3f", "Name": "Boolean" }
+    }, {
+        "Id": "bf6fac186eaa49cc8cf714ba41c0e77b",
+        "Name": "italic",
+        "FieldType": { "Id": "2b477f505af74487b7092b5617d88d3f", "Name": "Boolean" }
+    }, {
+        "Id": "fbbe472b45734981a36a501c5684b503",
+        "Name": "anchor",
+        "FieldType": { "Id": "b6b0725afe984c18ad6086cc6eba4e2b", "Name": "TextAnchor" }
+    }, {
+        "Id": "13ea3bc72135450b82ca9fb7950f0178",
+        "Name": "color",
+        "FieldType": { "Id": "83c08479d9d6e46c88247df9dbae2e1b", "Name": "Color" }
+    }, {
+        "Id": "ae60aea958aa4b03aa1b0c739e6900cb",
+        "Name": "font",
+        "FieldType": { "Id": "4b1f918c1c564e42a04a0cb8f4ee0665", "Name": "FontEntity" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "de741c68b67240148cdb8aa42a46bfdf", "Name": "TextRenderer" },
+        "Properties": {
+            "fontSize": 16,
+            "anchor": {
+                "$TypeId": 8,
+                "Type": { "Id": "b6b0725afe984c18ad6086cc6eba4e2b", "Name": "TextAnchor" },
+                "Id": "a9b9813abd72453e80f0fe0be152e6fd",
+                "Name": "MiddleCenter",
+                "Value": 4
+            }
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "e79a7d9b043443d8a6b5207058702290",
+    "Name": "Font",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "d394f9fd25ec40008a8013f9fb312001",
+        "Name": "file",
+        "FieldType": { "Id": "1bff5adddd7c41de98d3329c7c641208", "Name": "String" }
+    }, {
+        "Id": "d036c91722ab4cd088eb7e2aeea65767",
+        "Name": "loaded",
+        "FieldType": { "Id": "2b477f505af74487b7092b5617d88d3f", "Name": "Boolean" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "e79a7d9b043443d8a6b5207058702290", "Name": "Font" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "b6b0725afe984c18ad6086cc6eba4e2b",
+    "Name": "TextAnchor",
+    "TypeCode": "Enum",
+    "BaseType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
+    "Fields": [{
+        "Id": "9d3dc1baf41447118e952f7156f7422c",
+        "Name": "UpperLeft",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "f3b0cd865cec471da583095673a513e3",
+        "Name": "UpperCenter",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "9f4285a4a6d04eb28db435465b600743",
+        "Name": "UpperRight",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "42b4b65f156a44cd8da4437f595a855b",
+        "Name": "MiddleLeft",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "a9b9813abd72453e80f0fe0be152e6fd",
+        "Name": "MiddleCenter",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "4785e0b2dc974df9b5b325c3b85e74f4",
+        "Name": "MiddleRight",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "dea9e5b996654839b967280acb314dd4",
+        "Name": "LowerLeft",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "0b2b77208bc349cd84919bf35febbbc5",
+        "Name": "LowerCenter",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "9d72a761e9414083982838a10aa22b3a",
+        "Name": "LowerRight",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "b6b0725afe984c18ad6086cc6eba4e2b", "Name": "TextAnchor" },
+        "Properties": {
+            "UpperLeft": 0,
+            "UpperCenter": 1,
+            "UpperRight": 2,
+            "MiddleLeft": 3,
+            "MiddleCenter": 4,
+            "MiddleRight": 5,
+            "LowerLeft": 6,
+            "LowerCenter": 7,
+            "LowerRight": 8
+        }
+    }
+},
+{
+    "$TypeId": 7,
+    "Id": "01b80f0709e34958b086b6d73de1f988",
+    "Name": "TextRendererSystem",
+    "Options": 1,
+    "TextAsset": { "$TypeId": 10, "Guid": "8e5b9a5390bc95542abb281b2f98d9e7", "FileId": 4900000, "Type": 3 },
+    "ExecuteAfter": [
+        { "Id": "7242350985a7407b83d53f90890dfb1e", "Name": "FontLoaderSystem" },
+        { "Id": "faa9836d6a891fdc916d24ed5adb90a0", "Name": "Renderer" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "7242350985a7407b83d53f90890dfb1e",
+    "Name": "FontLoaderSystem",
+    "Options": 1,
+    "TextAsset": { "$TypeId": 10, "Guid": "b16928d5ada7b8e4cbfab046f51cdd2a", "FileId": 4900000, "Type": 3 }
+}]

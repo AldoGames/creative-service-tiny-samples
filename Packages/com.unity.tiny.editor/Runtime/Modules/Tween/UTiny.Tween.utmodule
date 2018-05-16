@@ -1,0 +1,638 @@
+﻿[{
+    "$TypeId": 2,
+    "Id": "7a630ae9230a41848287fbe2dc371ade",
+    "Name": "UTiny.Tween",
+    "Documentation": {
+        "Summary": "Tween module provides a high level API for managing tweens and sequences."
+    },
+    "Namespace": "ut.tween",
+    "Options": 1,
+    "Dependencies": [
+        { "Id": "2af0cd3b47a732bf738688ceab312689", "Name": "UTiny.Core" },
+        { "Id": "eae58004250dcd15a6c834b07677ca28", "Name": "UTiny.HTML" },
+        { "Id": "a1b50987659c653138795a8f4079fc10", "Name": "UTiny.Math" },
+        { "Id": "30097418841f56d73400bf82ee859ac9", "Name": "UTiny.Core2D" }
+    ],
+    "Components": [
+        { "Id": "6eb1ca23524940169ab2d98e1fde9376", "Name": "TweenTime" },
+        { "Id": "6cb146eb72924edaa537c427286c8189", "Name": "TweenEase" },
+        { "Id": "f50a019af1344f7388c90de54ff18feb", "Name": "TweenTarget" },
+        { "Id": "951c5d4cf9ab434eb67585b9bac97bb2", "Name": "TweenPlay" },
+        { "Id": "6a4d3ea661c642b9b770575054f93153", "Name": "TweenLoop" },
+        { "Id": "b8ff70a0175249dca8113a3af85bed12", "Name": "TweenDelay" },
+        { "Id": "e9dcdfe910714bd893c4ebd43bbd9c87", "Name": "TweenColor" },
+        { "Id": "6b916fe462064bd2a006fe6df78ef62e", "Name": "TweenVector3" },
+        { "Id": "db6fc6d42c344acb8c110e286faf5a27", "Name": "TweenFloat" },
+        { "Id": "0a23fa4cd6584e17834f5e30def6be97", "Name": "TweenSequence" },
+        { "Id": "106adf06d8a04755be14496636af0b1f", "Name": "TweenOnComplete" }
+    ],
+    "Enums": [
+        { "Id": "c90e131acfc346e7948c09113f58290d", "Name": "EaseType" },
+        { "Id": "6321903ee8754b28b8f3f65c36c49c35", "Name": "LoopType" }
+    ],
+    "Scripts": [
+        { "Id": "fa1470fc9870427e93c50f586a73060f", "Name": "TweenService" },
+        { "Id": "4723b08ef91b4debb1e2b547e4e3f9c9", "Name": "TweenEasing" }
+    ],
+    "Systems": [
+        { "Id": "102ec76dd94546639779bb92cf18cc99", "Name": "TweenVector3System" },
+        { "Id": "1b9c3ae372f94615ab378a4561d209a6", "Name": "TweenTimeSystem" },
+        { "Id": "4006b59bea0045db9fa3e5e6ddb12bbf", "Name": "TweenEaseSystem" },
+        { "Id": "446a62e8188d4190948765491f910f47", "Name": "TweenDelaySystem" },
+        { "Id": "ed496f98590344ff80244f9ea101398e", "Name": "TweenLoopSystem" },
+        { "Id": "93c3c4049b134eb593397ea760915abb", "Name": "TweenDestroySystem" },
+        { "Id": "b6ab8ed89f294c11b30fc77459536910", "Name": "TweenColorSystem" },
+        { "Id": "a5a0800d53424dc4b58427e609e508a7", "Name": "TweenFloatSystem" },
+        { "Id": "79a4d63bb5554ba1999efb5e7d7fe75c", "Name": "TweenSequenceEndSystem" },
+        { "Id": "e6e803e8e7de45a1bbc8eeac616dbb11", "Name": "TweenOnCompleteSystem" },
+        { "Id": "56a33a145b2748d48f9c7c9e1e711a8a", "Name": "TweenSequenceStartSystem" }
+    ],
+    "Tutorial": { "$TypeId": 10, "Guid": "64699c16e240cdc43aca8972af34cd39", "FileId": 4900000, "Type": 3 }
+},
+{
+    "$TypeId": 3,
+    "Id": "6eb1ca23524940169ab2d98e1fde9376",
+    "Name": "TweenTime",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "8683ccb9992349b18a48dc33273a17ea",
+        "Name": "time",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "ef7de049b6d44729bc451bd9c175e2a5",
+        "Name": "duration",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "64d9f8fd260d4cf58db0220400d9cfab",
+        "Name": "interpolation",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "043aea7ebb7247f1ba49e88b1242ee75",
+        "Name": "reverse",
+        "FieldType": { "Id": "2b477f505af74487b7092b5617d88d3f", "Name": "Boolean" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "6eb1ca23524940169ab2d98e1fde9376", "Name": "TweenTime" },
+        "Properties": {
+            "time": 0,
+            "duration": 0,
+            "interpolation": 0,
+            "reverse": false
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "6cb146eb72924edaa537c427286c8189",
+    "Name": "TweenEase",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "6cbc458b90924c928f3c5dc78e6ed199",
+        "Name": "easeType",
+        "FieldType": { "Id": "c90e131acfc346e7948c09113f58290d", "Name": "EaseType" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "6cb146eb72924edaa537c427286c8189", "Name": "TweenEase" }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "f50a019af1344f7388c90de54ff18feb",
+    "Name": "TweenTarget",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "a9d684a119cc465f85bb0671355b660f",
+        "Name": "entity",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" }
+    }, {
+        "Id": "c2f1a94a2a244b9ebcd0a14b57b65bd7",
+        "Name": "component",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "5fcbff54b48243238f54b7af88f568d6",
+        "Name": "property",
+        "FieldType": { "Id": "1bff5adddd7c41de98d3329c7c641208", "Name": "String" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "f50a019af1344f7388c90de54ff18feb", "Name": "TweenTarget" },
+        "Properties": {
+            "component": 0
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "951c5d4cf9ab434eb67585b9bac97bb2",
+    "Name": "TweenPlay",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "12e84f74fd9147ff90de5ff435bd6d1d",
+        "Name": "padding",
+        "FieldType": { "Id": "27c155635ccb4ab2bcb79ef5aaf129ec", "Name": "Int8" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "951c5d4cf9ab434eb67585b9bac97bb2", "Name": "TweenPlay" },
+        "Properties": {
+            "padding": 0
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "6a4d3ea661c642b9b770575054f93153",
+    "Name": "TweenLoop",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "34104d9adedf4a328ac2395c35e8a275",
+        "Name": "loopType",
+        "FieldType": { "Id": "6321903ee8754b28b8f3f65c36c49c35", "Name": "LoopType" }
+    }, {
+        "Id": "85ade8ade91845f6b6213117b3cfda7f",
+        "Name": "loopIndex",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "23d7a483fb774499ba94ecb3c88b5bb1",
+        "Name": "loopCount",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "6a4d3ea661c642b9b770575054f93153", "Name": "TweenLoop" },
+        "Properties": {
+            "loopIndex": 0,
+            "loopCount": 0
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "b8ff70a0175249dca8113a3af85bed12",
+    "Name": "TweenDelay",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "0e2ab91e4a2742648413afbec3dd17fd",
+        "Name": "time",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "f7d88be66fb54270b3fe1a58ee5565d8",
+        "Name": "delay",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "b8ff70a0175249dca8113a3af85bed12", "Name": "TweenDelay" },
+        "Properties": {
+            "time": 0,
+            "delay": 0
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "e9dcdfe910714bd893c4ebd43bbd9c87",
+    "Name": "TweenColor",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "1a0642e9e5034776ae4e0d4e20e7a6e8",
+        "Name": "start",
+        "FieldType": { "Id": "83c08479d9d6e46c88247df9dbae2e1b", "Name": "Color" }
+    }, {
+        "Id": "4cf719e10c394e728762ffec9ee51d97",
+        "Name": "end",
+        "FieldType": { "Id": "83c08479d9d6e46c88247df9dbae2e1b", "Name": "Color" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "e9dcdfe910714bd893c4ebd43bbd9c87", "Name": "TweenColor" },
+        "Properties": {
+            "start": {
+                "Type": { "Id": "83c08479d9d6e46c88247df9dbae2e1b", "Name": "Color" },
+                "Properties": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 255
+                }
+            },
+            "end": {
+                "Type": { "Id": "83c08479d9d6e46c88247df9dbae2e1b", "Name": "Color" },
+                "Properties": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 255
+                }
+            }
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "6b916fe462064bd2a006fe6df78ef62e",
+    "Name": "TweenVector3",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "28ca4adc2db3447bab026c1c002a37d3",
+        "Name": "start",
+        "FieldType": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" }
+    }, {
+        "Id": "d74b27c84f0e4b3ab7c6c7f20942306d",
+        "Name": "end",
+        "FieldType": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "6b916fe462064bd2a006fe6df78ef62e", "Name": "TweenVector3" },
+        "Properties": {
+            "start": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "end": {
+                "Type": { "Id": "f139194553e8ae4a3250c5527d6de169", "Name": "Vector3" },
+                "Properties": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            }
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "db6fc6d42c344acb8c110e286faf5a27",
+    "Name": "TweenFloat",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "245a8ea6fc6249ac9f780fee3793a068",
+        "Name": "start",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }, {
+        "Id": "86c0358c945f4274b5f8c73487f2b352",
+        "Name": "end",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "db6fc6d42c344acb8c110e286faf5a27", "Name": "TweenFloat" },
+        "Properties": {
+            "start": 0,
+            "end": 0
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "0a23fa4cd6584e17834f5e30def6be97",
+    "Name": "TweenSequence",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "c011a0be3e2644c2bf231389193dd222",
+        "Name": "index",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "0a23fa4cd6584e17834f5e30def6be97", "Name": "TweenSequence" },
+        "Properties": {
+            "index": 0
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "106adf06d8a04755be14496636af0b1f",
+    "Name": "TweenOnComplete",
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "50821c4d53a3490aa6b99224e7c25e49",
+        "Name": "padding",
+        "FieldType": { "Id": "27c155635ccb4ab2bcb79ef5aaf129ec", "Name": "Int8" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "106adf06d8a04755be14496636af0b1f", "Name": "TweenOnComplete" },
+        "Properties": {
+            "padding": 0
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "c90e131acfc346e7948c09113f58290d",
+    "Name": "EaseType",
+    "TypeCode": "Enum",
+    "BaseType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
+    "Fields": [{
+        "Id": "e34c30e7f1254cb3962f349177e378b7",
+        "Name": "Linear",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "289f9741bd4b403891244a4a5f602904",
+        "Name": "EaseInQuad",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "ac5a0780c5144608978921db34eac90d",
+        "Name": "EaseOutQuad",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "9ff75f1dca224d148b14d75c869fad03",
+        "Name": "EaseInOutQuad",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "1d9865f45b8d4842830efec714924758",
+        "Name": "EaseInCubic",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "b34742a525ce4b9c911985005598afe3",
+        "Name": "EaseOutCubic",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "50f59d7bfd3f4d8cb83ff42949d862b9",
+        "Name": "EaseInOutCubic",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "905d70e45bc54cba8173a9d95a9de31a",
+        "Name": "EaseInQuart",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "d74ba3577c374604bda67ac20abd3ea6",
+        "Name": "EaseOutQuart",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "29869fb3fb004fa5a4a10519b7d05dd1",
+        "Name": "EaseInOutQuart",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "12cf875f162d4217829a4dec623334b7",
+        "Name": "EaseInQuint",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "508548573bec42f79b4950ee666abfd4",
+        "Name": "EaseOutQuint",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "7c992adb8da94d899db3b079f3765324",
+        "Name": "EaseInOutQuint",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "7e81a1be7e7f42e5b013e8aa3598445c",
+        "Name": "EaseInBack",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "8dc5776bd63d4a139e5a5a80fd91e1e7",
+        "Name": "EaseOutBack",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "81ee3bd43b8449ae8348738ea0c016a9",
+        "Name": "EaseInOutBack",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "f4526cde30314116b3f1b6f75dcc163a",
+        "Name": "EaseInBounce",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "1a060b0bbd7042818edff2b0b8c08ff6",
+        "Name": "EaseOutBounce",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "35ba6f3341f44adaab692c5ed881a1dc",
+        "Name": "EaseInOutBounce",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "c90e131acfc346e7948c09113f58290d", "Name": "EaseType" },
+        "Properties": {
+            "Linear": 0,
+            "EaseInQuad": 1,
+            "EaseOutQuad": 2,
+            "EaseInOutQuad": 3,
+            "EaseInCubic": 4,
+            "EaseOutCubic": 5,
+            "EaseInOutCubic": 6,
+            "EaseInQuart": 7,
+            "EaseOutQuart": 8,
+            "EaseInOutQuart": 9,
+            "EaseInQuint": 10,
+            "EaseOutQuint": 11,
+            "EaseInOutQuint": 12,
+            "EaseInBack": 13,
+            "EaseOutBack": 14,
+            "EaseInOutBack": 15,
+            "EaseInBounce": 16,
+            "EaseOutBounce": 17,
+            "EaseInOutBounce": 18
+        }
+    }
+},
+{
+    "$TypeId": 3,
+    "Id": "6321903ee8754b28b8f3f65c36c49c35",
+    "Name": "LoopType",
+    "TypeCode": "Enum",
+    "BaseType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
+    "Fields": [{
+        "Id": "c7c5f1c7e1c14292958ee304310eb9ad",
+        "Name": "None",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "5fc2191e89044501a6f25832be71afbb",
+        "Name": "Repeat",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "7c5425052a32482991b1363f67967267",
+        "Name": "PingPong",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "6321903ee8754b28b8f3f65c36c49c35", "Name": "LoopType" },
+        "Properties": {
+            "None": 0,
+            "Repeat": 1,
+            "PingPong": 2
+        }
+    }
+},
+{
+    "$TypeId": 6,
+    "Id": "fa1470fc9870427e93c50f586a73060f",
+    "Name": "TweenService",
+    "TextAsset": { "$TypeId": 10, "Guid": "675da9d892a48414099219017a2eb4c9", "FileId": 4900000, "Type": 3 }
+},
+{
+    "$TypeId": 6,
+    "Id": "4723b08ef91b4debb1e2b547e4e3f9c9",
+    "Name": "TweenEasing",
+    "TextAsset": { "$TypeId": 10, "Guid": "dedb052e8e6226b45a4f130044f06a01", "FileId": 4900000, "Type": 3 }
+},
+{
+    "$TypeId": 7,
+    "Id": "102ec76dd94546639779bb92cf18cc99",
+    "Name": "TweenVector3System",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "8f691acc44629c543ad05b42de04e09e", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "951c5d4cf9ab434eb67585b9bac97bb2", "Name": "TweenPlay" },
+        { "Id": "6eb1ca23524940169ab2d98e1fde9376", "Name": "TweenTime" },
+        { "Id": "f50a019af1344f7388c90de54ff18feb", "Name": "TweenTarget" },
+        { "Id": "6b916fe462064bd2a006fe6df78ef62e", "Name": "TweenVector3" }
+    ],
+    "ExecuteAfter": [
+        { "Id": "4006b59bea0045db9fa3e5e6ddb12bbf", "Name": "TweenEaseSystem" }
+    ],
+    "ExecuteBefore": [
+        { "Id": "ed496f98590344ff80244f9ea101398e", "Name": "TweenLoopSystem" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "1b9c3ae372f94615ab378a4561d209a6",
+    "Name": "TweenTimeSystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "dfec26fc84caf9e4688ef2445ccc8e9f", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "951c5d4cf9ab434eb67585b9bac97bb2", "Name": "TweenPlay" },
+        { "Id": "6eb1ca23524940169ab2d98e1fde9376", "Name": "TweenTime" }
+    ],
+    "ExecuteAfter": [
+        { "Id": "446a62e8188d4190948765491f910f47", "Name": "TweenDelaySystem" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "4006b59bea0045db9fa3e5e6ddb12bbf",
+    "Name": "TweenEaseSystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "0efa5ffbd0967a94691149b2ec8dec29", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "951c5d4cf9ab434eb67585b9bac97bb2", "Name": "TweenPlay" },
+        { "Id": "6eb1ca23524940169ab2d98e1fde9376", "Name": "TweenTime" },
+        { "Id": "6cb146eb72924edaa537c427286c8189", "Name": "TweenEase" }
+    ],
+    "ExecuteAfter": [
+        { "Id": "1b9c3ae372f94615ab378a4561d209a6", "Name": "TweenTimeSystem" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "446a62e8188d4190948765491f910f47",
+    "Name": "TweenDelaySystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "b26ed51e4e531b741a2bdc3856abbd80", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "951c5d4cf9ab434eb67585b9bac97bb2", "Name": "TweenPlay" },
+        { "Id": "6eb1ca23524940169ab2d98e1fde9376", "Name": "TweenTime" },
+        { "Id": "b8ff70a0175249dca8113a3af85bed12", "Name": "TweenDelay" }
+    ],
+    "ExecuteAfter": [
+        { "Id": "56a33a145b2748d48f9c7c9e1e711a8a", "Name": "TweenSequenceStartSystem" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "ed496f98590344ff80244f9ea101398e",
+    "Name": "TweenLoopSystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "71a9654911c571c4b8925565f2e436e6", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "951c5d4cf9ab434eb67585b9bac97bb2", "Name": "TweenPlay" },
+        { "Id": "6eb1ca23524940169ab2d98e1fde9376", "Name": "TweenTime" },
+        { "Id": "6a4d3ea661c642b9b770575054f93153", "Name": "TweenLoop" }
+    ],
+    "ExecuteAfter": [
+        { "Id": "4006b59bea0045db9fa3e5e6ddb12bbf", "Name": "TweenEaseSystem" }
+    ],
+    "ExecuteBefore": [
+        { "Id": "79a4d63bb5554ba1999efb5e7d7fe75c", "Name": "TweenSequenceEndSystem" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "93c3c4049b134eb593397ea760915abb",
+    "Name": "TweenDestroySystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "77a2281db24947747bb89d239fae5527", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "951c5d4cf9ab434eb67585b9bac97bb2", "Name": "TweenPlay" },
+        { "Id": "6eb1ca23524940169ab2d98e1fde9376", "Name": "TweenTime" }
+    ],
+    "ExecuteBefore": [
+        { "Id": "face704baaa19cca19003460bfcd42ee", "Name": "RenderingFence" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "b6ab8ed89f294c11b30fc77459536910",
+    "Name": "TweenColorSystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "0d51a049d702f22439fd89b21bf8e314", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "951c5d4cf9ab434eb67585b9bac97bb2", "Name": "TweenPlay" },
+        { "Id": "6eb1ca23524940169ab2d98e1fde9376", "Name": "TweenTime" },
+        { "Id": "f50a019af1344f7388c90de54ff18feb", "Name": "TweenTarget" },
+        { "Id": "e9dcdfe910714bd893c4ebd43bbd9c87", "Name": "TweenColor" }
+    ],
+    "ExecuteAfter": [
+        { "Id": "4006b59bea0045db9fa3e5e6ddb12bbf", "Name": "TweenEaseSystem" }
+    ],
+    "ExecuteBefore": [
+        { "Id": "ed496f98590344ff80244f9ea101398e", "Name": "TweenLoopSystem" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "a5a0800d53424dc4b58427e609e508a7",
+    "Name": "TweenFloatSystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "4ba0184fcc8f36c44a9434425560d834", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "951c5d4cf9ab434eb67585b9bac97bb2", "Name": "TweenPlay" },
+        { "Id": "6eb1ca23524940169ab2d98e1fde9376", "Name": "TweenTime" },
+        { "Id": "f50a019af1344f7388c90de54ff18feb", "Name": "TweenTarget" },
+        { "Id": "db6fc6d42c344acb8c110e286faf5a27", "Name": "TweenFloat" }
+    ],
+    "ExecuteAfter": [
+        { "Id": "4006b59bea0045db9fa3e5e6ddb12bbf", "Name": "TweenEaseSystem" }
+    ],
+    "ExecuteBefore": [
+        { "Id": "ed496f98590344ff80244f9ea101398e", "Name": "TweenLoopSystem" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "79a4d63bb5554ba1999efb5e7d7fe75c",
+    "Name": "TweenSequenceEndSystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "b9cef9039e8de7443b5c3214a2c12746", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "951c5d4cf9ab434eb67585b9bac97bb2", "Name": "TweenPlay" },
+        { "Id": "6eb1ca23524940169ab2d98e1fde9376", "Name": "TweenTime" },
+        { "Id": "0a23fa4cd6584e17834f5e30def6be97", "Name": "TweenSequence" }
+    ],
+    "ExecuteBefore": [
+        { "Id": "e6e803e8e7de45a1bbc8eeac616dbb11", "Name": "TweenOnCompleteSystem" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "e6e803e8e7de45a1bbc8eeac616dbb11",
+    "Name": "TweenOnCompleteSystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "c02bae15572106142920d105994a49b9", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "951c5d4cf9ab434eb67585b9bac97bb2", "Name": "TweenPlay" },
+        { "Id": "6eb1ca23524940169ab2d98e1fde9376", "Name": "TweenTime" },
+        { "Id": "106adf06d8a04755be14496636af0b1f", "Name": "TweenOnComplete" }
+    ],
+    "ExecuteBefore": [
+        { "Id": "93c3c4049b134eb593397ea760915abb", "Name": "TweenDestroySystem" }
+    ]
+},
+{
+    "$TypeId": 7,
+    "Id": "56a33a145b2748d48f9c7c9e1e711a8a",
+    "Name": "TweenSequenceStartSystem",
+    "Options": 3,
+    "TextAsset": { "$TypeId": 10, "Guid": "015b1fdd7d6ef7646ac4de8b4a17fb9a", "FileId": 4900000, "Type": 3 },
+    "Components": [
+        { "Id": "0a23fa4cd6584e17834f5e30def6be97", "Name": "TweenSequence" }
+    ]
+}]

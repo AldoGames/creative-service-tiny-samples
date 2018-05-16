@@ -1,0 +1,500 @@
+ut.tween = ut.tween || {};
+
+/**
+ * @class
+ * @classdesc Handles scheduling, creation and destruction of all tween entities.
+ *            Use singleton {@link Tween} to access the API
+ * @property {object}   defaults               - The default values for tweens
+ * @property {boolean}  defaults.autoPlay=true - The default play state for tweens 
+ * @property {duration} defaults.duration=1    - The default duration for any tweens
+ * @tutorial 3_ut.tween.GettingStarted
+ */
+ut.tween.TweenService = function() {
+    var self=this;
+    this.defaults = {
+        autoPlay: true,
+        duration: 1
+    };
+
+    // internal type map
+    // @todo refactor this to be a core feature
+    this._types = {};
+    this._tweens = {};
+};
+ut.tween.TweenService.prototype = Object.create(null);
+ut.tween.TweenService.prototype.constructor = ut.tween.TweenService;
+
+/**
+ * @method
+ * @desc Creates a new tween object
+ * @returns {!ut.tween.Tweener}
+ */
+ut.tween.TweenService.prototype.create = function() {
+    var tween = new ut.tween.Tweener(this)
+                            .setDuration(this.defaults.duration);
+
+    if (this.defaults.autoPlay) {
+        tween.play();
+    }
+
+    return tween;
+};
+
+/**
+ * @method
+ * @desc Creates a new sequence object
+ * @returns {!ut.tween.Sequence}
+ */
+ ut.tween.TweenService.prototype.sequence = function() {
+    var sequence = new ut.tween.Sequence(this)
+                               .setDuration(1);
+
+    sequence.entity.addComponent(ut.tween.TweenSequence);
+
+    if (this.defaults.autoPlay) {
+        sequence.play();
+    }
+
+    return sequence;
+ };
+
+/**
+ * @method
+ * @desc Destroys the given tween object
+ * @param {ut.tween.Tween} tween - The tween object to destroy
+ */
+ut.tween.TweenService.prototype.destroy = function(tween) {
+    delete this._tweens[tween.id];
+    tween.entity.destroy(); 
+    tween.entity = null;
+};
+
+/**
+ * @method
+ * @desc Gets a tween based on it's tween id
+ * @param {int} id - The id for the tween object
+ */
+ut.tween.TweenService.prototype.getById = function(id) {
+    return this._tweens[id];
+};
+
+/**
+ * @method
+ * @desct Gets all tweens for the given entity
+ * @param {ut.Entity} entity - The target entity
+ * @returns {Array.<ut.tween.Tween>}
+ */
+ut.tween.TweenService.prototype.getByTarget = function(entity) {
+    var result = [];
+    for (var id in this._tweens) {
+        var tween = this._tweens[id];
+        var target = tween.target();
+        if (null == target) {
+            continue;
+        }
+        if (target.mId == entity.mId) {
+            result.push(tween);
+        }
+    }
+    return result;
+};
+
+/**
+ * @method
+ * @desc Destroys all tweens for the given entity
+ * @param {ut.Entity} entity - The target entity
+ */
+ut.tween.TweenService.prototype.destroyAll = function(entity) {
+    var tweens = Tween.getByTarget(entity);
+    for (var tween in tweens) {
+        Tween.destroy(tweens[tween]);
+    }
+};
+
+/**
+ * @abstract
+ * @class
+ * @classdesc Base class used by Tweeners and Sequences
+ * @param {ut.tween.TweenService}
+ */
+ut.tween.Tween = function(service) {
+    this.service = service;
+    this.entity = world.create("ut.tween");
+    this.service._tweens[this.entity.mId] = this;
+    this.onCompleteCallbacks = [];
+};
+ut.tween.Tween.prototype = Object.create(null);
+ut.tween.Tween.prototype.constructor = ut.tween.Tween;
+
+/**
+ * @abtract
+ * @method
+ * @desc Gets the target for the tween if any
+ * @returns {ut.Entity} The target for the tween (if any)
+ */
+ut.tween.Tween.prototype.target = function() {
+    return null;
+};
+
+/**
+ * @method
+ * @desc Sets the delay for the tween
+ * @param {float} delay - Delay in seconds
+ * @returns {ut.tween.Tween} self
+ */
+ut.tween.Tween.prototype.setDelay = function(delay) {
+    var c = this.entity.getOrAddComponent(ut.tween.TweenDelay);
+    c.setDelay(delay);
+    return this;
+};
+
+/**
+ * @method
+ * @desc Sets the duration for the tween
+ * @param {float} duration - Duration in seconds
+ * @returns {ut.tween.Tween} self
+ */
+ut.tween.Tween.prototype.setDuration = function(duration) {
+    if (duration <= 0) {
+        throw 'Tween.setDuration: duration must be greater than 0'
+    }
+    var c = this.entity.getOrAddComponent(ut.tween.TweenTime);
+    c.setDuration(duration);
+    return this;
+};
+
+/**
+ * @method
+ * @desc Sets the loopType for the tween
+ * @param {ut.tween.LoopType} loopType   - Loop type for the loop
+ * @param {int} loopCount       - Number of loops (-1 for infinite)
+ * @returns {ut.tween.Tween} self
+ */
+ut.tween.Tween.prototype.setLoop = function(loopType, loopCount = -1) {
+    if (loopType == ut.tween.LoopType.None) {
+        if (this.entity.hasComponent(ut.tween.TweenLoop)) {
+            entity.removeComponent(ut.tween.TweenLoop);
+        }
+        return this;
+    }
+
+    var c = this.entity.getOrAddComponent(ut.tween.TweenLoop);
+    c.setLoopType(loopType);
+    c.setLoopCount(loopCount);
+    return this;
+};
+
+/**
+ * @method
+ * @desc Returns true is the tween has completed
+ * @returns {boolean}
+ */
+ut.tween.Tween.prototype.isDone = function() {
+    var c = this.entity.getComponent(ut.tween.TweenTime);
+    return c.time() >= c.duration();
+};
+
+/**
+ * @method
+ * @desc Plays the tween
+ * @returns {ut.tween.Tween} self
+ */
+ut.tween.Tween.prototype.play = function() {
+    var c = this.entity.getOrAddComponent(ut.tween.TweenPlay);
+    return this;
+};
+
+/**
+ * @method
+ * @desc Stop the tween
+ * @returns {ut.tween.Tween} self
+ */
+ut.tween.Tween.prototype.stop = function() {
+    if (this.entity.hasComponent(ut.tween.TweenPlay)) {
+        world.removeComponentId(this.entity.mId, ut.tween.TweenPlay.cid);
+    }
+    return this;
+};
+
+/**
+ * @method
+ * @desc Registers a callback to be invoked when the tween completes
+ * @param {function} callback - Callback to be invoked
+ * @returns {ut.tween.Tween} self
+ */
+ut.tween.Tween.prototype.onComplete = function(callback, args) {
+    var c = this.entity.getOrAddComponent(ut.tween.TweenOnComplete);
+    this.onCompleteCallbacks.push({callback: callback, args: args});
+    return this;
+};
+
+/**
+ * @extends ut.tween.Tween
+ * @class
+ * @classdesc Sequence represents a chain of tweens that can be execution sequentially or in parallel
+ * @param {ut.tween.TweenService} service - TweenService that this tween belongs to
+ */
+ut.tween.Sequence = function(service) {
+    ut.tween.Tween.prototype.constructor.call(this, service);
+    this._and = []; 
+    this._then = [];
+};
+ut.tween.Sequence.prototype = Object.create(ut.tween.Tween.prototype);
+ut.tween.Sequence.prototype.constructor = ut.tween.Sequence;
+
+/**
+ * @method
+ * @desc Appends the given tween to the end of sequence
+ * @params {ut.tween.Tween} tween - The Tween to add
+ * @returns {ut.tween.Sequence} self
+ */
+ut.tween.Sequence.prototype.then = function(tween) {
+    this._then.push(tween.stop());
+    return this;
+};
+
+ /**
+ * @method
+ * @desc Sets the given tween to run in parallel with the sequence
+ * @params {ut.tween.Tween} tween - The Tween to add
+ * @returns {ut.tween.Sequence} self
+ */
+ut.tween.Sequence.prototype.and = function(tween) {
+    this._and.push(tween.stop());
+    return this;
+};
+
+/**
+ * @extends ut.tween.Tween
+ * @class
+ * @classdesc Tweener takes control of a value and animates it
+ * @param {ut.tween.TweenService} service - TweenService that this tween belongs to
+ */
+ut.tween.Tweener = function(service) {
+    ut.tween.Tween.prototype.constructor.call(this, service);
+};
+ut.tween.Tweener.prototype = Object.create(ut.tween.Tween.prototype);
+ut.tween.Tweener.prototype.constructor = ut.tween.Tweener;
+
+Object.defineProperty(ut.tween.Tweener.prototype, 'id', {
+  get: function() { return this.entity.mId; }
+});
+
+/**
+ * @method
+ * @desc Sets the {@link ut.tween.EaseType} for the tween
+ * @params {ut.tween.EaseType} easeType - The easeType set set
+ * @returns {ut.tween.Tweener} self
+ */
+ut.tween.Tweener.prototype.setEase = function(easeType) {
+    var c = this.entity.getOrAddComponent(ut.tween.TweenEase);
+    c.setEaseType(easeType);
+    return this;
+};
+
+/**
+ * @method
+ * @desc Gets the target for the tween if any
+ * @returns {ut.Entity} The target for the tween (if any)
+ */
+ut.tween.Tweener.prototype.target = function() {
+    if (null == this.entity) {
+        return null;
+    }
+
+    if (!this.entity.hasComponent(ut.tween.TweenTarget)) {
+        return null;
+    }
+
+    var c = this.entity.getComponent(ut.tween.TweenTarget);
+    return c.entity();
+};
+
+/**
+ * @method
+ * @desc Sets the target for the tween
+ * @param {ut.Entity} entity    - The target entity
+ * @param {function}  component - The component type
+ * @param {string}    property  - The property name
+ * @returns {ut.tween.Tweener} self
+ */
+ut.tween.Tweener.prototype.setTarget = function(entity, component, property) {
+    // @temp until ctypes are registered
+    this.service._types[component.cid] = component;
+
+    var c = this.entity.getOrAddComponent(ut.tween.TweenTarget);
+    c.setEntity(entity);
+    c.setComponent(component.cid);
+    c.setProperty(property)
+
+    return this;
+};
+
+/**
+ * @method
+ * @desc Set the start and end float
+ * @param {float} start - The start value
+ * @param {float} end   - The end value
+ * @returns {ut.tween.Tweener} self
+ */
+ut.tween.Tweener.prototype.setFloat = function(start, end) {
+    var c = this.entity.getOrAddComponent(ut.tween.TweenFloat);
+    c.setStart(start);
+    c.setEnd(end);
+    return this;
+};
+
+/**
+ * @method
+ * @desc Set the start and end vector
+ * @param {Vector3} start - The start value
+ * @param {Vector3} end   - The end value
+ * @returns {ut.tween.Tweener} self
+ */
+ut.tween.Tweener.prototype.setVector3 = function(start, end) {
+    var c = this.entity.getOrAddComponent(ut.tween.TweenVector3);
+    c.setStart(start);
+    c.setEnd(end);
+    return this;
+};
+
+/**
+ * @method
+ * @desc Set the start and end color
+ * @param {Color} start - The start value
+ * @param {Color} end   - The end value
+ * @returns {ut.tween.Tweener} self
+ */
+ut.tween.Tweener.prototype.setColor = function(start, end) {
+    var c = this.entity.getOrAddComponent(ut.tween.TweenColor);
+    c.setStart(start);
+    c.setEnd(end);
+    return this;
+};
+
+/**
+ * @method
+ * @desc Creates a new sequence with self (enqueued) and the given tween (enqueued)
+ * @param {ut.tween.Tween} tween - The tween to chain
+ * @returns {ut.tween.Sequence} The newly created sequence
+ */
+ut.tween.Tweener.prototype.then = function(tween) {
+    return Tween.sequence().then(this).then(tween);
+};
+
+/**
+ * @method
+ * @desc Creates a new sequence with self (enqueued) and the given tween (parallelized)
+ * @param {ut.tween.Tween} tween - The tween to chain
+ * @returns {ut.tween.Sequence} The newly created sequence
+ */
+ut.tween.Tweener.prototype.and = function(tween) {
+    return Tween.sequence().then(this).and(tween);
+};
+
+/**
+ * @type {ut.tween.TweenService}
+ * @desc Singleton tween instance
+ * @tutorial 3_ut.tween.GettingStarted
+ */
+var Tween = new ut.tween.TweenService();
+
+/**
+ * Moves the transform to {position}
+ */
+ut.Core2D.Transform.prototype.tweenLocalPosition = function(position){
+    var entity = new ut.Entity(world.ptr, this._e);
+    return Tween.create()
+                .setTarget(entity, ut.Core2D.Transform, 'localPosition')
+                .setVector3(this.localPosition(), position);
+};
+
+/**
+ * Moves the transform.localPosition.x to {value}
+ */
+ut.Core2D.Transform.prototype.tweenLocalX = function(value){
+    var entity = new ut.Entity(world.ptr, this._e);
+    return Tween.create()
+                .setTarget(entity, ut.Core2D.Transform, 'localPosition.x')
+                .setFloat(this.localPosition().x, value);
+};
+
+/**
+ * Moves the transform.localPosition.y to {value}
+ */
+ut.Core2D.Transform.prototype.tweenLocalY = function(value){
+    var entity = new ut.Entity(world.ptr, this._e);
+    return Tween.create()
+                .setTarget(entity, ut.Core2D.Transform, 'localPosition.y')
+                .setFloat(this.localPosition().y, value);
+};
+
+/**
+ * Rotates the transform to {rotation}
+ */
+ut.Core2D.Transform.prototype.tweenLocalRotation = function(rotation) {
+    throw 'tweenLocalRotation not implemented';
+};
+
+/**
+ * Scales the transform to {scale}
+ */
+ut.Core2D.Transform.prototype.tweenLocalScale = function(scale) {
+    var entity = new ut.Entity(world.ptr, this._e);
+    return Tween.create()
+                .setTarget(entity, ut.Core2D.Transform, 'localScale')
+                .setVector3(this.localScale(), scale, true);
+};
+
+/**
+ * @method
+ * @desc Tweens the given property from start to end
+ * @param {string} property - Property name path
+ * @param {object} start - Start value
+ * @param {object} end - End value
+ * @returns {ut.tween.Tween}
+ * @example transform.tween('localPosition.x', 0, 10);
+ * @tutorial 3_ut.tween.GettingStarted
+ */
+ut.Component.prototype.tween = function(property, start, end) {
+    var entity = new ut.Entity(world.ptr, this._e);
+    var ctype = Object.getPrototypeOf(this).constructor;
+
+    var tween = Tween.create()
+                     .setTarget(entity, ctype, property)
+                     .play();
+
+    // @todo use rtti to determine fieldType and fieldOffset
+    var component = entity.getComponent(ctype);
+    var e = property.split('.');
+    
+    var value = e.reduce(function (v, p) {
+        return v[p];
+    }, component[e.shift()]());
+
+    // @todo assert that start and end match the property being tweened
+    switch (typeof(value)) {
+        case "number":
+            // @hack We have no idea the real type for this number
+            // {uint8} {int32} {float32} etc. assume float32 for now
+            tween.setFloat(start, end);
+            break;
+
+        case "object":
+            var type = Object.getPrototypeOf(value).constructor;
+
+            switch (type) {
+                case Vector3:
+                    tween.setVector3(start, end);
+                    break;
+                case ut.Core2D.Color:
+                    tween.setColor(start, end);
+                    break;
+                default:
+                    throw 'tween: unsupported property type \'' + type.name + '\'';
+            }
+            break;
+    }
+
+    return tween;
+};

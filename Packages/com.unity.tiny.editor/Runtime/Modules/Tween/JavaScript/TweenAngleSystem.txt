@@ -1,0 +1,15 @@
+var t = tweentime.interpolation();
+var target = tweentarget.target();
+var origin = tweenangle.origin();
+var radius = tweenangle.radius();
+var start = tweenangle.start();
+var end = tweenangle.end();
+var transform = target.getComponent(ut.Core2D.Transform);
+
+var angle = start + (end - start) * t;
+var rad = angle * Math.PI / 180;
+
+var position = transform.position();
+position.x = origin.x + radius * Math.cos(rad);
+position.y = origin.y + radius * Math.sin(rad);
+transform.setPosition(position)

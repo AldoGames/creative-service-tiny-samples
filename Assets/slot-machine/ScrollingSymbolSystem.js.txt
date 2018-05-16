@@ -1,0 +1,22 @@
+
+// scroll the symbols by the speed set my the column that owns these objects
+
+var localPosition = transform.localPosition();
+localPosition.y -= scrollingsymbol.currentScrollSpeed() * sched.deltaTime();
+
+// if we go off the bottom, recycle to the top
+if(localPosition.y < scrollingsymbol.offscreenValueY())
+{
+    localPosition.y += scrollingsymbol.positionResetAmount();
+}
+
+// if we are in the middle, then it is a valid place to stop
+if(localPosition.y > -.1 && localPosition.y < .1)
+{
+	scrollingsymbol.setIsAtStoppingPoint(true);
+}else
+{
+	scrollingsymbol.setIsAtStoppingPoint(false);
+}
+
+transform.setLocalPosition(localPosition);

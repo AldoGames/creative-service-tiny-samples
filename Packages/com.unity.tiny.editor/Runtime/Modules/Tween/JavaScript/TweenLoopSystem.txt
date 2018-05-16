@@ -1,0 +1,27 @@
+var time = tweentime.time();
+var duration = tweentime.duration();
+
+var loopType = tweenloop.loopType();
+var loopIndex = tweenloop.loopIndex();
+var loopCount = tweenloop.loopCount();
+
+// tween has finished and we should loop
+if (time >= duration && (loopCount == -1 || loopIndex < loopCount)) {
+
+    switch (loopType) {
+        case ut.tween.LoopType.None:
+            return;
+        case ut.tween.LoopType.Restart:
+            break;
+        case ut.tween.LoopType.PingPong:
+            tweentime.setReverse(!tweentime.reverse());
+            break;
+    }
+
+    // increment loop index
+    tweenloop.setLoopIndex(loopIndex + 1);
+
+    // restart the tween
+    tweentime.setTime(0);
+    tweentime.setInterpolation(0);
+}
