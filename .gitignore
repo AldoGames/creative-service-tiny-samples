@@ -48,7 +48,12 @@ Documentation/ApiDocs/**
 .vs/
 /Assets/UTinyTemp/
 /Assets/UTinyTemp.meta
-/Assets/UTinyTemp/
+/Assets/dragon-match/UTinyTemp/
+/Assets/dragon-match/UTinyTemp.meta
+/Assets/slot-machine/UTinyTemp/
+/Assets/slot-machine/UTinyTemp.meta
+/Assets/dice-roller/UTinyTemp/
+/Assets/dice-roller/UTinyTemp.meta
 /TinyBugReport/
 node_modules/
 obj/

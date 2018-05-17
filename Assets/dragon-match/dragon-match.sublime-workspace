@@ -91,55 +91,28 @@
 			"file": "JavaScript/DestroyMatchSystem.js.txt",
 			"settings":
 			{
-				"buffer_size": 2879,
+				"buffer_size": 2824,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "DragonService.js.txt",
+			"file": "JavaScript/GemDragSystem.js.txt",
 			"settings":
 			{
-				"buffer_size": 833,
+				"buffer_size": 3470,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "DragonSystem.js.txt",
+			"contents": "Searching 77 files for \"GemType\"\n\n/Users/allensanderlin/projects/dragon-match/Assets/UTiny.Demo.DragonMatch.utproject:\n   59      ],\n   60      \"Enums\": [\n   61:         { \"Id\": \"e9081c3116e04fac9a0c5902d5768392\", \"Name\": \"GemType\" }\n   62      ],\n   63      \"EntityGroups\": [\n   ..\n   93          \"Id\": \"de62da0c96c24f9f82f609c5a4e45518\",\n   94          \"Name\": \"type\",\n   95:         \"FieldType\": { \"Id\": \"e9081c3116e04fac9a0c5902d5768392\", \"Name\": \"GemType\" }\n   96      }, {\n   97          \"Id\": \"fda9d789fdda43bf8bec0f9953bffb95\",\n   ..\n  311      \"$TypeId\": 3,\n  312      \"Id\": \"e9081c3116e04fac9a0c5902d5768392\",\n  313:     \"Name\": \"GemType\",\n  314      \"TypeCode\": \"Enum\",\n  315      \"BaseType\": { \"Id\": \"9633c95a0a68473682f09ed6a01194b4\", \"Name\": \"Int32\" },\n  ...\n  332      }],\n  333      \"DefaultValue\": {\n  334:         \"Type\": { \"Id\": \"e9081c3116e04fac9a0c5902d5768392\", \"Name\": \"GemType\" },\n  335          \"Properties\": {\n  336              \"Red\": 0,\n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/BoardService.js.txt:\n   14   * @desc Creates a new instance of a gem and sets up the intial state\n   15   * @param {game.Cell} cell\n   16:  * @param {game.GemType} type\n   17   * @returns {ut.Entity}\n   18   */\n   ..\n   37  \n   38      switch (type) {\n   39:         case game.GemType.Red:\n   40              color = new ut.Core2D.Color(1, 0, 0, 1);\n   41              break;\n   42:         case game.GemType.Green:\n   43              color = new ut.Core2D.Color(0, 1, 0, 1);\n   44              break;\n   45:         case game.GemType.Blue:\n   46              color = new ut.Core2D.Color(0, 0, 1, 1);\n   47              break;\n   48:         case game.GemType.Purple:\n   49              color = new ut.Core2D.Color(1, 0, 1, 1);\n   50              break;\n   ..\n   99   * @desc Returns all gems that match the given type along the x-axis for the given cell\n  100   * @param {game.Cell} cell\n  101:  * @param {game.GemType} type\n  102   * @returns {ut.Entity[]} entities\n  103   */\n  ...\n  130   * @desc Returns all entities that match the given type along the y-axis for the given cell\n  131   * @param {game.Cell} cell\n  132:  * @param {game.GemType} type\n  133   * @returns {ut.Entity[]} entities\n  134   */\n  ...\n  161   * @desc Gets all entities that are a 'match' with the given cell and type using the given thresold (e.g. 3 for match3)\n  162   * @param {game.Cell} cell\n  163:  * @param {game.GemType} type\n  164   * @param {int32} threshold\n  165   * @returns {ut.Entity[]} entities\n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/DestroyMatchSystem.js.txt:\n   28  \n   29      switch (gem.getComponent(game.Gem).type()) {\n   30:         case game.GemType.Red:\n   31              color = new ut.Core2D.Color(1, 0, 0, 1);\n   32              break;\n   33:         case game.GemType.Green:\n   34              color = new ut.Core2D.Color(0, 1, 0, 1);\n   35              break;\n   36:         case game.GemType.Blue:\n   37              color = new ut.Core2D.Color(0, 0, 1, 1);\n   38              break;\n   39:         case game.GemType.Purple:\n   40              color = new ut.Core2D.Color(.4, .6, .7, 1);\n   41              break;\n\n16 matches across 3 files\n\n\nSearching 77 files for \"GemType\"\n\n/Users/allensanderlin/projects/dragon-match/Assets/UTiny.Demo.DragonMatch.utproject:\n   59      ],\n   60      \"Enums\": [\n   61:         { \"Id\": \"e9081c3116e04fac9a0c5902d5768392\", \"Name\": \"GemType\" }\n   62      ],\n   63      \"EntityGroups\": [\n   ..\n   93          \"Id\": \"de62da0c96c24f9f82f609c5a4e45518\",\n   94          \"Name\": \"type\",\n   95:         \"FieldType\": { \"Id\": \"e9081c3116e04fac9a0c5902d5768392\", \"Name\": \"GemType\" }\n   96      }, {\n   97          \"Id\": \"fda9d789fdda43bf8bec0f9953bffb95\",\n   ..\n  311      \"$TypeId\": 3,\n  312      \"Id\": \"e9081c3116e04fac9a0c5902d5768392\",\n  313:     \"Name\": \"GemType\",\n  314      \"TypeCode\": \"Enum\",\n  315      \"BaseType\": { \"Id\": \"9633c95a0a68473682f09ed6a01194b4\", \"Name\": \"Int32\" },\n  ...\n  332      }],\n  333      \"DefaultValue\": {\n  334:         \"Type\": { \"Id\": \"e9081c3116e04fac9a0c5902d5768392\", \"Name\": \"GemType\" },\n  335          \"Properties\": {\n  336              \"Red\": 0,\n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/BoardService.js.txt:\n   14   * @desc Creates a new instance of a gem and sets up the intial state\n   15   * @param {game.Cell} cell\n   16:  * @param {game.GemType} type\n   17   * @returns {ut.Entity}\n   18   */\n   ..\n   37  \n   38      switch (type) {\n   39:         case game.GemType.Red:\n   40              color = new ut.Core2D.Color(1, 0, 0, 1);\n   41              break;\n   42:         case game.GemType.Green:\n   43              color = new ut.Core2D.Color(0, 1, 0, 1);\n   44              break;\n   45:         case game.GemType.Blue:\n   46              color = new ut.Core2D.Color(0, 0, 1, 1);\n   47              break;\n   48:         case game.GemType.Purple:\n   49              color = new ut.Core2D.Color(1, 0, 1, 1);\n   50              break;\n   ..\n   99   * @desc Returns all gems that match the given type along the x-axis for the given cell\n  100   * @param {game.Cell} cell\n  101:  * @param {game.GemType} type\n  102   * @returns {ut.Entity[]} entities\n  103   */\n  ...\n  130   * @desc Returns all entities that match the given type along the y-axis for the given cell\n  131   * @param {game.Cell} cell\n  132:  * @param {game.GemType} type\n  133   * @returns {ut.Entity[]} entities\n  134   */\n  ...\n  161   * @desc Gets all entities that are a 'match' with the given cell and type using the given thresold (e.g. 3 for match3)\n  162   * @param {game.Cell} cell\n  163:  * @param {game.GemType} type\n  164   * @param {int32} threshold\n  165   * @returns {ut.Entity[]} entities\n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/DestroyMatchSystem.js.txt:\n   28  \n   29      switch (gem.getComponent(game.Gem).type()) {\n   30:         case game.GemType.Swirl:\n   31              color = new ut.Core2D.Color(1, 0, 0, 1);\n   32              break;\n   33:         case game.GemType.Circle:\n   34              color = new ut.Core2D.Color(0, 1, 0, 1);\n   35              break;\n   36:         case game.GemType.D20:\n   37              color = new ut.Core2D.Color(0, 0, 1, 1);\n   38              break;\n   39:         case game.GemType.Star:\n   40              color = new ut.Core2D.Color(.4, .6, .7, 1);\n   41              break;\n\n16 matches across 3 files\n\n\nSearching 79 files for \"getDragonTransform\"\n\n/Users/allensanderlin/projects/dragon-match/Assets/DragonService.js.txt:\n    6  game.DragonService.prototype.constructor = game.DragonService;\n    7  \n    8: game.DragonService.prototype.getDragonTransform = function() {\n    9      return world.getByName('Dragon').getComponent(ut.Core2D.Transform);\n   10  }\n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/BoardService.js.txt:\n    6  game.BoardService.prototype.constructor = game.BoardService;\n    7  \n    8: game.BoardService.prototype.getDragonTransform = function() {\n    9      return world.getByName('Dragon').getComponent(ut.Core2D.Transform);\n   10  }\n\n2 matches across 2 files\n\n\nSearching 79 files for \"createGem\"\n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/BoardService.js.txt:\n   13   * @returns {ut.Entity}\n   14   */\n   15: game.BoardService.prototype.createGem = function (cell, type) {\n   16      var group = ut.Flow.Service.instantiate(\"game.GemPrefab\");\n   17      var entity = group.root;\n   ..\n   76                  // @todo select a type that will not trigger a match\n   77  \n   78:                 var entity = Board.createGem(cell, type);\n   79  \n   80                  entity.getComponent(game.Gem).setAnimating(true);\n   ..\n  360                  var type = getRandomInt(0, 3);\n  361  \n  362:                 var entity = Board.createGem(cell, type);\n  363                  var transform = entity.getComponent(ut.Core2D.Transform);\n  364  \n\n3 matches in 1 file\n\n\nSearching 84 files for \"prefab\"\"\n\n/Users/allensanderlin/projects/dragon-match/Assets/UTiny.Demo.DragonMatch.utproject:\n   64      \"EntityGroups\": [\n   65          { \"Id\": \"4106bb38df6246028c88eb73d48d17ab\", \"Name\": \"Level_Base\" },\n   66:         { \"Id\": \"85cd58012b1a44adb954d3453e2fae31\", \"Name\": \"GemPrefab\" },\n   67:         { \"Id\": \"a511468a78aa4770a65ed5fbf90998eb\", \"Name\": \"ParticlePrefab\" },\n   68:         { \"Id\": \"4dac95cd0810483ea6cbe6c6ec664271\", \"Name\": \"SlashPrefab\" },\n   69          { \"Id\": \"321ebfd4335744608cf0bfdc681f588d\", \"Name\": \"VictoryGroup\" }\n   70      ],\n   ..\n  729      \"$TypeId\": 4,\n  730      \"Id\": \"85cd58012b1a44adb954d3453e2fae31\",\n  731:     \"Name\": \"GemPrefab\",\n  732      \"Entities\": [\n  733          { \"$TypeId\": 9, \"Id\": \"f2c8cc2abd5c4c60b3327074979c8cc3\", \"Name\": \"Gem\" }\n  ...\n  806      \"$TypeId\": 4,\n  807      \"Id\": \"a511468a78aa4770a65ed5fbf90998eb\",\n  808:     \"Name\": \"ParticlePrefab\",\n  809      \"Entities\": [\n  810          { \"$TypeId\": 9, \"Id\": \"03565d60e01c4a3aa89b0ee2e0b03772\", \"Name\": \"ParticleEmitter\" },\n  ...\n  927      \"$TypeId\": 4,\n  928      \"Id\": \"4dac95cd0810483ea6cbe6c6ec664271\",\n  929:     \"Name\": \"SlashPrefab\",\n  930      \"Entities\": [\n  931          { \"$TypeId\": 9, \"Id\": \"fa09cbde36074ecbb4a890f765e4cc0c\", \"Name\": \"SlashEffect\" }\n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/BoardService.js.txt:\n   14   */\n   15  game.BoardService.prototype.createGem = function (cell, type) {\n   16:     var group = ut.Flow.Service.instantiate(\"game.GemPrefab\");\n   17      var entity = group.root;\n   18  \n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/DestroyMatchSystem.js.txt:\n   18  \n   19      // trigger particle effect\n   20:     var particleGroup = ut.Flow.Service.instantiate(\"game.ParticlePrefab\");\n   21      var particleEmitterEntity = particleGroup.root;\n   22      var particleTransform = particleEmitterEntity.getComponent(ut.Core2D.Transform);\n   ..\n   65  function spawnSlashEffect(targetPos)\n   66  {\n   67:     var slashGroup = ut.Flow.Service.instantiate(\"game.SlashPrefab\");\n   68      var slashTransform = slashGroup.root.getComponent(ut.Core2D.Transform);\n   69  \n\n9 matches across 3 files\n\n\nSearching 77 files for \"isanimating\"\n\n0 matches\n\nSearching 77 files for \"animating\"\n\n/Users/allensanderlin/projects/all-samples/Assets/dragon-match/UTiny.Demo.DragonMatch.utproject:\n  100      }, {\n  101          \"Id\": \"fda9d789fdda43bf8bec0f9953bffb95\",\n  102:         \"Name\": \"animating\",\n  103          \"FieldType\": { \"Id\": \"2b477f505af74487b7092b5617d88d3f\", \"Name\": \"Boolean\" }\n  104      }, {\n  ...\n  119          \"Type\": { \"Id\": \"31f9ea2e09d245118f7494b9975a4b15\", \"Name\": \"Gem\" },\n  120          \"Properties\": {\n  121:             \"animating\": false\n  122          }\n  123      }\n\n/Users/allensanderlin/projects/all-samples/Assets/dragon-match/JavaScript/BoardService.js.txt:\n   20      var gem = entity.getComponent(game.Gem);\n   21      gem.setType(type);\n   22:     gem.setAnimating(false);\n   23  \n   24      // node setup\n   ..\n   78                  var entity = Board.createGem(cell, type);\n   79  \n   80:                 entity.getComponent(game.Gem).setAnimating(true);\n   81                  entity.getComponent(ut.Core2D.Transform).tween(\"localScale\", new Vector3(0, 0, 0), entity.getComponent(ut.Core2D.Transform).localScale())\n   82                                                .setDuration(0.5)\n   83                                                .setEase(ut.tween.EaseType.EaseOutBack)\n   84                                                .onComplete(function(e) {\n   85:                                                   e.getComponent(game.Gem).setAnimating(false); \n   86                                                }, entity);\n   87              }\n   ..\n  105          if (null == entity) { break; } \n  106          var gem = entity.getComponent(game.Gem);\n  107:         if (gem.animating()) { break; }\n  108          if (gem.type() != type) { break; }\n  109          entities.push(entity);\n  ...\n  114          if (null == entity) { break; } \n  115          var gem = entity.getComponent(game.Gem);\n  116:         if (gem.animating()) { break; }\n  117          if (gem.type() != type) { break; }\n  118          entities.push(entity);\n  ...\n  136          if (null == entity) { break; } \n  137          var gem = entity.getComponent(game.Gem);\n  138:         if (gem.animating()) { break; }\n  139          if (gem.type() != type) { break; }\n  140          entities.push(entity);\n  ...\n  145          if (null == entity) { break; } \n  146          var gem = entity.getComponent(game.Gem);\n  147:         if (gem.animating()) { break; }\n  148          if (gem.type() != type) { break; }\n  149          entities.push(entity);\n  ...\n  263                  var gem = entity.getComponent(game.Gem);\n  264  \n  265:                 // Ignore animating gems\n  266:                 if (gem.animating()) {\n  267                      continue;\n  268                  }\n  ...\n  329                  var g = node.getComponent(game.Gem);\n  330  \n  331:                 if (g.animating()) {\n  332                      break;\n  333                  }\n  ...\n  341                   .setEase(ut.tween.EaseType.EaseOutBounce)\n  342                   .onComplete(function(e) {\n  343:                     e.getComponent(game.Gem).setAnimating(false);\n  344                  }, node);\n  345  \n  346:                 g.setAnimating(true);\n  347  \n  348                  var n = node.getComponent(game.CellGraphNode);\n  ...\n  373                  var end = Graph.getPosition(cell);\n  374  \n  375:                 entity.getComponent(game.Gem).setAnimating(true);\n  376                  transform.tween(\"localPosition\", start, end)\n  377                           .setDuration(0.5)\n  378                           .onComplete(function(e) {\n  379:                              e.getComponent(game.Gem).setAnimating(false);\n  380                           }, entity);\n  381              }\n\n/Users/allensanderlin/projects/all-samples/Assets/dragon-match/JavaScript/DestroyMatchSystem.js.txt:\n    4  \n    5      var gem = gems[i];\n    6:     gem.getComponent(game.Gem).setAnimating(true);\n    7  \n    8      var gemTransform = gem.getComponent(ut.Core2D.Transform);\n\n/Users/allensanderlin/projects/all-samples/Assets/dragon-match/JavaScript/GemDragSystem.js.txt:\n   66  \n   67                  // animate them to their new positions\n   68:                 entity.getComponent(game.Gem).setAnimating(true);\n   69:                 nextCellEntity.getComponent(game.Gem).setAnimating(true);\n   70  \n   71                  transform.tween(\"localPosition\", transform.localPosition(), Graph.getPosition(node.cell()))\n   ..\n   73                   .setEase(ut.tween.EaseType.EaseOutBounce)\n   74                   .onComplete(function(e) {\n   75:                     e.setAnimating(false);\n   76                  }, gem);\n   77  \n   ..\n   82                   .setEase(ut.tween.EaseType.EaseOutBounce)\n   83                   .onComplete(function(e) {\n   84:                     e.setAnimating(false);\n   85                  }, nextCellGem);\n   86              }\n\n21 matches across 4 files\n",
 			"settings":
 			{
-				"buffer_size": 467,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "Searching 77 files for \"GemType\"\n\n/Users/allensanderlin/projects/dragon-match/Assets/UTiny.Demo.DragonMatch.utproject:\n   59      ],\n   60      \"Enums\": [\n   61:         { \"Id\": \"e9081c3116e04fac9a0c5902d5768392\", \"Name\": \"GemType\" }\n   62      ],\n   63      \"EntityGroups\": [\n   ..\n   93          \"Id\": \"de62da0c96c24f9f82f609c5a4e45518\",\n   94          \"Name\": \"type\",\n   95:         \"FieldType\": { \"Id\": \"e9081c3116e04fac9a0c5902d5768392\", \"Name\": \"GemType\" }\n   96      }, {\n   97          \"Id\": \"fda9d789fdda43bf8bec0f9953bffb95\",\n   ..\n  311      \"$TypeId\": 3,\n  312      \"Id\": \"e9081c3116e04fac9a0c5902d5768392\",\n  313:     \"Name\": \"GemType\",\n  314      \"TypeCode\": \"Enum\",\n  315      \"BaseType\": { \"Id\": \"9633c95a0a68473682f09ed6a01194b4\", \"Name\": \"Int32\" },\n  ...\n  332      }],\n  333      \"DefaultValue\": {\n  334:         \"Type\": { \"Id\": \"e9081c3116e04fac9a0c5902d5768392\", \"Name\": \"GemType\" },\n  335          \"Properties\": {\n  336              \"Red\": 0,\n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/BoardService.js.txt:\n   14   * @desc Creates a new instance of a gem and sets up the intial state\n   15   * @param {game.Cell} cell\n   16:  * @param {game.GemType} type\n   17   * @returns {ut.Entity}\n   18   */\n   ..\n   37  \n   38      switch (type) {\n   39:         case game.GemType.Red:\n   40              color = new ut.Core2D.Color(1, 0, 0, 1);\n   41              break;\n   42:         case game.GemType.Green:\n   43              color = new ut.Core2D.Color(0, 1, 0, 1);\n   44              break;\n   45:         case game.GemType.Blue:\n   46              color = new ut.Core2D.Color(0, 0, 1, 1);\n   47              break;\n   48:         case game.GemType.Purple:\n   49              color = new ut.Core2D.Color(1, 0, 1, 1);\n   50              break;\n   ..\n   99   * @desc Returns all gems that match the given type along the x-axis for the given cell\n  100   * @param {game.Cell} cell\n  101:  * @param {game.GemType} type\n  102   * @returns {ut.Entity[]} entities\n  103   */\n  ...\n  130   * @desc Returns all entities that match the given type along the y-axis for the given cell\n  131   * @param {game.Cell} cell\n  132:  * @param {game.GemType} type\n  133   * @returns {ut.Entity[]} entities\n  134   */\n  ...\n  161   * @desc Gets all entities that are a 'match' with the given cell and type using the given thresold (e.g. 3 for match3)\n  162   * @param {game.Cell} cell\n  163:  * @param {game.GemType} type\n  164   * @param {int32} threshold\n  165   * @returns {ut.Entity[]} entities\n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/DestroyMatchSystem.js.txt:\n   28  \n   29      switch (gem.getComponent(game.Gem).type()) {\n   30:         case game.GemType.Red:\n   31              color = new ut.Core2D.Color(1, 0, 0, 1);\n   32              break;\n   33:         case game.GemType.Green:\n   34              color = new ut.Core2D.Color(0, 1, 0, 1);\n   35              break;\n   36:         case game.GemType.Blue:\n   37              color = new ut.Core2D.Color(0, 0, 1, 1);\n   38              break;\n   39:         case game.GemType.Purple:\n   40              color = new ut.Core2D.Color(.4, .6, .7, 1);\n   41              break;\n\n16 matches across 3 files\n\n\nSearching 77 files for \"GemType\"\n\n/Users/allensanderlin/projects/dragon-match/Assets/UTiny.Demo.DragonMatch.utproject:\n   59      ],\n   60      \"Enums\": [\n   61:         { \"Id\": \"e9081c3116e04fac9a0c5902d5768392\", \"Name\": \"GemType\" }\n   62      ],\n   63      \"EntityGroups\": [\n   ..\n   93          \"Id\": \"de62da0c96c24f9f82f609c5a4e45518\",\n   94          \"Name\": \"type\",\n   95:         \"FieldType\": { \"Id\": \"e9081c3116e04fac9a0c5902d5768392\", \"Name\": \"GemType\" }\n   96      }, {\n   97          \"Id\": \"fda9d789fdda43bf8bec0f9953bffb95\",\n   ..\n  311      \"$TypeId\": 3,\n  312      \"Id\": \"e9081c3116e04fac9a0c5902d5768392\",\n  313:     \"Name\": \"GemType\",\n  314      \"TypeCode\": \"Enum\",\n  315      \"BaseType\": { \"Id\": \"9633c95a0a68473682f09ed6a01194b4\", \"Name\": \"Int32\" },\n  ...\n  332      }],\n  333      \"DefaultValue\": {\n  334:         \"Type\": { \"Id\": \"e9081c3116e04fac9a0c5902d5768392\", \"Name\": \"GemType\" },\n  335          \"Properties\": {\n  336              \"Red\": 0,\n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/BoardService.js.txt:\n   14   * @desc Creates a new instance of a gem and sets up the intial state\n   15   * @param {game.Cell} cell\n   16:  * @param {game.GemType} type\n   17   * @returns {ut.Entity}\n   18   */\n   ..\n   37  \n   38      switch (type) {\n   39:         case game.GemType.Red:\n   40              color = new ut.Core2D.Color(1, 0, 0, 1);\n   41              break;\n   42:         case game.GemType.Green:\n   43              color = new ut.Core2D.Color(0, 1, 0, 1);\n   44              break;\n   45:         case game.GemType.Blue:\n   46              color = new ut.Core2D.Color(0, 0, 1, 1);\n   47              break;\n   48:         case game.GemType.Purple:\n   49              color = new ut.Core2D.Color(1, 0, 1, 1);\n   50              break;\n   ..\n   99   * @desc Returns all gems that match the given type along the x-axis for the given cell\n  100   * @param {game.Cell} cell\n  101:  * @param {game.GemType} type\n  102   * @returns {ut.Entity[]} entities\n  103   */\n  ...\n  130   * @desc Returns all entities that match the given type along the y-axis for the given cell\n  131   * @param {game.Cell} cell\n  132:  * @param {game.GemType} type\n  133   * @returns {ut.Entity[]} entities\n  134   */\n  ...\n  161   * @desc Gets all entities that are a 'match' with the given cell and type using the given thresold (e.g. 3 for match3)\n  162   * @param {game.Cell} cell\n  163:  * @param {game.GemType} type\n  164   * @param {int32} threshold\n  165   * @returns {ut.Entity[]} entities\n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/DestroyMatchSystem.js.txt:\n   28  \n   29      switch (gem.getComponent(game.Gem).type()) {\n   30:         case game.GemType.Swirl:\n   31              color = new ut.Core2D.Color(1, 0, 0, 1);\n   32              break;\n   33:         case game.GemType.Circle:\n   34              color = new ut.Core2D.Color(0, 1, 0, 1);\n   35              break;\n   36:         case game.GemType.D20:\n   37              color = new ut.Core2D.Color(0, 0, 1, 1);\n   38              break;\n   39:         case game.GemType.Star:\n   40              color = new ut.Core2D.Color(.4, .6, .7, 1);\n   41              break;\n\n16 matches across 3 files\n\n\nSearching 79 files for \"getDragonTransform\"\n\n/Users/allensanderlin/projects/dragon-match/Assets/DragonService.js.txt:\n    6  game.DragonService.prototype.constructor = game.DragonService;\n    7  \n    8: game.DragonService.prototype.getDragonTransform = function() {\n    9      return world.getByName('Dragon').getComponent(ut.Core2D.Transform);\n   10  }\n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/BoardService.js.txt:\n    6  game.BoardService.prototype.constructor = game.BoardService;\n    7  \n    8: game.BoardService.prototype.getDragonTransform = function() {\n    9      return world.getByName('Dragon').getComponent(ut.Core2D.Transform);\n   10  }\n\n2 matches across 2 files\n\n\nSearching 79 files for \"createGem\"\n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/BoardService.js.txt:\n   13   * @returns {ut.Entity}\n   14   */\n   15: game.BoardService.prototype.createGem = function (cell, type) {\n   16      var group = ut.Flow.Service.instantiate(\"game.GemPrefab\");\n   17      var entity = group.root;\n   ..\n   76                  // @todo select a type that will not trigger a match\n   77  \n   78:                 var entity = Board.createGem(cell, type);\n   79  \n   80                  entity.getComponent(game.Gem).setAnimating(true);\n   ..\n  360                  var type = getRandomInt(0, 3);\n  361  \n  362:                 var entity = Board.createGem(cell, type);\n  363                  var transform = entity.getComponent(ut.Core2D.Transform);\n  364  \n\n3 matches in 1 file\n\n\nSearching 84 files for \"prefab\"\"\n\n/Users/allensanderlin/projects/dragon-match/Assets/UTiny.Demo.DragonMatch.utproject:\n   64      \"EntityGroups\": [\n   65          { \"Id\": \"4106bb38df6246028c88eb73d48d17ab\", \"Name\": \"Level_Base\" },\n   66:         { \"Id\": \"85cd58012b1a44adb954d3453e2fae31\", \"Name\": \"GemPrefab\" },\n   67:         { \"Id\": \"a511468a78aa4770a65ed5fbf90998eb\", \"Name\": \"ParticlePrefab\" },\n   68:         { \"Id\": \"4dac95cd0810483ea6cbe6c6ec664271\", \"Name\": \"SlashPrefab\" },\n   69          { \"Id\": \"321ebfd4335744608cf0bfdc681f588d\", \"Name\": \"VictoryGroup\" }\n   70      ],\n   ..\n  729      \"$TypeId\": 4,\n  730      \"Id\": \"85cd58012b1a44adb954d3453e2fae31\",\n  731:     \"Name\": \"GemPrefab\",\n  732      \"Entities\": [\n  733          { \"$TypeId\": 9, \"Id\": \"f2c8cc2abd5c4c60b3327074979c8cc3\", \"Name\": \"Gem\" }\n  ...\n  806      \"$TypeId\": 4,\n  807      \"Id\": \"a511468a78aa4770a65ed5fbf90998eb\",\n  808:     \"Name\": \"ParticlePrefab\",\n  809      \"Entities\": [\n  810          { \"$TypeId\": 9, \"Id\": \"03565d60e01c4a3aa89b0ee2e0b03772\", \"Name\": \"ParticleEmitter\" },\n  ...\n  927      \"$TypeId\": 4,\n  928      \"Id\": \"4dac95cd0810483ea6cbe6c6ec664271\",\n  929:     \"Name\": \"SlashPrefab\",\n  930      \"Entities\": [\n  931          { \"$TypeId\": 9, \"Id\": \"fa09cbde36074ecbb4a890f765e4cc0c\", \"Name\": \"SlashEffect\" }\n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/BoardService.js.txt:\n   14   */\n   15  game.BoardService.prototype.createGem = function (cell, type) {\n   16:     var group = ut.Flow.Service.instantiate(\"game.GemPrefab\");\n   17      var entity = group.root;\n   18  \n\n/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/DestroyMatchSystem.js.txt:\n   18  \n   19      // trigger particle effect\n   20:     var particleGroup = ut.Flow.Service.instantiate(\"game.ParticlePrefab\");\n   21      var particleEmitterEntity = particleGroup.root;\n   22      var particleTransform = particleEmitterEntity.getComponent(ut.Core2D.Transform);\n   ..\n   65  function spawnSlashEffect(targetPos)\n   66  {\n   67:     var slashGroup = ut.Flow.Service.instantiate(\"game.SlashPrefab\");\n   68      var slashTransform = slashGroup.root.getComponent(ut.Core2D.Transform);\n   69  \n\n9 matches across 3 files\n",
-			"settings":
-			{
-				"buffer_size": 10131,
+				"buffer_size": 15119,
 				"line_ending": "Unix",
 				"name": "Find Results",
 				"scratch": true
-			}
-		},
-		{
-			"file": "SlashEffectSystem.js.txt",
-			"settings":
-			{
-				"buffer_size": 198,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "ParticleEmitterSystem.js.txt",
-			"settings":
-			{
-				"buffer_size": 451,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
 			}
 		},
 		{
@@ -189,11 +162,15 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/allensanderlin/projects/dragon-match/Assets",
-		"/Users/allensanderlin/projects/dragon-match/Assets/JavaScript"
+		"/Users/allensanderlin/projects/all-samples/Assets/dragon-match",
+		"/Users/allensanderlin/projects/all-samples/Assets/dragon-match/JavaScript"
 	],
 	"file_history":
 	[
+		"/Users/allensanderlin/projects/all-samples/Assets/dragon-match/ParticleEmitterSystem.js.txt",
+		"/Users/allensanderlin/projects/all-samples/Assets/dragon-match/SlashEffectSystem.js.txt",
+		"/Users/allensanderlin/projects/all-samples/Assets/dragon-match/DragonSystem.js.txt",
+		"/Users/allensanderlin/projects/all-samples/Assets/dragon-match/DragonService.js.txt",
 		"/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/GraphService.txt",
 		"/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/GemDragSystem.js.txt",
 		"/Users/allensanderlin/projects/dragon-match/Assets/JavaScript/DestroyMatchSystem.js.txt",
@@ -238,6 +215,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"animating",
+			"isanimating",
 			"prefab\"",
 			"createGem",
 			"getDragonTransform",
@@ -275,7 +254,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -284,15 +263,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2879,
+						"buffer_size": 2824,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1823,
-								1823
+								0,
+								0
 							]
 						],
 						"settings":
@@ -302,75 +281,48 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 155.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "JavaScript/GemDragSystem.js.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3470,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1300,
+								1300
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Babel/JavaScript (Babel).tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 250.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "DragonService.js.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 833,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								737,
-								737
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Babel/JavaScript (Babel).tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
 					"buffer": 2,
-					"file": "DragonSystem.js.txt",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 467,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								465,
-								465
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Babel/JavaScript (Babel).tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10131,
+						"buffer_size": 15119,
 						"regions":
 						{
 							"match":
@@ -561,6 +513,90 @@
 									[
 										10004,
 										10011
+									],
+									[
+										10412,
+										10421
+									],
+									[
+										10673,
+										10682
+									],
+									[
+										10917,
+										10926
+									],
+									[
+										11103,
+										11112
+									],
+									[
+										11609,
+										11618
+									],
+									[
+										11846,
+										11855
+									],
+									[
+										12090,
+										12099
+									],
+									[
+										12334,
+										12343
+									],
+									[
+										12578,
+										12587
+									],
+									[
+										12801,
+										12810
+									],
+									[
+										12847,
+										12856
+									],
+									[
+										13027,
+										13036
+									],
+									[
+										13278,
+										13287
+									],
+									[
+										13365,
+										13374
+									],
+									[
+										13588,
+										13597
+									],
+									[
+										13845,
+										13854
+									],
+									[
+										14109,
+										14118
+									],
+									[
+										14426,
+										14435
+									],
+									[
+										14507,
+										14516
+									],
+									[
+										14801,
+										14810
+									],
+									[
+										15013,
+										15022
 									]
 								],
 								"scope": ""
@@ -569,8 +605,8 @@
 						"selection":
 						[
 							[
-								9701,
-								9701
+								10182,
+								10182
 							]
 						],
 						"settings":
@@ -578,7 +614,7 @@
 							"default_dir": "/Users/allensanderlin/projects/dragon-match/Assets/JavaScript",
 							"detect_indentation": false,
 							"line_numbers": false,
-							"output_tag": 5,
+							"output_tag": 7,
 							"result_base_dir": "",
 							"result_file_regex": "^([^ \t].*):$",
 							"result_line_regex": "^ +([0-9]+):",
@@ -586,70 +622,14 @@
 							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 3222.0,
+						"translation.y": 4050.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "SlashEffectSystem.js.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 198,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								152,
-								152
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Babel/JavaScript (Babel).tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "ParticleEmitterSystem.js.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 451,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								185,
-								202
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Babel/JavaScript (Babel).tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
+					"buffer": 3,
 					"file": "JavaScript/BoardService.js.txt",
 					"semi_transient": false,
 					"settings":
@@ -661,8 +641,8 @@
 						"selection":
 						[
 							[
-								7450,
-								7457
+								7828,
+								7828
 							]
 						],
 						"settings":
@@ -672,10 +652,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3280.0,
+						"translation.y": 3900.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
