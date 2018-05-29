@@ -54,6 +54,9 @@ Documentation/ApiDocs/**
 /Assets/slot-machine/UTinyTemp.meta
 /Assets/dice-roller/UTinyTemp/
 /Assets/dice-roller/UTinyTemp.meta
+/Assets/dice-roller/dice-roller.sublime-workspace
+/Assets/dragon-match/dragon-match.sublime-workspace
+/Assets/slot-machine/slot-machine.sublime-workspace
 /TinyBugReport/
 node_modules/
 obj/
