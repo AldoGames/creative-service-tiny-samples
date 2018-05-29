@@ -1,8 +1,6 @@
-
-if(velocity2d.velocity().length() < 20)
+var vel = velocity2d.velocity();
+if(vel.length() < 20)
 {
-	//velocity2d.setVelocity(new Vector2(0,0));
-
 	if(die.result() === 0)
 	{
 		var resultIndex = getRandomInt(0,die.resultFaces().length-1);
@@ -22,20 +20,23 @@ if(velocity2d.velocity().length() < 20)
 
 if(die.result() === 0)
 {
-	velocity2d.setVelocity(velocity2d.velocity().lerp(new Vector2(0,0), sched.deltaTime() * .2));
+	velocity2d.setVelocity(vel.lerp(new Vector2(0,0), sched.deltaTime() * .2));
 }else
 {
-	velocity2d.setVelocity(velocity2d.velocity().lerp(new Vector2(0,0), sched.deltaTime() * 2));
+	velocity2d.setVelocity(vel.lerp(new Vector2(0,0), sched.deltaTime() * 2));
 }
 
-var angle = Math.atan2(velocity2d.velocity().y, velocity2d.velocity().x) * (180/Math.PI) - 90;
-//var angle = die.targetRot();
+if(vel.length() > 0)
+{
+    // set the angle of the die to the direction of the die movement since that is how they are animated.
+    var angle = Math.atan2(vel.y, vel.x) * (180/Math.PI) - 90;
 
-// need to convert to rads for Quaternion().setFromEuler until it is switch to accept degrees 
-var radAngle = Math.PI*angle/180;
+    // need to convert to rads for Quaternion().setFromEuler until it is switched to accept degrees 
+    var radAngle = Math.PI*angle/180;
 
-var worldRotation = new Quaternion().setFromEuler(new ut.Math.Euler(0,0,radAngle));
-die.animEntity().getComponent(ut.Core2D.Transform).setWorldRotation(worldRotation);
+    var worldRotation = new Quaternion().setFromEuler(new ut.Math.Euler(0,0,radAngle));
+    die.animEntity().getComponent(ut.Core2D.Transform).setWorldRotation(worldRotation);
+}
 
 
 /**
