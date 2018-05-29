@@ -18,6 +18,7 @@
             "Embedded": true
         },
         "LocalHTTPServerPort": 9050,
+        "SingleFileHtml": true,
         "MemorySize": 16,
         "IncludeWSClient": true,
         "RunBabel": true

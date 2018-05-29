@@ -7,7 +7,6 @@
         "CanvasWidth": 1024,
         "CanvasHeight": 600,
         "CanvasAutoResize": true,
-        "BuildConfiguration": 2,
         "EmbedAssets": true,
         "DefaultTextureSettings": {
             "FormatType": 1,
@@ -20,14 +19,14 @@
             "Embedded": true,
             "IncludePreviewInDocumentation": true
         },
-        "Preview": true,
         "LocalHTTPServerPort": 9050,
         "SingleFileHtml": true,
         "MemorySize": 16,
         "IncludeWSClient": true,
         "RunBabel": true
     },
-    "Module": { "Id": "685f5f5d64494ffd8feea45de7d45695", "Name": "Main" }
+    "Module": { "Id": "685f5f5d64494ffd8feea45de7d45695", "Name": "Main" },
+    "Configuration": { "$TypeId": 9, "Id": "b30533b03a04435f9a718df3111e7d70", "Name": "Configuration" }
 },
 {
     "$TypeId": 2,
@@ -840,7 +839,7 @@
     }, {
         "Type": { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
         "Properties": {
-            "sprite": { "$TypeId": 10, "Guid": "592bbfc6f55e946dbb98fb26eebcaeab", "FileId": 21300000, "Type": 3 }
+            "sprite": { "$TypeId": 10 }
         }
     }]
 },
@@ -1162,4 +1161,18 @@
         { "Id": "b5907cf00b180b2af76f9af8c4d3408b", "Name": "Sprite2DRenderer" },
         { "Id": "10b758a472c3be3e0885538510d60803", "Name": "Transform" }
     ]
+},
+{
+    "$TypeId": 5,
+    "Id": "b30533b03a04435f9a718df3111e7d70",
+    "Name": "Configuration",
+    "Enabled": true,
+    "Components": [{
+        "Type": { "Id": "575fe161bc06950c954480d04c70c9ab", "Name": "DisplayInfo" },
+        "Properties": {
+            "width": 1024,
+            "height": 600,
+            "autoSizeToFrame": true
+        }
+    }]
 }]
