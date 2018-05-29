@@ -30,8 +30,6 @@ switch (gamemanager.state()) {
         	{
          		gamemanager.setState(game.GameState.CreateDice);
         	}
-        	//console.log("getMouseButtonDown");
-         	//gamemanager.setState(game.GameState.CreateDice);
         }
 		gamemanager.dieCountText().getComponent(ut.Text.TextRenderer).setText(String(numDiceToUse));
     }
@@ -130,19 +128,16 @@ function isMouseOnButton(button)
     var rectTransform = button.getComponent(ut.Core2D.Transform);
     var rectHitBox = button.getComponent(ut.HitBox2D.RectHitBox2D);
 
-    // @todo rect helper methods
-    let xMin = rectTransform.worldPosition().x - rectHitBox.box().width * 0.5;
-    let xMax = rectTransform.worldPosition().x + rectHitBox.box().width * 0.5;
+    let pos = rectTransform.worldPosition();
+    let xMin = pos.x - rectHitBox.box().width * 0.5;
+    let xMax = pos.x + rectHitBox.box().width * 0.5;
 
-    let yMin = rectTransform.worldPosition().y - rectHitBox.box().height * 0.5;
-    let yMax = rectTransform.worldPosition().y + rectHitBox.box().height * 0.5;
+    let yMin = pos.y - rectHitBox.box().height * 0.5;
+    let yMax = pos.y + rectHitBox.box().height * 0.5;
 
     var mouse = ut.Runtime.Input.getWorldInputPosition(world);
 
-    var x = mouse.x;
-    var y = mouse.y;
-
-    if (x > xMin && x < xMax && y > yMin && y < yMax)  {
+    if (mouse.x > xMin && mouse.x < xMax && mouse.y > yMin && mouse.y < yMax)  {
         return true;
     }
     return false;
