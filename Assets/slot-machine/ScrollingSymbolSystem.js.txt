@@ -11,7 +11,7 @@ if(localPosition.y < scrollingsymbol.offscreenValueY())
 }
 
 // if we are in the middle, then it is a valid place to stop
-if(localPosition.y > -.1 && localPosition.y < .1)
+if(localPosition.y <= 0 && scrollingsymbol.lastPositionY() > 0)
 {
 	scrollingsymbol.setIsAtStoppingPoint(true);
 }else
@@ -20,3 +20,4 @@ if(localPosition.y > -.1 && localPosition.y < .1)
 }
 
 transform.setLocalPosition(localPosition);
+scrollingsymbol.setLastPositionY(localPosition.y);
