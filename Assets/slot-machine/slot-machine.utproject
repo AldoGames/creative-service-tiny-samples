@@ -138,6 +138,10 @@
         "Id": "39bba1bd64334c8499667994082e1aa0",
         "Name": "offscreenValueY",
         "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" }
+    }, {
+        "Id": "97c682d5a8fc47d4be43109a99daacf9",
+        "Name": "lastPositionY",
+        "FieldType": { "Id": "67325dccf2f047c19c7ef4a045354e67", "Name": "Float32" }
     }],
     "DefaultValue": {
         "Type": { "Id": "da967c6d3a7644319231cd8830f35264", "Name": "ScrollingSymbol" }
